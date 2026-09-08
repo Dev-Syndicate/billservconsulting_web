@@ -62,7 +62,12 @@ export function SiteHeader() {
 
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild className="md:hidden">
-            <Button variant="outline" size="icon" aria-label="Open menu">
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label="Open menu"
+              className="size-11 rounded-lg"
+            >
               <Menu className="size-5" />
             </Button>
           </SheetTrigger>
@@ -76,19 +81,22 @@ export function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="rounded-md px-3 py-2.5 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
+                  className="rounded-lg px-3 py-3.5 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                 >
                   {item.label}
                 </Link>
               ))}
-              <Button asChild className="mt-4">
+              <Button
+                asChild
+                className="mt-5 h-13 rounded-xl text-base"
+              >
                 <Link href="#contact" onClick={() => setOpen(false)}>
                   Get in Touch
                 </Link>
               </Button>
               <a
                 href={`tel:${site.phone.replace(/\s/g, "")}`}
-                className="mt-3 flex items-center justify-center gap-1.5 text-sm font-medium text-muted-foreground"
+                className="mt-4 flex items-center justify-center gap-2 py-2 text-base font-medium text-muted-foreground"
               >
                 <Phone className="size-4" />
                 {site.phone}

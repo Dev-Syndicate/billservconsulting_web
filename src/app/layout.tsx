@@ -17,15 +17,18 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: `${site.name} — Medical Billing & Revenue Cycle Management`,
   description: site.description,
-  icons: {
-    icon: "/logo.avif",
-  },
   openGraph: {
     title: `${site.name} — Medical Billing & Revenue Cycle Management`,
     description: site.description,
     url: site.url,
     siteName: site.name,
     type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — Medical Billing & Revenue Cycle Management`,
+    description: site.description,
   },
 };
 

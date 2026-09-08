@@ -41,7 +41,7 @@ export function Services() {
       id="services"
       className="scroll-mt-16 border-b border-border bg-secondary/40"
     >
-      <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6 lg:py-24">
+      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
         <Reveal className="max-w-2xl">
           <p className="text-sm font-semibold tracking-wide text-primary uppercase">
             What We Do

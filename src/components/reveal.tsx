@@ -59,10 +59,12 @@ export function Reveal({
     return () => observer.disconnect();
   }, []);
 
+  // Horizontal offsets are kept small so an un-revealed element never
+  // pushes past the viewport edge and creates a horizontal scrollbar.
   const offset = {
     bottom: "translate-y-8",
-    left: "-translate-x-8",
-    right: "translate-x-8",
+    left: "-translate-x-4",
+    right: "translate-x-4",
     none: "",
   }[from];
 

@@ -6,7 +6,7 @@ import { leadership } from "@/lib/site";
 export function About() {
   return (
     <section id="about" className="scroll-mt-16 border-b border-border">
-      <div className="mx-auto w-full max-w-6xl px-4 py-20 sm:px-6">
+      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <p className="text-sm font-semibold tracking-wide text-primary uppercase">
@@ -24,18 +24,18 @@ export function About() {
               the most benefits.
             </p>
 
-            <dl className="mt-10 grid gap-6 sm:grid-cols-3">
+            <dl className="mt-8 grid grid-cols-3 gap-4 sm:mt-10 sm:gap-6">
               {[
                 { value: "10", label: "Billing services offered" },
                 { value: "7", label: "Specialties covered" },
                 { value: "24/7", label: "Availability" },
               ].map((stat) => (
-                <div key={stat.label}>
+                <div key={stat.label} className="text-center sm:text-left">
                   <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-3xl font-semibold text-primary">
+                  <dd className="text-2xl font-semibold text-primary sm:text-3xl">
                     {stat.value}
                   </dd>
-                  <p className="mt-1 text-sm text-muted-foreground text-pretty">
+                  <p className="mt-1 text-xs text-muted-foreground text-pretty sm:text-sm">
                     {stat.label}
                   </p>
                 </div>

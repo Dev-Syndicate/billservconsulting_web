@@ -386,6 +386,9 @@
   }
 
   body {
+    /* Reveal animations translate elements before they enter view; clip
+     * that horizontally so it never produces a horizontal scrollbar. */
+    overflow-x: clip;
     @apply bg-background text-foreground;
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
