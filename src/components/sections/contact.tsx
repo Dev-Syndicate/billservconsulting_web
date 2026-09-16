@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Clock, Mail, MapPin, Phone, Printer } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { cn } from "cn";
 
@@ -14,6 +15,44 @@ import { Reveal } from "@/components/reveal";
 import { site } from "@/lib/site";
 
 const fieldClass = "h-13 rounded-xl px-4 text-base";
+
+type ContactMethod = {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  /** Secondary line under the value, e.g. the fax number. */
+  note?: string;
+  /** Present only for methods that are actionable (call, email). */
+  href?: string;
+};
+
+const contactMethods: ContactMethod[] = [
+  {
+    icon: Phone,
+    label: "Phone",
+    value: site.phone,
+    note: `Fax ${site.fax}`,
+    href: `tel:${site.phone.replace(/\s/g, "")}`,
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: site.email,
+    href: `mailto:${site.email}`,
+  },
+  {
+    icon: MapPin,
+    label: "Office",
+    value: `${site.address.street}, ${site.address.city}`,
+  },
+  { icon: Clock, label: "Availability", value: site.availability },
+];
+
+const nextSteps = [
+  "We reply within one business day to understand your specialty, volumes, and current billing setup.",
+  "We walk you through where claims are leaking — denials, aged A/R, and front-end eligibility gaps.",
+  "You get a written scope and pricing, with no obligation to proceed.",
+] as const;
 
 export function Contact({ headless = false }: { headless?: boolean } = {}) {
   const [submitted, setSubmitted] = React.useState(false);
@@ -55,44 +94,85 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
               </>
             )}
 
-            <ul className={cn("space-y-4 text-sm", headless ? "mt-0" : "mt-8")}>
-              <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 size-5 shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  {site.address.street},
-                  <br />
-                  {site.address.city}
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="size-5 shrink-0 text-primary" />
+            {/* Contact methods as labelled cards, so the column carries
+                the same visual weight as the form beside it. */}
+            <ul
+              className={cn(
+                "grid gap-4 sm:grid-cols-2",
+                headless ? "mt-0" : "mt-8",
+              )}
+            >
+              {contactMethods.map((method, i) => (
+                <li key={method.label}>
+                  <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+                    <CardContent className="flex h-full gap-4">
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "grid size-11 shrink-0 place-items-center rounded-xl text-white",
+                          i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                        )}
+                      >
+                        <method.icon className="size-5" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                          {method.label}
+                        </p>
+                        {method.href ? (
+                          <a
+                            href={method.href}
+                            className="mt-1 block font-medium break-all transition-colors hover:text-primary-text"
+                          >
+                            {method.value}
+                          </a>
+                        ) : (
+                          <p className="mt-1 font-medium text-pretty">
+                            {method.value}
+                          </p>
+                        )}
+                        {method.note ? (
+                          <p className="mt-1 text-sm text-muted-foreground">
+                            {method.note}
+                          </p>
+                        ) : null}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+
+            {/* Sets expectations for anyone hesitating over the form. */}
+            <div className="mt-6 rounded-2xl border border-border bg-secondary p-6">
+              <h3 className="font-semibold">What happens next</h3>
+              <ol className="mt-4 space-y-3.5">
+                {nextSteps.map((step, i) => (
+                  <li key={step} className="flex gap-3 text-sm">
+                    <span
+                      aria-hidden
+                      className="grid size-6 shrink-0 place-items-center rounded-full bg-primary text-xs font-semibold text-white"
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="text-muted-foreground text-pretty">
+                      {step}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+
+              <p className="mt-5 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-border pt-5 text-sm text-muted-foreground">
+                Prefer to talk it through?
                 <a
                   href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className="text-muted-foreground transition-colors hover:text-primary"
+                  className="inline-flex items-center gap-1.5 font-semibold text-primary-text hover:underline"
                 >
+                  <Phone className="size-4" />
                   {site.phone}
                 </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Printer className="size-5 shrink-0 text-primary" />
-                <span className="text-muted-foreground">Fax {site.fax}</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="size-5 shrink-0 text-primary" />
-                <a
-                  href={`mailto:${site.email}`}
-                  className="break-all text-muted-foreground transition-colors hover:text-primary"
-                >
-                  {site.email}
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Clock className="size-5 shrink-0 text-primary" />
-                <span className="text-muted-foreground">
-                  {site.availability}
-                </span>
-              </li>
-            </ul>
+              </p>
+            </div>
           </Reveal>
 
           <Reveal from="right" delay={120} className="h-full">
