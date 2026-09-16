@@ -93,6 +93,9 @@ artwork, so confirm the exact legal spelling before print use:
 
 ## Testimonial
 
+**Not currently published on the site** — the section was removed. Kept
+here as a record of the client's supplied wording.
+
 "Outsourcing billing to Billserv has been a game-changer. Fewer denials, faster
 reimbursements, and immediate answers from my dedicated rep. Now I can focus on
 patients, not paperwork! Highly recommend it."

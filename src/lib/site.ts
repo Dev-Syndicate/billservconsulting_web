@@ -369,11 +369,3 @@ export const communication = {
     "Ongoing operational coordination",
   ],
 } as const;
-
-export const testimonial = {
-  quote:
-    "Outsourcing billing to Billserv has been a game-changer. Fewer denials, faster reimbursements, and immediate answers from my dedicated rep. Now I can focus on patients, not paperwork! Highly recommend it.",
-  author: "Dr. Mohammed Q. Khan",
-  title: "Nephrologist, President & CEO",
-  location: "Riverside, California, USA",
-} as const;
