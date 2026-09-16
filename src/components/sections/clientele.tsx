@@ -28,7 +28,7 @@ export function Clientele() {
                 <CardContent className="flex items-center gap-4">
                   <span
                     aria-hidden
-                    className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary"
+                    className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary text-white"
                   >
                     <Building2 className="size-5" />
                   </span>

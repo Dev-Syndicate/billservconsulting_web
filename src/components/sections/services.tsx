@@ -85,18 +85,22 @@ export function Services({ headless = false }: { headless?: boolean } = {}) {
                     aria-hidden
                     className={cn(
                       "relative grid size-16 place-items-center rounded-full border bg-background transition-colors",
+                      // Paid is teal — the site's confirmation colour.
                       isLast
-                        ? "border-primary bg-primary text-primary-foreground"
+                        ? "border-brand-teal bg-brand-teal text-white"
                         : "border-border text-primary",
                     )}
                   >
                     {isLast && (
-                      <span className="absolute inset-0 animate-pulse-ring rounded-full bg-primary/30" />
+                      <span className="absolute inset-0 animate-pulse-ring rounded-full bg-brand-teal/30" />
                     )}
                     <Icon className="relative size-6" />
                   </span>
 
-                  <p className="mt-5 font-semibold">{step.title}</p>
+                  <p className="mt-5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                    Step {i + 1}
+                  </p>
+                  <p className="mt-1 font-semibold">{step.title}</p>
                   <p className="mt-2 max-w-64 text-sm leading-relaxed text-muted-foreground text-pretty">
                     {step.description}
                   </p>
@@ -106,26 +110,41 @@ export function Services({ headless = false }: { headless?: boolean } = {}) {
           </ol>
         </div>
 
-        {/* service cards */}
-        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Service cards. Two columns keeps ten cards even (5 x 2), so no
+            orphan sits alone on the last row. Icon tiles alternate blue and
+            teal, and each card carries its number in the workflow. */}
+        <div className="mt-16 grid gap-5 md:grid-cols-2">
           {services.map((service, i) => {
             const Icon = icons[service.icon];
             return (
               <Reveal key={service.title} delay={i * 60} className="h-full">
                 <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                  <CardContent className="flex h-full flex-col">
+                  <CardContent className="flex h-full gap-4 sm:gap-5">
                     <span
                       aria-hidden
-                      className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
+                      className={cn(
+                        "grid size-12 shrink-0 place-items-center rounded-xl text-white",
+                        i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                      )}
                     >
                       <Icon className="size-5" />
                     </span>
-                    <h3 className="mt-4 font-semibold text-pretty">
-                      {service.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-                      {service.description}
-                    </p>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-baseline justify-between gap-3">
+                        <h3 className="font-semibold text-pretty">
+                          {service.title}
+                        </h3>
+                        <span
+                          aria-hidden
+                          className="text-xs font-semibold tracking-wide text-muted-foreground tabular-nums"
+                        >
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                      </div>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                        {service.description}
+                      </p>
+                    </div>
                   </CardContent>
                 </Card>
               </Reveal>
