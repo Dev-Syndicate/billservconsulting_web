@@ -8,7 +8,7 @@ import { legalNav, nav, site } from "@/lib/site";
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-secondary/50">
-      <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6">
+      <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6">
         <p className="text-2xl font-semibold tracking-tight sm:text-3xl">
           Lets Work Together.
         </p>

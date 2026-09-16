@@ -65,7 +65,7 @@ export function Hero() {
         className="pointer-events-none absolute -z-10 hidden size-120 rounded-full bg-brand-teal/10 blur-3xl lg:block lg:top-10 lg:right-[38%]"
       />
 
-      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[0.88fr_1fr] lg:gap-10 xl:gap-12 lg:py-24">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[0.88fr_1fr] lg:gap-10 xl:gap-12 lg:py-24">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-background px-3.5 py-1.5 text-xs font-medium text-primary-text shadow-sm sm:text-sm">
             <span
@@ -166,7 +166,7 @@ export function Hero() {
       </div>
 
       {/* Stats bar */}
-      <div className="mx-auto w-full max-w-6xl px-4 pb-14 sm:px-6 sm:pb-20">
+      <div className="mx-auto w-full max-w-7xl px-4 pb-14 sm:px-6 sm:pb-20">
         <dl className="grid gap-x-6 gap-y-8 rounded-2xl border border-border/70 bg-background/80 p-6 shadow-sm backdrop-blur sm:grid-cols-2 sm:p-8 lg:grid-cols-4 lg:divide-x lg:divide-border/70">
           {stats.map((stat) => (
             <div
