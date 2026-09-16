@@ -4,13 +4,19 @@ import {
   ArrowRight,
   BadgeCheck,
   ClipboardList,
+  Droplets,
+  Eye,
   FileCode2,
   FileWarning,
   Headset,
+  HeartPulse,
+  Microscope,
   PhoneCall,
+  Scan,
   Send,
   ShieldCheck,
   Stethoscope,
+  TestTube,
   UserPlus,
   Wallet,
 } from "lucide-react";
@@ -18,7 +24,6 @@ import {
 import { cn } from "cn";
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
 import { TeamIllustration } from "@/components/illustrations";
 import { expertise, services, whyOutsource } from "@/lib/site";
@@ -34,6 +39,16 @@ const serviceIcons: Record<(typeof services)[number]["icon"], LucideIcon> = {
   PhoneCall,
   BadgeCheck,
   Headset,
+};
+
+const specialtyIcons: Record<(typeof expertise)[number]["icon"], LucideIcon> = {
+  Stethoscope,
+  TestTube,
+  Scan,
+  Droplets,
+  HeartPulse,
+  Eye,
+  Microscope,
 };
 
 /** Shared heading block for each teaser. */
@@ -117,9 +132,22 @@ export function AboutTeaser() {
   );
 }
 
-/** Services: the first six, with the rest on /services. */
+/**
+ * Services: all ten, in an asymmetric layout.
+ *
+ * The first two get large feature tiles and the remaining eight sit in a
+ * compact grid beneath. Ten equal cards read as a uniform wall of boxes
+ * with no entry point; giving the first two more weight creates a
+ * reading order and lets the whole offering show without the section
+ * becoming a long scroll.
+ *
+ * Numbering is deliberate: the services are listed in the order a claim
+ * actually moves through them, so the digits double as a hint that this
+ * is one continuous pipeline rather than a menu of unrelated items.
+ */
 export function ServicesTeaser() {
-  const shown = services.slice(0, 6);
+  const [lead, second, ...rest] = services;
+  const featured = [lead, second];
 
   return (
     <section className="border-b border-border bg-secondary">
@@ -130,39 +158,112 @@ export function ServicesTeaser() {
           lead="End-to-end revenue cycle support, from the first patient record to the final settled claim."
         />
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {shown.map((service, i) => {
+        {/* Two feature tiles: the front of the revenue cycle, where the
+            most claim problems originate. */}
+        <div className="mt-12 grid gap-5 lg:grid-cols-2">
+          {featured.map((service, i) => {
             const Icon = serviceIcons[service.icon];
+            const teal = i % 2 === 1;
             return (
-              <Reveal key={service.title} delay={i * 60} className="h-full">
-                <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                  <CardContent className="flex h-full flex-col items-center px-6 text-center">
-                    <span
-                      aria-hidden
-                      className={cn(
-                        "grid size-16 shrink-0 place-items-center rounded-full ring-4",
-                        i % 2 === 0
-                          ? "bg-primary text-white ring-primary/15"
-                          : "bg-brand-teal text-white ring-brand-teal/15",
-                      )}
-                    >
-                      <Icon className="size-6" />
-                    </span>
-                    <h3 className="mt-5 font-semibold text-balance">
-                      {service.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
-                      {service.description}
-                    </p>
-                  </CardContent>
-                </Card>
+              <Reveal key={service.title} delay={i * 90} className="h-full">
+                <Link
+                  href="/services"
+                  className={cn(
+                    "group relative flex h-full flex-col overflow-hidden rounded-2xl border p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-8",
+                    teal
+                      ? "border-brand-teal/25 bg-brand-teal/8 hover:border-brand-teal/50 hover:shadow-brand-teal/10"
+                      : "border-primary/25 bg-primary/8 hover:border-primary/50 hover:shadow-primary/10",
+                  )}
+                >
+                  {/* Oversized step number, sunk into the corner as a
+                      graphic rather than read as content. */}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "pointer-events-none absolute -top-4 right-2 text-[7rem] leading-none font-bold tabular-nums select-none",
+                      teal ? "text-brand-teal/12" : "text-primary/12",
+                    )}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "relative grid size-14 shrink-0 place-items-center rounded-2xl text-white shadow-sm",
+                      teal ? "bg-brand-teal" : "bg-primary",
+                    )}
+                  >
+                    <Icon className="size-7" />
+                  </span>
+
+                  <h3 className="relative mt-5 text-lg font-semibold text-balance">
+                    {service.title}
+                  </h3>
+                  <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {service.description}
+                  </p>
+
+                  <span
+                    className={cn(
+                      "relative mt-5 inline-flex items-center gap-1.5 text-sm font-semibold",
+                      teal ? "text-brand-teal-deep" : "text-brand-cta",
+                    )}
+                  >
+                    See how it works
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
               </Reveal>
             );
           })}
         </div>
 
+        {/* The remaining eight, compact. Four columns divide them evenly,
+            so no cell is left stranded on an incomplete row. */}
+        <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {rest.map((service, i) => {
+            const Icon = serviceIcons[service.icon];
+            const teal = i % 2 === 1;
+            return (
+              <Reveal
+                as="li"
+                key={service.title}
+                delay={180 + i * 50}
+                className="h-full"
+              >
+                <div className="flex h-full flex-col rounded-2xl border border-border bg-background p-5 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+                  <div className="flex items-center gap-3">
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "grid size-10 shrink-0 place-items-center rounded-xl text-white",
+                        teal ? "bg-brand-teal" : "bg-primary",
+                      )}
+                    >
+                      <Icon className="size-5" />
+                    </span>
+                    <span
+                      aria-hidden
+                      className="text-sm font-semibold tabular-nums text-muted-foreground/60"
+                    >
+                      {String(i + 3).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-sm font-semibold text-pretty">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {service.description}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </ul>
+
         <MoreLink href="/services">
-          {`View all ${services.length} services`}
+          {`Explore all ${services.length} services in detail`}
         </MoreLink>
       </div>
     </section>
@@ -226,7 +327,9 @@ export function ExpertiseTeaser() {
          * still divide evenly.
          */}
         <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {expertise.map((area, i) => (
+          {expertise.map((area, i) => {
+            const Icon = specialtyIcons[area.icon];
+            return (
             <Reveal as="li" key={area.name} delay={i * 60} className="h-full">
               <div className="flex h-full flex-col rounded-2xl border border-border bg-background p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
                 <span
@@ -236,7 +339,7 @@ export function ExpertiseTeaser() {
                     i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
                   )}
                 >
-                  <Stethoscope className="size-5" />
+                  <Icon className="size-5" />
                 </span>
                 <h3 className="mt-4 font-semibold text-pretty">{area.name}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
@@ -244,7 +347,8 @@ export function ExpertiseTeaser() {
                 </p>
               </div>
             </Reveal>
-          ))}
+            );
+          })}
 
           {/* Completes the final row and carries the section's call to
               action, so no separate button is needed below the grid. */}

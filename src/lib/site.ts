@@ -41,104 +41,217 @@ export const legalNav = [
   { label: "Terms & Conditions", href: "/terms" },
 ] as const;
 
+/*
+ * Specialties. Each carries its own icon — a single shared stethoscope
+ * across all seven made the icon purely decorative and the cards hard to
+ * tell apart at a glance.
+ */
 export const expertise = [
   {
     name: "Internal Medicine",
+    icon: "Stethoscope",
     description:
       "E/M level selection, chronic care management, and annual wellness visits across high patient volumes.",
   },
   {
     name: "Laboratory Billing",
+    icon: "TestTube",
     description:
       "Panel versus component billing, medical necessity checks against payer LCD/NCD policy, and CLIA modifiers.",
   },
   {
     name: "Radiology Billing",
+    icon: "Scan",
     description:
       "Professional and technical component splits, modifiers 26 and TC, and global versus split billing.",
   },
   {
     name: "Nephrology Billing",
+    icon: "Droplets",
     description:
       "Monthly capitation payments for dialysis, ESRD codes, and place-of-service rules across facility settings.",
   },
   {
     name: "Cardiology Billing",
+    icon: "HeartPulse",
     description:
       "Diagnostic and interventional procedures, device monitoring, and bundling rules under NCCI edits.",
   },
   {
     name: "Ophthalmology Billing",
+    icon: "Eye",
     description:
       "Eye visit codes versus E/M, bilateral procedure modifiers, and global surgical period tracking.",
   },
   {
     name: "Hematology Billing",
+    icon: "Microscope",
     description:
       "Infusion and injection hierarchies, drug units under HCPCS J-codes, and prior-authorization workflows.",
   },
 ] as const;
 
+/*
+ * Services.
+ *
+ * `description` is the one-line summary used in the homepage teaser.
+ * `detail` and `benefits` come from the information pack and are shown
+ * only on /services — they are what makes that page worth visiting
+ * rather than a repeat of the homepage.
+ */
 export const services = [
   {
     title: "Patient Registration / Demographic entry",
     icon: "UserPlus",
     description:
       "Capturing and validating patient demographics, guarantor details, and insurance information at intake, so claims carry accurate identifiers from the outset.",
+    detail:
+      "BillServ supports patient registration and demographic entry to ensure essential patient information is captured accurately and entered into the appropriate systems. Our attention to detail at the beginning of the revenue cycle helps prevent downstream billing issues and unnecessary claim delays.",
+    benefits: [
+      "Accurate patient information",
+      "Cleaner billing records",
+      "Reduced demographic errors",
+      "Fewer avoidable claim issues",
+      "Improved revenue cycle efficiency",
+    ],
   },
   {
     title: "Insurance eligibility verification",
     icon: "ShieldCheck",
     description:
       "Confirming active coverage, benefits, copay, deductible, and prior-authorization requirements before the visit — via X12 270/271 transactions or payer portals.",
+    detail:
+      "Our team verifies insurance eligibility, coverage, benefits, payer information, and other relevant details to identify potential billing problems before they become costly denials. By strengthening the front end of the revenue cycle, BillServ helps providers minimize avoidable eligibility-related issues.",
+    benefits: [
+      "Reduced eligibility-related denials",
+      "Better understanding of patient coverage",
+      "Fewer unexpected billing issues",
+      "Improved front-end revenue cycle management",
+      "Better patient financial communication",
+    ],
   },
   {
     title: "Medical Coding services",
     icon: "FileCode2",
     description:
       "Translating clinical documentation into ICD-10-CM diagnosis and CPT/HCPCS procedure codes with appropriate modifiers, each supported by the record.",
+    detail:
+      "BillServ provides medical coding support designed to ensure that healthcare services are appropriately translated into billing codes based on documentation and applicable requirements. Our team focuses on accuracy, consistency, and claim quality.",
+    benefits: [
+      "Accurate coding",
+      "Improved claim quality",
+      "Reduced coding-related errors",
+      "Reduced avoidable denials",
+      "Improved reimbursement accuracy",
+    ],
   },
   {
     title: "Charge Entry Services",
     icon: "ClipboardList",
     description:
       "Entering coded services with date and place of service, provider, units, and modifiers, then auditing each charge against the fee schedule before claim creation.",
+    detail:
+      "BillServ provides accurate and timely charge entry to ensure that services provided by healthcare professionals are properly captured within the billing system. Our charge-entry processes help reduce missed charges, improve revenue capture, and ensure claims are prepared accurately.",
+    benefits: [
+      "Improved charge capture",
+      "Reduced missed revenue",
+      "Accurate claim preparation",
+      "Faster billing workflows",
+      "Improved financial visibility",
+    ],
   },
   {
     title: "EDI -Setup / Electronic claims Transmission",
     icon: "Send",
     description:
       "Establishing payer and clearinghouse enrollments, then transmitting claims as HIPAA-standard X12 837P/837I files and working rejection reports.",
+    detail:
+      "BillServ supports electronic claims transmission and EDI processes to help healthcare providers submit claims efficiently and identify issues as early as possible. Our team helps ensure claims are properly transmitted and works with rejected claims that require correction and resubmission.",
+    benefits: [
+      "Efficient electronic claim submission",
+      "Faster identification of rejected claims",
+      "Reduced manual processing",
+      "Faster correction and resubmission",
+      "Improved claims workflow",
+    ],
   },
   {
     title: "Payment Posting",
     icon: "Wallet",
     description:
       "Posting payments from X12 835 remittance advice and manual EOBs, reconciling against deposits while flagging underpayments, adjustments, and denial codes.",
+    detail:
+      "BillServ posts insurance and patient payments, adjustments, and related transactions accurately while helping maintain reliable account balances. This gives providers greater visibility into their financial position and helps identify outstanding accounts requiring follow-up.",
+    benefits: [
+      "Accurate account balances",
+      "Improved financial visibility",
+      "Reduced posting errors",
+      "Better identification of outstanding A/R",
+      "More efficient revenue cycle management",
+    ],
   },
   {
     title: "Denial Management",
     icon: "FileWarning",
     description:
       "Analyzing CARC/RARC denial reasons, correcting and appealing within timely-filing limits, and tracing denial trends back to their root cause.",
+    detail:
+      "BillServ takes a proactive approach to denial management by identifying denial reasons, investigating issues, correcting problems, submitting appeals where appropriate, and following claims through resolution. We also look beyond individual denials to identify recurring patterns and opportunities to prevent future revenue leakage.",
+    benefits: [
+      "Denial identification",
+      "Denial analysis",
+      "Appeals management",
+      "Revenue recovery",
+      "Root-cause analysis",
+      "Reduced preventable denials",
+      "Improved reimbursement",
+    ],
   },
   {
     title: "Account Receivable, Insurance and Patient follow up",
     icon: "PhoneCall",
     description:
       "Working aged A/R by bucket — checking claim status via X12 276/277, pursuing unpaid balances, and managing patient statements and payment plans.",
+    detail:
+      "BillServ's A/R management services are designed to turn outstanding receivables into collected revenue. Our team proactively follows up on unpaid claims and outstanding balances, communicates with insurance companies and patients where appropriate, investigates payment delays, and works toward resolution.",
+    benefits: [
+      "Improved A/R recovery",
+      "Reduced aging",
+      "Proactive insurance follow-up",
+      "Patient balance follow-up",
+      "Improved cash flow",
+      "Greater visibility into outstanding revenue",
+    ],
   },
   {
     title: "Credentialing",
     icon: "BadgeCheck",
     description:
       "Enrolling providers with payers and Medicare/Medicaid, maintaining CAQH ProView profiles, and tracking re-credentialing cycles and licence expirations.",
+    detail:
+      "BillServ provides credentialing support to help healthcare providers manage payer enrollment and credentialing requirements in an organized and efficient manner.",
+    benefits: [
+      "Streamlined credentialing",
+      "Reduced administrative workload",
+      "Organized enrollment processes",
+      "Better payer participation management",
+      "Reduced credentialing-related delays",
+    ],
   },
   {
     title: "Call Centre",
     icon: "Headset",
     description:
       "Inbound and outbound voice support — patient billing inquiries, eligibility calls, and payer follow-up — under HIPAA-compliant handling protocols.",
+    detail:
+      "BillServ provides professional call center support designed to help healthcare organizations manage communication efficiently. Our team can support patient, billing, insurance, and administrative communication while helping providers maintain responsive and professional service.",
+    benefits: [
+      "Professional communication",
+      "Improved responsiveness",
+      "Reduced administrative workload",
+      "Better patient experience",
+      "Scalable support",
+    ],
   },
 ] as const;
 
