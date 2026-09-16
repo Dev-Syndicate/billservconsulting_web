@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -11,7 +12,6 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { ClaimsDashboard } from "@/components/claims-dashboard";
 import { site } from "@/lib/site";
 
 const highlights = [
@@ -56,7 +56,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-border bg-secondary">
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[0.88fr_1fr] lg:gap-10 xl:gap-12 lg:py-24">
+      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-14 pb-10 sm:px-6 sm:pt-20 sm:pb-12 lg:grid-cols-[0.95fr_1fr] lg:gap-12 lg:pt-24 lg:pb-14">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-background px-3.5 py-1.5 text-xs font-medium text-primary-text shadow-sm sm:text-sm">
             <span
@@ -140,24 +140,23 @@ export function Hero() {
           </ul>
         </div>
 
+        {/* The image carries its own script captions, so no separate
+            accent line is needed alongside it. */}
         <div className="relative">
-          <ClaimsDashboard />
-
-          {/* Script accent, echoing the reference lockup. */}
-          <p
-            aria-hidden
-            className="mt-24 hidden text-right text-xl leading-tight text-primary-text italic lg:block xl:mt-28"
-            style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
-          >
-            Your Growth Partner
-            <br />
-            in Healthcare
-          </p>
+          <Image
+            src="/hero-billing.avif"
+            alt="A clinician reviewing patient records on a tablet, beside books reading Better Billing, Healthier Practices, and Brighter Futures"
+            width={1536}
+            height={1024}
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="h-auto w-full rounded-2xl"
+          />
         </div>
       </div>
 
       {/* Stats bar */}
-      <div className="mx-auto w-full max-w-7xl px-4 pb-14 sm:px-6 sm:pb-20">
+      <div className="mx-auto w-full max-w-7xl px-4 pb-14 sm:px-6 sm:pb-16 lg:pb-20">
         <dl className="grid gap-x-6 gap-y-8 rounded-2xl border border-border/70 bg-background/80 p-6 shadow-sm backdrop-blur sm:grid-cols-2 sm:p-8 lg:grid-cols-4 lg:divide-x lg:divide-border/70">
           {stats.map((stat) => (
             <div

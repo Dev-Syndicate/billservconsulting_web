@@ -90,16 +90,18 @@ checkmarks, approved rows, and the clean-claim meter.
 - **The contact form has no backend.** It builds a `mailto:` link and
   hands off to the visitor's email client. Wiring it to a real endpoint
   (a form service or a route handler) is outstanding.
-- **Dashboard figures are illustrative.** The numbers in the hero's
-  claims panel (1,248 claims, 98% clean rate, +30% revenue) and the stats
-  bar (500+ providers, 99% accuracy) came from the design reference, not
-  from client data. They should be confirmed or softened before launch.
+- **Stats bar figures are illustrative.** 500+ providers and 99% claim
+  accuracy came from the design reference, not from client data. They
+  should be confirmed or softened before launch.
 - **The legal pages need a lawyer's review.** The Governing law clause
   currently says "the laws applicable at our principal place of business"
   rather than naming a jurisdiction — BillServ operates from India while
   serving US providers, so this needs a decision.
 - `src/components/hero-illustration.tsx` and
   `src/components/ui/navigation-menu.tsx` are currently unused.
+- **The hero photograph is AI-generated** (`public/hero-billing.avif`).
+  It shows a stock-style clinician, not BillServ staff or a real client
+  setting. Swap it for a genuine photograph if one becomes available.
 
 `CONTENT.md` records the copy extracted from the original Wix site,
 including which parts are verbatim client wording.
