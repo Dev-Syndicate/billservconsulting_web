@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import type { LucideIcon } from "lucide-react";
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 import { cn } from "cn";
 
@@ -26,7 +26,19 @@ type ContactMethod = {
   href?: string;
 };
 
+/*
+ * Email leads and spans the full row — the address is long enough to wrap
+ * in a half-width card. Phone and Office then pair up beneath it, each
+ * carrying a secondary line (fax, availability) so no card is left
+ * stranded alone on a row.
+ */
 const contactMethods: ContactMethod[] = [
+  {
+    icon: Mail,
+    label: "Email",
+    value: site.email,
+    href: `mailto:${site.email}`,
+  },
   {
     icon: Phone,
     label: "Phone",
@@ -35,17 +47,11 @@ const contactMethods: ContactMethod[] = [
     href: `tel:${site.phone.replace(/\s/g, "")}`,
   },
   {
-    icon: Mail,
-    label: "Email",
-    value: site.email,
-    href: `mailto:${site.email}`,
-  },
-  {
     icon: MapPin,
     label: "Office",
     value: `${site.address.street}, ${site.address.city}`,
+    note: site.availability,
   },
-  { icon: Clock, label: "Availability", value: site.availability },
 ];
 
 const nextSteps = [
@@ -103,7 +109,10 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
               )}
             >
               {contactMethods.map((method, i) => (
-                <li key={method.label}>
+                <li
+                  key={method.label}
+                  className={method.label === "Email" ? "sm:col-span-2" : undefined}
+                >
                   <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
                     <CardContent className="flex h-full gap-4">
                       <span
@@ -122,7 +131,7 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
                         {method.href ? (
                           <a
                             href={method.href}
-                            className="mt-1 block font-medium break-all transition-colors hover:text-primary-text"
+                            className="mt-1 block font-medium wrap-anywhere transition-colors hover:text-primary-text"
                           >
                             {method.value}
                           </a>
