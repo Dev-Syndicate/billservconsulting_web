@@ -4,7 +4,6 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHeader } from "@/components/page-header";
 import { WhyOutsource } from "@/components/sections/why-outsource";
-import { Testimonial } from "@/components/sections/testimonial";
 import { CtaBand } from "@/components/cta-band";
 import { site } from "@/lib/site";
 
@@ -37,7 +36,6 @@ export default function WhyOutsourcePage() {
           lead={lead}
         />
         <WhyOutsource headless />
-        <Testimonial />
         <CtaBand />
       </main>
       <SiteFooter />

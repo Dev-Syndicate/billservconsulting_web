@@ -203,7 +203,7 @@ export function WhyTeaser() {
   );
 }
 
-/** Specialties: names only, linking into the services page. */
+/** Specialties: each with a one-line summary, linking into /services. */
 export function ExpertiseTeaser() {
   return (
     <section className="border-b border-border bg-secondary">
@@ -214,21 +214,62 @@ export function ExpertiseTeaser() {
           lead="Each specialty carries its own coding rules, modifiers, and payer policies. These are the ones we work in daily."
         />
 
-        <ul className="mt-10 flex flex-wrap gap-3">
+        {/*
+         * A grid of named cards rather than a row of pills. Seven pills
+         * wrapped to leave one stranded on its own line with the right
+         * half of the section empty, and they discarded the per-specialty
+         * description that the data already carries.
+         *
+         * Eight cells across four columns: the seven specialties plus a
+         * closing link cell, so the last row completes instead of trailing
+         * off. Below lg it falls back to two columns, where eight cells
+         * still divide evenly.
+         */}
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {expertise.map((area, i) => (
-            <Reveal as="li" key={area.name} delay={i * 50}>
-              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-medium">
-                <Stethoscope
+            <Reveal as="li" key={area.name} delay={i * 60} className="h-full">
+              <div className="flex h-full flex-col rounded-2xl border border-border bg-background p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
+                <span
                   aria-hidden
-                  className="size-4 text-primary-text"
-                />
-                {area.name}
-              </span>
+                  className={cn(
+                    "grid size-11 shrink-0 place-items-center rounded-xl text-white",
+                    i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                  )}
+                >
+                  <Stethoscope className="size-5" />
+                </span>
+                <h3 className="mt-4 font-semibold text-pretty">{area.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                  {area.description}
+                </p>
+              </div>
             </Reveal>
           ))}
-        </ul>
 
-        <MoreLink href="/services">See how we bill each specialty</MoreLink>
+          {/* Completes the final row and carries the section's call to
+              action, so no separate button is needed below the grid. */}
+          <Reveal
+            as="li"
+            delay={expertise.length * 60}
+            className="h-full"
+          >
+            <Link
+              href="/services"
+              className="group flex h-full flex-col justify-center rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-6 transition-colors hover:border-primary/60 hover:bg-primary/10"
+            >
+              {/* brand-cta, not primary-text: the primary/5 tint on this
+                  cell darkens the background just enough that
+                  primary-text lands at 4.47:1, under the 4.5:1 AA floor. */}
+              <span className="font-semibold text-brand-cta text-pretty">
+                See how we bill each specialty
+              </span>
+              <span className="mt-2 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                View all services
+                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          </Reveal>
+        </ul>
       </div>
     </section>
   );

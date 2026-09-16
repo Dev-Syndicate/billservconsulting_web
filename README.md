@@ -52,15 +52,15 @@ records (Wix does not allow changing nameservers, so use pointing).
 | ---------------- | ----------------------------------------------------- |
 | `/`              | Landing page: hero, then a teaser per section          |
 | `/services`      | Ten services, seven specialties                        |
-| `/why-outsource` | The four reasons to outsource, plus the testimonial    |
+| `/why-outsource` | The four reasons to outsource                          |
 | `/about`         | About, mission/vision/values, leadership, clientele, compliance & capability |
 | `/contact`       | Contact details, enquiry form, FAQ                     |
 | `/terms`         | Terms and Conditions                                   |
 | `/privacy`       | Privacy Policy                                         |
 
-The homepage teasers show a subset (six of ten services, specialty names
-only) and link through, so full content lives in exactly one place and
-there is no duplicate-content penalty.
+The homepage teasers show a subset (six of ten services) and link
+through, so full content lives in exactly one place and there is no
+duplicate-content penalty.
 
 ## Editing content
 
@@ -68,7 +68,7 @@ Most copy lives in data files rather than in markup:
 
 - **`src/lib/site.ts`** — company details, navigation, services,
   specialties, reasons to outsource, mission/vision/values, leadership,
-  clients, compliance and capability lists, testimonial.
+  clients, compliance and capability lists.
   Changing `nav` here updates the header, mobile menu, and footer.
 - **`src/lib/legal.ts`** — the Terms and Privacy documents, as structured
   sections. Both pull company name, email, phone, and address from
