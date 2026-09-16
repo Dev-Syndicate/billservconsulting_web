@@ -31,7 +31,7 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
               {[
                 { value: "10", label: "Billing services offered" },
                 { value: "7", label: "Specialties covered" },
-                { value: "24/7", label: "Availability" },
+                { value: "2022", label: "Serving providers since" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center sm:text-left">
                   <dt className="sr-only">{stat.label}</dt>

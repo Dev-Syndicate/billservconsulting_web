@@ -91,7 +91,7 @@ export function AboutTeaser() {
               {[
                 { value: "10", label: "Billing services offered" },
                 { value: "7", label: "Specialties covered" },
-                { value: "24/7", label: "Availability" },
+                { value: "2022", label: "Serving providers since" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <dt className="sr-only">{stat.label}</dt>

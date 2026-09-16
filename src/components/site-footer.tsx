@@ -62,9 +62,12 @@ export function SiteFooter() {
                   {site.email}
                 </a>
               </li>
-              <li className="flex items-center gap-2">
-                <Clock className="size-4 shrink-0 text-primary" />
-                {site.availability}
+              {/* items-start, not items-center: the hours string wraps to
+                  two lines in this column and the icon should sit with the
+                  first line rather than float to the vertical middle. */}
+              <li className="flex items-start gap-2">
+                <Clock className="mt-0.5 size-4 shrink-0 text-primary" />
+                <span className="text-pretty">{site.availability}</span>
               </li>
             </ul>
           </div>

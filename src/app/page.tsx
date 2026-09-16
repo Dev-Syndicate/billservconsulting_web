@@ -7,6 +7,7 @@ import {
   ServicesTeaser,
   WhyTeaser,
 } from "@/components/sections/home-teasers";
+import { ClientLogos } from "@/components/sections/client-logos";
 import { Testimonial } from "@/components/sections/testimonial";
 import { CtaBand } from "@/components/cta-band";
 
@@ -20,6 +21,7 @@ export default function Home() {
       <SiteHeader />
       <main className="flex-1">
         <Hero />
+        <ClientLogos />
         <AboutTeaser />
         <ServicesTeaser />
         <WhyTeaser />

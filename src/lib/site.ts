@@ -1,15 +1,28 @@
 export const site = {
   name: "BillServ Consulting",
+  /* Hero headline, carried over from the original Wix site. */
   tagline: "Quality Is What We Believe In.",
   /* Logo lockup tagline. */
   logoTagline: "Billing Today. A Healthier Tomorrow.",
+  /* Closing line from the information pack's "Our Promise" section. */
+  promise: "Your Healthcare. Our Expertise. Better Revenue Management.",
   description:
     "Outsourced medical billing and revenue cycle management. We ensure that your claims are billed right every time and provide you with hassle-free billing services.",
   url: "https://www.billservconsulting.com",
   phone: "+1 408 462 6008",
   fax: "+1 408 462 6009",
   email: "team@billservconsulting.com",
-  availability: "We are Available 24/7",
+  /*
+   * Pacific Time, not a fixed offset: California observes PST and PDT at
+   * different points in the year, so naming the zone stays correct
+   * year-round. The information pack is explicit that the site must NOT
+   * claim 24/7 availability.
+   */
+  availability: "Monday–Friday, 8:00 AM–5:00 PM Pacific Time (PT)",
+  /** Compact form, for places where the full string will not fit. */
+  availabilityShort: "Mon–Fri, 8AM–5PM PT",
+  legalEntity: "Billserv Consulting (OPC) Private Limited",
+  established: 2022,
   address: {
     street: "45/20 T.S Street, Mount Road",
     city: "Chennai- 600002, T.N, India.",
@@ -187,6 +200,8 @@ export const leadership = [
  */
 export type Client = {
   name: string;
+  /** Where the practice is based, per the information pack. */
+  location: string;
   logo: string;
   width: number;
   height: number;
@@ -200,13 +215,15 @@ export type Client = {
 
 export const clients: Client[] = [
   {
-    name: "Rashid Elahi, M.D, Inc.",
+    name: "Dr. Rashid Elahi, M.D., Inc.",
+    location: "San Jose, California",
     logo: "/client-rashid-elahi.avif",
     width: 290,
     height: 228,
   },
   {
     name: "Riverside-Nephrology Physicians Inc.",
+    location: "Riverside, California",
     nameInLogo: true,
     logo: "/client-riverside-nephrology.avif",
     width: 581,
@@ -214,13 +231,15 @@ export const clients: Client[] = [
   },
   {
     name: "Van Buren Dialysis Center",
+    location: "Riverside, California",
     nameInLogo: true,
     logo: "/client-van-buren-dialysis.avif",
     width: 386,
     height: 386,
   },
   {
-    name: "Tricity Dialysis Center",
+    name: "Tri-City Dialysis Center",
+    location: "Riverside, California",
     nameInLogo: true,
     logo: "/client-tricity-dialysis.avif",
     width: 386,
@@ -231,6 +250,7 @@ export const clients: Client[] = [
 export const testimonial = {
   quote:
     "Outsourcing billing to Billserv has been a game-changer. Fewer denials, faster reimbursements, and immediate answers from my dedicated rep. Now I can focus on patients, not paperwork! Highly recommend it.",
-  author: "Dr Mohammed Q Khan",
-  title: "Nephrologist, President/CEO, Riverside, CA",
+  author: "Dr. Mohammed Q. Khan",
+  title: "Nephrologist, President & CEO",
+  location: "Riverside, California, USA",
 } as const;

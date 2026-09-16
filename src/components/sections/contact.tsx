@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import type { LucideIcon } from "lucide-react";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 import { cn } from "cn";
 
@@ -28,9 +28,8 @@ type ContactMethod = {
 
 /*
  * Email leads and spans the full row — the address is long enough to wrap
- * in a half-width card. Phone and Office then pair up beneath it, each
- * carrying a secondary line (fax, availability) so no card is left
- * stranded alone on a row.
+ * in a half-width card. Phone, Office, and Business hours then fill the
+ * two-column rows beneath it, so no card is left stranded alone on a row.
  */
 const contactMethods: ContactMethod[] = [
   {
@@ -50,7 +49,16 @@ const contactMethods: ContactMethod[] = [
     icon: MapPin,
     label: "Office",
     value: `${site.address.street}, ${site.address.city}`,
-    note: site.availability,
+  },
+  /*
+   * Hours get their own card rather than sitting under the office address:
+   * the office is in India but the hours are quoted in Pacific Time for US
+   * clients, so pairing them would read as a contradiction.
+   */
+  {
+    icon: Clock,
+    label: "Business hours",
+    value: site.availability,
   },
 ];
 

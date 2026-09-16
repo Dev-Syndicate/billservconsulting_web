@@ -90,7 +90,7 @@ export default function OpengraphImage() {
             {site.phone}
           </span>
           <span>{site.email}</span>
-          <span>Available 24/7</span>
+          <span>{site.availabilityShort}</span>
         </div>
       </div>
     ),

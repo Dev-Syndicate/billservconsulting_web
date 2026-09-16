@@ -23,8 +23,9 @@ export function Clientele() {
             Practices we work with
           </h2>
           <p className="mt-4 max-w-2xl text-lg text-muted-foreground text-pretty">
-            Nephrology and dialysis groups across the United States trust us
-            with their revenue cycle.
+            Our client relationships include healthcare organizations serving
+            patients across California, with particular strength in nephrology
+            and dialysis-related revenue cycle operations.
           </p>
         </Reveal>
 
@@ -45,12 +46,23 @@ export function Clientele() {
                   />
                 </div>
                 {/* Only caption the marks that are pure symbol — otherwise
-                    the practice name would appear twice in the same card. */}
+                    the practice name would appear twice in the same card.
+                    The location line is safe either way, since no logo
+                    carries it. */}
                 {client.nameInLogo ? null : (
                   <p className="mt-4 text-sm font-medium text-pretty">
                     {client.name}
                   </p>
                 )}
+                <p
+                  className={
+                    client.nameInLogo
+                      ? "mt-4 text-xs text-muted-foreground"
+                      : "mt-1 text-xs text-muted-foreground"
+                  }
+                >
+                  {client.location}
+                </p>
               </div>
             </Reveal>
           ))}
