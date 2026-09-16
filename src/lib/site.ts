@@ -1,6 +1,8 @@
 export const site = {
   name: "BillServ Consulting",
   tagline: "Quality Is What We Believe In.",
+  /* Logo lockup tagline. */
+  logoTagline: "Billing Today. A Healthier Tomorrow.",
   description:
     "Outsourced medical billing and revenue cycle management. We ensure that your claims are billed right every time and provide you with hassle-free billing services.",
   url: "https://www.billservconsulting.com",

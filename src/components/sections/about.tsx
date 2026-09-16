@@ -9,7 +9,7 @@ export function About() {
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <p className="text-sm font-semibold tracking-wide text-primary uppercase">
+            <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
               About Us
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
@@ -32,7 +32,7 @@ export function About() {
               ].map((stat) => (
                 <div key={stat.label} className="text-center sm:text-left">
                   <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-2xl font-semibold text-primary sm:text-3xl">
+                  <dd className="text-2xl font-semibold text-primary-text sm:text-3xl">
                     {stat.value}
                   </dd>
                   <p className="mt-1 text-xs text-muted-foreground text-pretty sm:text-sm">
@@ -60,7 +60,7 @@ export function About() {
                   <CardContent className="flex items-center gap-4">
                     <span
                       aria-hidden
-                      className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/10 text-base font-semibold text-primary"
+                      className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/12 text-base font-semibold text-brand-deep"
                     >
                       {person.name
                         .split(" ")

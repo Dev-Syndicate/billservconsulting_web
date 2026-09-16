@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu, Phone } from "lucide-react";
+import { ArrowRight, Menu, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +20,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/85 backdrop-blur supports-backdrop-filter:bg-background/70">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:h-20 sm:px-6">
         <Link href="/" className="flex items-center gap-2.5">
           <Image
             src="/logo.avif"
@@ -28,10 +28,15 @@ export function SiteHeader() {
             width={236}
             height={144}
             priority
-            className="h-11 w-auto"
+            className="h-11 w-auto sm:h-12"
           />
-          <span className="text-base font-semibold tracking-tight">
-            BillServ <span className="text-primary">Consulting</span>
+          <span className="flex flex-col leading-none">
+            <span className="text-base font-semibold tracking-tight sm:text-lg">
+              BillServ <span className="text-primary-text">Consulting</span>
+            </span>
+            <span className="mt-1 hidden text-[0.6875rem] text-muted-foreground sm:block">
+              {site.logoTagline}
+            </span>
           </span>
         </Link>
 
@@ -50,13 +55,19 @@ export function SiteHeader() {
         <div className="hidden items-center gap-3 md:flex">
           <a
             href={`tel:${site.phone.replace(/\s/g, "")}`}
-            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary-text"
           >
             <Phone className="size-4" />
             {site.phone}
           </a>
-          <Button asChild className="h-10 rounded-lg px-5">
-            <Link href="/#contact">Get in Touch</Link>
+          <Button
+            asChild
+            className="group h-11 rounded-xl bg-brand-gradient-cta px-6 text-[0.9375rem] font-semibold shadow-sm transition-shadow hover:shadow-md hover:shadow-primary/25"
+          >
+            <Link href="/#contact">
+              Get in Touch
+              <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
           </Button>
         </div>
 
@@ -88,7 +99,7 @@ export function SiteHeader() {
               ))}
               <Button
                 asChild
-                className="mt-5 h-13 rounded-xl text-base"
+                className="mt-5 h-13 rounded-xl bg-brand-gradient-cta text-base font-semibold"
               >
                 <Link href="/#contact" onClick={() => setOpen(false)}>
                   Get in Touch

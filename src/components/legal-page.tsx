@@ -25,7 +25,7 @@ export function LegalPage({ document }: { document: LegalDocument }) {
       <Reveal>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary-text"
         >
           <ArrowLeft className="size-4" />
           Back to home
@@ -91,14 +91,14 @@ export function LegalPage({ document }: { document: LegalDocument }) {
             Questions about this page? Email{" "}
             <a
               href={`mailto:${site.email}`}
-              className="font-medium text-primary underline-offset-4 hover:underline"
+              className="font-medium text-primary-text underline-offset-4 hover:underline"
             >
               {site.email}
             </a>{" "}
             or{" "}
             <Link
               href="/#contact"
-              className="font-medium text-primary underline-offset-4 hover:underline"
+              className="font-medium text-primary-text underline-offset-4 hover:underline"
             >
               get in touch
             </Link>
@@ -121,7 +121,7 @@ export function LegalPage({ document }: { document: LegalDocument }) {
               <li key={section.id}>
                 <a
                   href={`#${section.id}`}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary-text"
                 >
                   {section.heading}
                 </a>

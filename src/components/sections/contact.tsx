@@ -39,7 +39,7 @@ export function Contact() {
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <p className="text-sm font-semibold tracking-wide text-primary uppercase">
+            <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
               Contact
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
@@ -162,7 +162,7 @@ export function Contact() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="h-13 w-full rounded-xl text-base"
+                    className="h-13 w-full rounded-xl bg-brand-gradient-cta text-base font-semibold shadow-md shadow-primary/20 transition-shadow hover:shadow-lg hover:shadow-primary/30"
                   >
                     Submit
                   </Button>

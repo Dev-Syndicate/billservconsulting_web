@@ -14,7 +14,7 @@ export function Expertise() {
       <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-16">
           <Reveal className="max-w-2xl">
-            <p className="text-sm font-semibold tracking-wide text-primary uppercase">
+            <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
               Specialties
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
