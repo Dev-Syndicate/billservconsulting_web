@@ -1,15 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowRight,
-  BarChart3,
-  Clock,
-  FileCheck2,
-  Phone,
-  ShieldCheck,
-  Users,
-  Zap,
-} from "lucide-react";
+import { ArrowRight, Clock, Phone, ShieldCheck, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/site";
@@ -28,34 +19,9 @@ const highlights = [
   { icon: Clock, title: "Available 24/7", detail: "Dedicated support" },
 ];
 
-const stats = [
-  {
-    icon: Users,
-    value: "500+",
-    label: "Healthcare Providers",
-    detail: "Trust Us",
-  },
-  {
-    icon: FileCheck2,
-    value: "99%",
-    label: "Claim Accuracy",
-    detail: "Our Commitment",
-  },
-  { icon: Clock, value: "24/7", label: "Expert Support", detail: "Always Here" },
-  {
-    icon: BarChart3,
-    value: "Stronger Revenue",
-    label: "Healthier Practices",
-    detail: "A Brighter Tomorrow",
-    /* Long phrase rather than a figure — set at heading size, not stat size. */
-    wide: true,
-  },
-];
-
 export function Hero() {
   return (
-    <section className="border-b border-border bg-secondary">
-      <div className="relative overflow-hidden">
+    <section className="relative overflow-hidden border-b border-border bg-secondary">
       {/*
        * Full-bleed photograph anchored to the section's right edge from lg
        * up, so it runs to the top, bottom, and side without a card frame.
@@ -64,7 +30,7 @@ export function Hero() {
        */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-6 right-0 bottom-0 hidden w-[56%] xl:block"
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[56%] xl:block"
         style={{
           maskImage:
             "linear-gradient(to right, transparent 0%, black 22%, black 100%)",
@@ -72,13 +38,16 @@ export function Hero() {
             "linear-gradient(to right, transparent 0%, black 22%, black 100%)",
         }}
       >
+        {/* object-cover fills the band edge to edge with no letterboxing.
+            Anchored right-centre so the crop takes from the empty left of
+            the frame and keeps the clinician and books in view. */}
         <Image
           src="/hero-billing.avif"
           alt=""
           fill
           priority
           sizes="56vw"
-          className="object-contain object-right-bottom"
+          className="object-cover object-[75%_45%]"
         />
       </div>
 
@@ -179,43 +148,6 @@ export function Hero() {
             className="h-auto w-full rounded-2xl"
           />
         </div>
-        </div>
-      </div>
-
-      {/* Stats bar */}
-      <div className="mx-auto w-full max-w-7xl px-4 pb-14 sm:px-6 sm:pb-16 lg:pb-20">
-        <dl className="grid gap-x-6 gap-y-8 rounded-2xl border border-border/70 bg-background/80 p-6 shadow-sm backdrop-blur sm:grid-cols-2 sm:p-8 lg:grid-cols-4 lg:divide-x lg:divide-border/70">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="flex items-center gap-4 lg:px-6 lg:first:pl-0 lg:last:pr-0"
-            >
-              <span
-                aria-hidden
-                className="grid size-12 shrink-0 place-items-center rounded-xl bg-secondary"
-              >
-                <stat.icon className="size-5 text-primary-text" />
-              </span>
-              <div className="min-w-0">
-                <dd
-                  className={
-                    stat.wide
-                      ? "text-base font-bold text-balance"
-                      : "text-2xl font-bold"
-                  }
-                >
-                  {stat.value}
-                </dd>
-                <dt className="text-sm font-medium text-pretty">
-                  {stat.label}
-                </dt>
-                <p className="text-xs text-muted-foreground text-pretty">
-                  {stat.detail}
-                </p>
-              </div>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );

@@ -90,9 +90,6 @@ checkmarks, approved rows, and the clean-claim meter.
 - **The contact form has no backend.** It builds a `mailto:` link and
   hands off to the visitor's email client. Wiring it to a real endpoint
   (a form service or a route handler) is outstanding.
-- **Stats bar figures are illustrative.** 500+ providers and 99% claim
-  accuracy came from the design reference, not from client data. They
-  should be confirmed or softened before launch.
 - **The legal pages need a lawyer's review.** The Governing law clause
   currently says "the laws applicable at our principal place of business"
   rather than naming a jurisdiction — BillServ operates from India while
