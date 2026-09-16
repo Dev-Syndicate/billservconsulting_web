@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -37,6 +38,28 @@ export default function AboutPage() {
           eyebrow="About Us"
           title="Our Experts Are the Finest"
           lead={lead}
+          bleed
+          aside={
+            <Image
+              src="/about-team.avif"
+              alt=""
+              fill
+              priority
+              sizes="52vw"
+              className="object-cover object-[62%_45%]"
+            />
+          }
+          asideStacked={
+            <Image
+              src="/about-team.avif"
+              alt="Three billing specialists reviewing claims together at a laptop"
+              width={1500}
+              height={1000}
+              priority
+              sizes="100vw"
+              className="h-auto w-full rounded-2xl"
+            />
+          }
         />
         <About headless />
         <Values />

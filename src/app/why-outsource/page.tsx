@@ -36,7 +36,13 @@ export default function WhyOutsourcePage() {
           lead={lead}
         />
         <WhyOutsource headless />
-        <CtaBand />
+        {/* The section above already closes on a navy panel with its own
+            call to action, so this one leads with the practical next step
+            rather than repeating the pitch. */}
+        <CtaBand
+          heading="Want to see the numbers for your practice?"
+          body="Send us your specialty and volumes and we will come back with a written scope and pricing."
+        />
       </main>
       <SiteFooter />
     </>

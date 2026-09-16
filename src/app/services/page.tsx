@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -35,6 +36,28 @@ export default function ServicesPage() {
           eyebrow="What We Do"
           title="Services Offered"
           lead={lead}
+          bleed
+          aside={
+            <Image
+              src="/services-cycle.avif"
+              alt=""
+              fill
+              priority
+              sizes="52vw"
+              className="object-cover object-[58%_30%]"
+            />
+          }
+          asideStacked={
+            <Image
+              src="/services-cycle.avif"
+              alt="The revenue cycle as ten numbered stages, from patient registration through claims and payment posting to A/R follow-up and call centre support"
+              width={1374}
+              height={1145}
+              priority
+              sizes="100vw"
+              className="h-auto w-full rounded-2xl"
+            />
+          }
         />
         <Services headless />
         <Expertise />
