@@ -7,9 +7,9 @@ import { clients } from "@/lib/site";
  * Client logos. Lives on /about rather than with the specialties, since it
  * describes who we work for, not what we bill.
  *
- * The logos arrive at different aspect ratios (two square marks, two
- * wordmarks), so each sits in a fixed-height box with object-contain. That
- * normalises them optically without distorting anyone's brand.
+ * Same plain logo row as the homepage strip — no cards, no per-logo
+ * captions. The logos carry their own names, and a card per client left
+ * most of each tile empty with a stranded line of text at the bottom.
  */
 export function Clientele() {
   return (
@@ -29,41 +29,18 @@ export function Clientele() {
           </p>
         </Reveal>
 
-        <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Wraps to two rows on narrow screens rather than shrinking the
+            logos to the point the baked-in wordmarks stop being legible. */}
+        <ul className="mt-12 flex flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16">
           {clients.map((client, i) => (
             <Reveal as="li" key={client.name} delay={i * 90}>
-              <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-border bg-background p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                {/* Fixed box keeps every mark on the same optical baseline.
-                    Tall enough that the square marks' own wordmarks stay
-                    legible rather than shrinking to a few pixels. */}
-                <div className="flex h-36 w-full items-center justify-center">
-                  <Image
-                    src={client.logo}
-                    alt={`${client.name} logo`}
-                    width={client.width}
-                    height={client.height}
-                    className="max-h-36 w-auto object-contain"
-                  />
-                </div>
-                {/* Only caption the marks that are pure symbol — otherwise
-                    the practice name would appear twice in the same card.
-                    The location line is safe either way, since no logo
-                    carries it. */}
-                {client.nameInLogo ? null : (
-                  <p className="mt-4 text-sm font-medium text-pretty">
-                    {client.name}
-                  </p>
-                )}
-                <p
-                  className={
-                    client.nameInLogo
-                      ? "mt-4 text-xs text-muted-foreground"
-                      : "mt-1 text-xs text-muted-foreground"
-                  }
-                >
-                  {client.location}
-                </p>
-              </div>
+              <Image
+                src={client.logo}
+                alt={`${client.name} logo`}
+                width={client.width}
+                height={client.height}
+                className="h-20 w-auto object-contain sm:h-24"
+              />
             </Reveal>
           ))}
         </ul>
