@@ -3,7 +3,9 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, Phone } from "lucide-react";
+import { cn } from "cn";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,6 +19,7 @@ import { nav, site } from "@/lib/site";
 
 export function SiteHeader() {
   const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/70 bg-background/85 backdrop-blur supports-backdrop-filter:bg-background/70">
@@ -41,15 +44,26 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
-          {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              {item.label}
-            </Link>
-          ))}
+          {nav.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                // Hover darkens the label; brand blue is reserved for the
+                // current page, with a short underline as its marker.
+                className={cn(
+                  "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  active
+                    ? "text-primary-text after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-primary"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
@@ -87,16 +101,25 @@ export function SiteHeader() {
               <SheetTitle className="text-left">Menu</SheetTitle>
             </SheetHeader>
             <div className="flex flex-col gap-1 px-4">
-              {nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-3.5 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {nav.map((item) => {
+                const active = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    aria-current={active ? "page" : undefined}
+                    className={cn(
+                      "rounded-lg px-3 py-3.5 text-base font-medium transition-colors",
+                      active
+                        ? "bg-secondary text-primary-text"
+                        : "hover:text-primary-text",
+                    )}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
               <Button
                 asChild
                 className="mt-5 h-13 rounded-xl bg-brand-cta hover:bg-brand-cta-hover text-base font-semibold"
