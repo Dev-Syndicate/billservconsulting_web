@@ -2,7 +2,7 @@ import { cn } from "cn";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
-import { TeamIllustration } from "@/components/illustrations";
+import { ClaimFlowIllustration } from "@/components/illustrations";
 import { leadership } from "@/lib/site";
 
 export function About({ headless = false }: { headless?: boolean } = {}) {
@@ -47,7 +47,7 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
           </Reveal>
 
           <Reveal from="right" delay={120}>
-            <TeamIllustration className="mx-auto w-full max-w-md animate-float" />
+            <ClaimFlowIllustration className="mx-auto w-full max-w-md animate-float" />
           </Reveal>
         </div>
 

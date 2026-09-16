@@ -8,8 +8,10 @@ import {
   Eye,
   FileCode2,
   FileWarning,
+  CalendarDays,
   Headset,
   HeartPulse,
+  Layers,
   Microscope,
   PhoneCall,
   Scan,
@@ -25,7 +27,7 @@ import { cn } from "cn";
 
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
-import { TeamIllustration } from "@/components/illustrations";
+import { ClaimFlowIllustration } from "@/components/illustrations";
 import { expertise, services, whyOutsource } from "@/lib/site";
 
 const serviceIcons: Record<(typeof services)[number]["icon"], LucideIcon> = {
@@ -102,15 +104,30 @@ export function AboutTeaser() {
               lead="We provide services across the whole healthcare spectrum; from the moment a patient arrives for treatment until the time the insurance company settles the claim."
             />
 
-            <dl className="mt-10 grid grid-cols-3 gap-4 sm:gap-6">
+            {/* Stats as bordered tiles rather than bare numerals: as plain
+                text they read as loose figures floating under the copy,
+                with nothing tying them to each other. */}
+            <dl className="mt-10 grid grid-cols-3 gap-3 sm:gap-4">
               {[
-                { value: "10", label: "Billing services offered" },
-                { value: "7", label: "Specialties covered" },
-                { value: "2022", label: "Serving providers since" },
-              ].map((stat) => (
-                <div key={stat.label}>
+                { value: "10", label: "Billing services", icon: Layers },
+                { value: "7", label: "Specialties covered", icon: Stethoscope },
+                { value: "2022", label: "Serving providers since", icon: CalendarDays },
+              ].map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-border bg-background p-4 sm:p-5"
+                >
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "grid size-9 place-items-center rounded-xl text-white",
+                      i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                    )}
+                  >
+                    <stat.icon className="size-4.5" />
+                  </span>
                   <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-2xl font-bold text-primary-text sm:text-3xl">
+                  <dd className="mt-3 text-2xl font-bold tabular-nums text-primary-text sm:text-3xl">
                     {stat.value}
                   </dd>
                   <p className="mt-1 text-xs text-muted-foreground text-pretty sm:text-sm">
@@ -124,7 +141,7 @@ export function AboutTeaser() {
           </div>
 
           <Reveal from="right" delay={120}>
-            <TeamIllustration className="mx-auto w-full max-w-md animate-float" />
+            <ClaimFlowIllustration className="mx-auto w-full max-w-md animate-float" />
           </Reveal>
         </div>
       </div>

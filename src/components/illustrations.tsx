@@ -1,130 +1,154 @@
 type IllustrationProps = { className?: string };
 
-/** Team of specialists reviewing a claim together — used in the About section. */
-export function TeamIllustration({ className }: IllustrationProps) {
+/**
+ * A claim's journey from submitted to paid, with A/R ageing alongside.
+ *
+ * Replaces an earlier illustration of anonymous figures round a chart,
+ * which was generic clip-art — it said nothing about billing and could
+ * have sat on any consultancy site. This shows the two things a practice
+ * actually cares about: claims clearing on first pass, and money not
+ * getting stuck in ageing buckets.
+ *
+ * Figures are indicative of the workflow, not audited performance
+ * metrics. The information pack is explicit that verified numbers may
+ * only be published once BillServ has internal records supporting them,
+ * so nothing here is labelled as a measured result.
+ */
+export function ClaimFlowIllustration({ className }: IllustrationProps) {
   return (
     <svg
-      viewBox="0 0 460 320"
+      viewBox="0 0 460 340"
       fill="none"
       role="img"
-      aria-label="A team of billing specialists reviewing claims together"
+      aria-label="A claim moving from submitted through review to paid, beside an accounts-receivable ageing chart"
       className={className}
     >
       <defs>
-        <linearGradient id="ilTeamCard" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#F4FAFD" />
-        </linearGradient>
+        <clipPath id="cf-card">
+          <rect x="24" y="26" width="412" height="288" rx="18" />
+        </clipPath>
       </defs>
 
-      <ellipse cx="230" cy="286" rx="176" ry="18" fill="#EDF6FD" />
-      <circle cx="86" cy="86" r="52" fill="#EDF6FD" />
-      <circle cx="392" cy="66" r="34" fill="#E4F2FB" />
+      {/* Card */}
+      <rect
+        x="24"
+        y="26"
+        width="412"
+        height="288"
+        rx="18"
+        fill="var(--color-background)"
+        stroke="var(--color-border)"
+        strokeWidth="1.5"
+      />
 
-      {/* central board */}
-      <g transform="translate(120 44)">
-        <rect
-          width="220"
-          height="150"
-          rx="16"
-          fill="url(#ilTeamCard)"
-          stroke="#DCEAF4"
-        />
-        <rect x="22" y="24" width="92" height="10" rx="5" fill="#3FA9E5" />
-        <rect x="22" y="48" width="150" height="8" rx="4" fill="#EAF4FC" />
-        <rect x="22" y="68" width="120" height="8" rx="4" fill="#EAF4FC" />
-        {/* mini bars — rise in sequence */}
-        <rect
-          x="22"
-          y="98"
-          width="18"
-          height="28"
-          rx="4"
-          fill="#CDE8F7"
-          className="animate-bar-rise"
-          style={{ animationDelay: "0.1s" }}
-        />
-        <rect
-          x="48"
-          y="88"
-          width="18"
-          height="38"
-          rx="4"
-          fill="#A8D9F2"
-          className="animate-bar-rise"
-          style={{ animationDelay: "0.25s" }}
-        />
-        <rect
-          x="74"
-          y="78"
-          width="18"
-          height="48"
-          rx="4"
-          fill="#7BC8EE"
-          className="animate-bar-rise"
-          style={{ animationDelay: "0.4s" }}
-        />
-        <rect
-          x="100"
-          y="66"
-          width="18"
-          height="60"
-          rx="4"
-          fill="#3FA9E5"
-          className="animate-bar-rise"
-          style={{ animationDelay: "0.55s" }}
-        />
-        {/* check — pulses, then pops. Teal marks the confirmed state. */}
-        <circle
-          cx="176"
-          cy="104"
-          r="22"
-          fill="none"
-          stroke="#8FD9D8"
-          strokeWidth="2"
-          className="animate-pulse-ring"
-        />
-        <circle cx="176" cy="104" r="22" fill="#DFF4F4" />
-        <path
-          d="M166 104 L173 111 L187 96"
-          stroke="#35C2C0"
-          strokeWidth="4"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="animate-pop"
-        />
-      </g>
+      <g clipPath="url(#cf-card)">
+        {/* Header bar */}
+        <rect x="24" y="26" width="412" height="46" fill="var(--color-secondary)" />
+        <rect x="46" y="43" width="96" height="10" rx="5" fill="var(--color-primary)" />
+        <rect x="152" y="45" width="58" height="6" rx="3" fill="var(--color-border)" />
 
-      {/* person left */}
-      <g transform="translate(48 132)">
-        <g className="animate-bob" style={{ animationDelay: "0s" }}>
-          <circle cx="34" cy="30" r="22" fill="#7BC8EE" />
+        {/* Status pill, top right */}
+        <rect x="332" y="40" width="82" height="20" rx="10" fill="var(--color-brand-teal)" opacity="0.14" />
+        <circle cx="346" cy="50" r="3.5" fill="var(--color-brand-teal)" />
+        <rect x="355" y="47" width="46" height="6" rx="3" fill="var(--color-brand-teal)" opacity="0.65" />
+
+        {/* ---- Claim pipeline: submitted -> review -> paid ---- */}
+        <g>
+          {/* Connector */}
           <path
-            d="M4 116 C4 82 18 64 34 64 C50 64 64 82 64 116 Z"
-            fill="#3FA9E5"
+            d="M76 112 H 236"
+            stroke="var(--color-border)"
+            strokeWidth="2"
+            strokeDasharray="6 6"
           />
+          <path
+            d="M236 112 H 384"
+            stroke="var(--color-brand-teal)"
+            strokeWidth="2"
+            strokeDasharray="6 6"
+            opacity="0.5"
+          />
+
+          {/* Stage 1 — submitted */}
+          <circle cx="76" cy="112" r="20" fill="var(--color-primary)" opacity="0.12" />
+          <circle cx="76" cy="112" r="20" stroke="var(--color-primary)" strokeWidth="1.5" />
+          <rect x="68" y="103" width="16" height="18" rx="2.5" fill="var(--color-primary)" />
+          <rect x="71" y="107" width="10" height="1.8" rx="0.9" fill="var(--color-background)" />
+          <rect x="71" y="111" width="10" height="1.8" rx="0.9" fill="var(--color-background)" />
+          <rect x="71" y="115" width="6" height="1.8" rx="0.9" fill="var(--color-background)" />
+
+          {/* Stage 2 — in review */}
+          <circle cx="236" cy="112" r="20" fill="var(--color-primary)" opacity="0.12" />
+          <circle cx="236" cy="112" r="20" stroke="var(--color-primary)" strokeWidth="1.5" />
+          <circle cx="233" cy="109" r="7" stroke="var(--color-primary)" strokeWidth="2.5" />
+          <path d="M238 114 L 244 120" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" />
+
+          {/* Stage 3 — paid. Teal is the site's confirmation colour. */}
+          <circle
+            cx="384"
+            cy="112"
+            r="22"
+            fill="var(--color-brand-teal)"
+            className="animate-pulse-ring"
+            opacity="0.25"
+          />
+          <circle cx="384" cy="112" r="20" fill="var(--color-brand-teal)" />
+          <path
+            d="M375 112 l 6 6 l 12 -13"
+            stroke="var(--color-background)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="animate-draw"
+          />
+
+          {/* Stage labels */}
+          <rect x="58" y="142" width="36" height="5" rx="2.5" fill="var(--color-border)" />
+          <rect x="218" y="142" width="36" height="5" rx="2.5" fill="var(--color-border)" />
+          <rect x="366" y="142" width="36" height="5" rx="2.5" fill="var(--color-brand-teal)" opacity="0.6" />
         </g>
-      </g>
 
-      {/* person right */}
-      <g transform="translate(348 132)">
-        <g className="animate-bob" style={{ animationDelay: "-1.3s" }}>
-          <circle cx="34" cy="30" r="22" fill="#A8D9F2" />
-          <path
-            d="M4 116 C4 82 18 64 34 64 C50 64 64 82 64 116 Z"
-            fill="#7BC8EE"
-          />
+        {/* ---- A/R ageing: bars shrink as buckets age, which is the
+               point — money should not sit in the far-right buckets. ---- */}
+        <g>
+          <rect x="52" y="176" width="72" height="6" rx="3" fill="var(--color-border)" />
+
+          <g className="animate-bar-rise">
+            <rect x="52" y="208" width="30" height="60" rx="5" fill="var(--color-primary)" />
+          </g>
+          <g className="animate-bar-rise" style={{ animationDelay: "120ms" }}>
+            <rect x="94" y="224" width="30" height="44" rx="5" fill="var(--color-primary)" opacity="0.72" />
+          </g>
+          <g className="animate-bar-rise" style={{ animationDelay: "240ms" }}>
+            <rect x="136" y="240" width="30" height="28" rx="5" fill="var(--color-primary)" opacity="0.48" />
+          </g>
+          <g className="animate-bar-rise" style={{ animationDelay: "360ms" }}>
+            <rect x="178" y="252" width="30" height="16" rx="5" fill="var(--color-primary)" opacity="0.28" />
+          </g>
+
+          {/* Baseline */}
+          <path d="M46 268 H 214" stroke="var(--color-border)" strokeWidth="1.5" />
         </g>
-      </g>
 
-      {/* person center-front */}
-      <g transform="translate(196 176)">
-        <g className="animate-bob" style={{ animationDelay: "-2.6s" }}>
-          <circle cx="34" cy="32" r="26" fill="#CDE8F7" />
+        {/* ---- Clean-claim trend, rising ---- */}
+        <g>
+          <rect x="250" y="176" width="64" height="6" rx="3" fill="var(--color-border)" />
           <path
-            d="M0 128 C0 88 16 68 34 68 C52 68 68 88 68 128 Z"
-            fill="#A8D9F2"
+            d="M254 254 C 284 250, 300 232, 322 218 S 366 196, 404 190"
+            stroke="var(--color-brand-teal)"
+            strokeWidth="3"
+            strokeLinecap="round"
+            className="animate-trend-draw"
           />
+          <circle
+            cx="404"
+            cy="190"
+            r="5.5"
+            fill="var(--color-brand-teal)"
+            className="animate-pop"
+            style={{ animationDelay: "700ms" }}
+          />
+          <path d="M246 268 H 414" stroke="var(--color-border)" strokeWidth="1.5" />
         </g>
       </g>
     </svg>
