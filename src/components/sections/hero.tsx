@@ -30,7 +30,7 @@ export function Hero() {
        */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[56%] xl:block"
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[62%] xl:block"
         style={{
           maskImage:
             "linear-gradient(to right, transparent 0%, black 22%, black 100%)",
@@ -46,12 +46,19 @@ export function Hero() {
           alt=""
           fill
           priority
-          sizes="56vw"
-          className="object-cover object-[75%_45%]"
+          sizes="62vw"
+          className="object-cover object-[82%_42%]"
         />
       </div>
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-10 pb-10 sm:px-6 sm:pt-12 sm:pb-12 lg:grid-cols-[1fr_1fr] lg:gap-12 lg:pt-14 xl:grid-cols-1 xl:pt-16 xl:pb-16">
+      {/*
+       * From xl the full-bleed photo layer is what gives this section its
+       * presence, so the content grid carries a minimum height to give the
+       * photo real vertical room. Without it the section collapses to the
+       * height of the copy alone, the photo crops tight, and the next
+       * section's white background rides up close under the headline.
+       */}
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-10 pb-10 sm:px-6 sm:pt-12 sm:pb-12 lg:grid-cols-[1fr_1fr] lg:gap-12 lg:pt-14 xl:min-h-168 xl:grid-cols-1 xl:pt-16 xl:pb-16">
         <div className="xl:max-w-[44%]">
           <h1 className="text-[2.25rem] leading-[1.08] font-bold tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
             Quality Is What We{" "}
