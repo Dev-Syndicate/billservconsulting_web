@@ -15,6 +15,7 @@ export function Testimonial() {
           <figcaption className="mt-8">
             <p className="font-semibold">{testimonial.author}</p>
             <p className="mt-1 text-sm text-white/85">{testimonial.title}</p>
+            <p className="text-sm text-white/85">{testimonial.location}</p>
           </figcaption>
         </Reveal>
       </div>

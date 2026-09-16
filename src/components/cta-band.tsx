@@ -22,7 +22,11 @@ export function CtaBand({
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <Reveal className="flex flex-col items-start gap-8 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl">
-            <h2 className="text-2xl font-bold tracking-tight text-balance sm:text-3xl">
+            {/* The company's own promise line, from the information pack. */}
+            <p className="text-sm font-semibold tracking-wide text-brand-teal uppercase">
+              {site.promise}
+            </p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-balance sm:text-3xl">
               {heading}
             </h2>
             <p className="mt-3 text-white/80 text-pretty sm:text-lg">{body}</p>

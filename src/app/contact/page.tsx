@@ -10,7 +10,7 @@ import { site } from "@/lib/site";
 
 const title = "Contact Us";
 const lead =
-  "Tell us about your practice and we will get back to you. We are available 24/7.";
+  "Tell us about your practice and we will get back to you within one business day.";
 
 /** Reassurance points, shown beside the page title. */
 const assurances = [
