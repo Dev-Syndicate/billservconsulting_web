@@ -53,15 +53,7 @@ export function Hero() {
 
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-10 pb-10 sm:px-6 sm:pt-12 sm:pb-12 lg:grid-cols-[1fr_1fr] lg:gap-12 lg:pt-14 xl:grid-cols-1 xl:pt-16 xl:pb-16">
         <div className="xl:max-w-[44%]">
-          <p className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-background px-3.5 py-1.5 text-xs font-medium text-primary-text shadow-sm sm:text-sm">
-            <span
-              aria-hidden
-              className="size-1.5 rounded-full bg-primary"
-            />
-            Medical Billing &amp; Revenue Cycle Management
-          </p>
-
-          <h1 className="mt-5 text-[2.25rem] leading-[1.08] font-bold tracking-tight text-balance sm:mt-6 sm:text-6xl lg:text-[4.25rem]">
+          <h1 className="text-[2.25rem] leading-[1.08] font-bold tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
             Quality Is What We{" "}
             <span className="relative inline-block">
               <span className="text-primary-text">Believe In.</span>
