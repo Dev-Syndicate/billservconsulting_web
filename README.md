@@ -85,6 +85,26 @@ dash pattern for the lifecycle connector, not decorative colour.
 Teal consistently signals a confirmed or positive state: the Paid step,
 checkmarks, approved rows, and the clean-claim meter.
 
+## Images
+
+All images in `public/` are hand-optimised AVIF, committed at the size
+they are served. `next.config.ts` sets `images.unoptimized`, so they are
+served straight from `public/` rather than through `/_next/image`.
+
+That is deliberate: the sources are already small, and routing them
+through the optimiser returned **89 KB against a 54 KB source** at the
+hero’s rendered size, while consuming Vercel Image Optimization quota
+(metered on the Hobby tier).
+
+If you add an image that is *not* pre-optimised — a large JPEG or PNG
+from the client, say — either convert it the same way:
+
+```bash
+npx sharp-cli -i source.png -o public/name.avif -f avif --quality 62 resize 1536
+```
+
+…or remove the `unoptimized` flag and let Next handle it.
+
 ## Notes
 
 - **The contact form has no backend.** It builds a `mailto:` link and
