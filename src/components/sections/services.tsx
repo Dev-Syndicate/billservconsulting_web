@@ -110,41 +110,43 @@ export function Services({ headless = false }: { headless?: boolean } = {}) {
           </ol>
         </div>
 
-        {/* Service cards. Two columns keeps ten cards even (5 x 2), so no
-            orphan sits alone on the last row. Icon tiles alternate blue and
-            teal, and each card carries its number in the workflow. */}
-        <div className="mt-16 grid gap-5 md:grid-cols-2">
+        {/* Service cards: centred, with a ringed circular icon above the
+            title. Three columns leaves one card on the last row of ten, so
+            the final card spans the middle rather than sitting left-aligned
+            under an empty gap. */}
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => {
             const Icon = icons[service.icon];
+            const isOrphan = i === services.length - 1;
             return (
-              <Reveal key={service.title} delay={i * 60} className="h-full">
+              <Reveal
+                key={service.title}
+                delay={i * 60}
+                className={cn(
+                  "h-full",
+                  // Ten cards in three columns: centre the last one.
+                  isOrphan && "sm:col-span-2 sm:mx-auto sm:max-w-md lg:col-start-2",
+                )}
+              >
                 <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                  <CardContent className="flex h-full gap-4 sm:gap-5">
+                  <CardContent className="flex h-full flex-col items-center px-6 text-center">
                     <span
                       aria-hidden
                       className={cn(
-                        "grid size-12 shrink-0 place-items-center rounded-xl text-white",
-                        i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                        "grid size-18 shrink-0 place-items-center rounded-full ring-4 transition-colors duration-300",
+                        i % 2 === 0
+                          ? "bg-primary text-white ring-primary/15"
+                          : "bg-brand-teal text-white ring-brand-teal/15",
                       )}
                     >
-                      <Icon className="size-5" />
+                      <Icon className="size-7" />
                     </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-baseline justify-between gap-3">
-                        <h3 className="font-semibold text-pretty">
-                          {service.title}
-                        </h3>
-                        <span
-                          aria-hidden
-                          className="text-xs font-semibold tracking-wide text-muted-foreground tabular-nums"
-                        >
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                      </div>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-                        {service.description}
-                      </p>
-                    </div>
+                    <h3 className="mt-5 font-semibold text-balance">
+                      {service.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
+                      {service.description}
+                    </p>
                   </CardContent>
                 </Card>
               </Reveal>

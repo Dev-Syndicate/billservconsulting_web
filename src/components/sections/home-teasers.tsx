@@ -136,20 +136,22 @@ export function ServicesTeaser() {
             return (
               <Reveal key={service.title} delay={i * 60} className="h-full">
                 <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                  <CardContent className="flex h-full flex-col">
+                  <CardContent className="flex h-full flex-col items-center px-6 text-center">
                     <span
                       aria-hidden
                       className={cn(
-                        "grid size-11 shrink-0 place-items-center rounded-xl text-white",
-                        i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                        "grid size-16 shrink-0 place-items-center rounded-full ring-4",
+                        i % 2 === 0
+                          ? "bg-primary text-white ring-primary/15"
+                          : "bg-brand-teal text-white ring-brand-teal/15",
                       )}
                     >
-                      <Icon className="size-5" />
+                      <Icon className="size-6" />
                     </span>
-                    <h3 className="mt-4 font-semibold text-pretty">
+                    <h3 className="mt-5 font-semibold text-balance">
                       {service.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
                       {service.description}
                     </p>
                   </CardContent>
