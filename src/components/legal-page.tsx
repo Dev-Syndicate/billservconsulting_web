@@ -21,7 +21,7 @@ export function LegalPage({ document }: { document: LegalDocument }) {
   }));
 
   return (
-    <div className="mx-auto w-full max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+    <div className="mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
       <Reveal>
         <Link
           href="/"

@@ -6,7 +6,7 @@ import { leadership } from "@/lib/site";
 export function About() {
   return (
     <section id="about" className="scroll-mt-16 border-b border-border">
-      <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
