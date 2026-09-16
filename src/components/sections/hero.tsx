@@ -54,10 +54,36 @@ const stats = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-secondary">
+    <section className="border-b border-border bg-secondary">
+      <div className="relative overflow-hidden">
+      {/*
+       * Full-bleed photograph anchored to the section's right edge from lg
+       * up, so it runs to the top, bottom, and side without a card frame.
+       * The gradient mask fades its left edge into the background rather
+       * than ending on a hard vertical line behind the copy.
+       */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -top-6 right-0 bottom-0 hidden w-[56%] xl:block"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent 0%, black 22%, black 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent 0%, black 22%, black 100%)",
+        }}
+      >
+        <Image
+          src="/hero-billing.avif"
+          alt=""
+          fill
+          priority
+          sizes="56vw"
+          className="object-contain object-right-bottom"
+        />
+      </div>
 
-      <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-14 pb-10 sm:px-6 sm:pt-20 sm:pb-12 lg:grid-cols-[0.95fr_1fr] lg:gap-12 lg:pt-24 lg:pb-14">
-        <div>
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-10 pb-10 sm:px-6 sm:pt-12 sm:pb-12 lg:grid-cols-[1fr_1fr] lg:gap-12 lg:pt-14 xl:grid-cols-1 xl:pt-16 xl:pb-16">
+        <div className="xl:max-w-[44%]">
           <p className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-background px-3.5 py-1.5 text-xs font-medium text-primary-text shadow-sm sm:text-sm">
             <span
               aria-hidden
@@ -118,7 +144,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <ul className="mt-10 grid gap-5 sm:grid-cols-3 sm:gap-x-3">
+          <ul className="mt-10 grid gap-5 sm:grid-cols-3 sm:gap-x-3 lg:grid-cols-2 xl:grid-cols-3">
             {highlights.map((item) => (
               <li key={item.title} className="flex items-center gap-3">
                 <span
@@ -140,18 +166,19 @@ export function Hero() {
           </ul>
         </div>
 
-        {/* The image carries its own script captions, so no separate
-            accent line is needed alongside it. */}
-        <div className="relative">
+        {/* Below lg the photo stacks in flow beneath the copy; from lg the
+            full-bleed layer above takes over and this is hidden. */}
+        <div className="relative xl:hidden">
           <Image
             src="/hero-billing.avif"
             alt="A clinician reviewing patient records on a tablet, beside books reading Better Billing, Healthier Practices, and Brighter Futures"
             width={1536}
             height={1024}
             priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="100vw"
             className="h-auto w-full rounded-2xl"
           />
+        </div>
         </div>
       </div>
 
