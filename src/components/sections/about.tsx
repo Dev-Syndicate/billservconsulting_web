@@ -1,3 +1,5 @@
+import { CalendarDays, Layers, Stethoscope } from "lucide-react";
+
 import { cn } from "cn";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -8,8 +10,15 @@ import { leadership } from "@/lib/site";
 export function About({ headless = false }: { headless?: boolean } = {}) {
   return (
     <section id="about" className="scroll-mt-16 border-b border-border">
-      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
-        <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+      {/* In headless mode the route's PageHeader supplies the separation
+          above, so the section's own top padding is reduced. */}
+      <div
+        className={cn(
+          "mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20",
+          headless ? "pt-10 sm:pt-12" : "pt-16 sm:pt-20",
+        )}
+      >
+        <div className="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           <Reveal>
             {!headless && (
               <>
@@ -27,15 +36,34 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
               a great start and reaps the most benefits.
             </p>
 
-            <dl className="mt-8 grid grid-cols-3 gap-4 sm:mt-10 sm:gap-6">
+            {/* Tiles rather than bare numerals, matching the homepage
+                teaser — as loose figures they had nothing tying them
+                together. */}
+            <dl className="mt-8 grid grid-cols-3 gap-3 sm:mt-10 sm:gap-4">
               {[
-                { value: "10", label: "Billing services offered" },
-                { value: "7", label: "Specialties covered" },
-                { value: "2022", label: "Serving providers since" },
-              ].map((stat) => (
-                <div key={stat.label} className="text-center sm:text-left">
+                { value: "10", label: "Billing services", icon: Layers },
+                { value: "7", label: "Specialties covered", icon: Stethoscope },
+                {
+                  value: "2022",
+                  label: "Serving providers since",
+                  icon: CalendarDays,
+                },
+              ].map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className="rounded-2xl border border-border bg-background p-4 sm:p-5"
+                >
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "grid size-9 place-items-center rounded-xl text-white",
+                      i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                    )}
+                  >
+                    <stat.icon className="size-4.5" />
+                  </span>
                   <dt className="sr-only">{stat.label}</dt>
-                  <dd className="text-2xl font-semibold text-primary-text sm:text-3xl">
+                  <dd className="mt-3 text-2xl font-bold tabular-nums text-primary-text sm:text-3xl">
                     {stat.value}
                   </dd>
                   <p className="mt-1 text-xs text-muted-foreground text-pretty sm:text-sm">

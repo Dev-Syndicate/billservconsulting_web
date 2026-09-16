@@ -255,6 +255,33 @@ export const services = [
   },
 ] as const;
 
+/**
+ * Closing line from the information pack's "Why Outsource" section.
+ * Their own wording, and the sharpest sentence in the document.
+ */
+export const outsourcePromise =
+  "Your patients deserve your attention. Your revenue cycle deserves ours.";
+
+/**
+ * What a practice actually gets back, from the same section. Kept as
+ * short outcome phrases rather than prose — they read as a checklist,
+ * which is how the pack presents them.
+ */
+export const outsourceOutcomes = [
+  "Reduce administrative workload",
+  "Improve billing accuracy",
+  "Strengthen front-end processes",
+  "Improve claims management",
+  "Reduce preventable denials",
+  "Improve A/R follow-up",
+  "Recover outstanding revenue",
+  "Improve financial visibility",
+  "Reduce operational complexity",
+  "Access experienced billing professionals",
+  "Scale billing operations more efficiently",
+  "Spend more time focusing on patient care",
+] as const;
+
 export const whyOutsource = [
   {
     title: "Current coding and payer expertise",

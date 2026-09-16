@@ -9,6 +9,9 @@ import {
   FileCode2,
   FileWarning,
   CalendarDays,
+  Check,
+  Clock,
+  GraduationCap,
   Headset,
   HeartPulse,
   Layers,
@@ -19,6 +22,7 @@ import {
   ShieldCheck,
   Stethoscope,
   TestTube,
+  TrendingDown,
   UserPlus,
   Wallet,
 } from "lucide-react";
@@ -28,7 +32,13 @@ import { cn } from "cn";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { ClaimFlowIllustration } from "@/components/illustrations";
-import { expertise, services, whyOutsource } from "@/lib/site";
+import {
+  expertise,
+  outsourceOutcomes,
+  outsourcePromise,
+  services,
+  whyOutsource,
+} from "@/lib/site";
 
 const serviceIcons: Record<(typeof services)[number]["icon"], LucideIcon> = {
   UserPlus,
@@ -41,6 +51,13 @@ const serviceIcons: Record<(typeof services)[number]["icon"], LucideIcon> = {
   PhoneCall,
   BadgeCheck,
   Headset,
+};
+
+const whyIcons: Record<(typeof whyOutsource)[number]["icon"], LucideIcon> = {
+  GraduationCap,
+  ShieldCheck,
+  TrendingDown,
+  Clock,
 };
 
 const specialtyIcons: Record<(typeof expertise)[number]["icon"], LucideIcon> = {
@@ -287,7 +304,17 @@ export function ServicesTeaser() {
   );
 }
 
-/** Why outsource: the four reasons, condensed. */
+/**
+ * Why outsource: the four reasons, then what a practice gets back.
+ *
+ * The reasons were a plain bulleted list — four dots and two columns of
+ * text, with no hierarchy and no use of the icons the data already
+ * carries. They are now numbered cards.
+ *
+ * The dark panel beneath carries the pack's own closing line and its
+ * twelve outcome phrases. Those outcomes are the answer to "so what?"
+ * that the four reasons raise, and they had no home anywhere on the site.
+ */
 export function WhyTeaser() {
   return (
     <section className="border-b border-border">
@@ -298,24 +325,80 @@ export function WhyTeaser() {
           lead="Codes change annually, payer rules change constantly, and unworked claims age out of their filing windows."
         />
 
-        <ul className="mt-12 grid gap-x-8 gap-y-6 sm:grid-cols-2">
-          {whyOutsource.map((item, i) => (
-            <Reveal as="li" key={item.title} delay={i * 80}>
-              <h3 className="flex items-start gap-3 font-semibold text-pretty">
-                <span
-                  aria-hidden
-                  className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
-                />
-                {item.title}
-              </h3>
-              <p className="mt-2 pl-4.5 text-sm leading-relaxed text-muted-foreground text-pretty">
-                {item.description}
-              </p>
-            </Reveal>
-          ))}
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2">
+          {whyOutsource.map((item, i) => {
+            const Icon = whyIcons[item.icon];
+            const teal = i % 2 === 1;
+            return (
+              <Reveal as="li" key={item.title} delay={i * 80} className="h-full">
+                <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-background p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 sm:p-7">
+                  {/* Oversized numeral, sunk into the corner as a graphic. */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute -top-3 right-3 text-7xl leading-none font-bold tabular-nums text-muted-foreground/8 select-none"
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "relative grid size-12 shrink-0 place-items-center rounded-2xl text-white shadow-sm",
+                      teal ? "bg-brand-teal" : "bg-primary",
+                    )}
+                  >
+                    <Icon className="size-6" />
+                  </span>
+
+                  <h3 className="relative mt-5 font-semibold text-pretty">
+                    {item.title}
+                  </h3>
+                  <p className="relative mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {item.description}
+                  </p>
+                </div>
+              </Reveal>
+            );
+          })}
         </ul>
 
-        <MoreLink href="/why-outsource">Why it pays to outsource</MoreLink>
+        {/* What you get back. Navy panel so it reads as a conclusion
+            rather than as a fifth reason. */}
+        <Reveal delay={120}>
+          <div className="mt-6 overflow-hidden rounded-2xl bg-brand-deep p-7 text-white sm:p-10">
+            <div className="grid gap-8 lg:grid-cols-[1fr_1.35fr] lg:gap-12">
+              <div>
+                <p className="text-sm font-semibold tracking-wide text-brand-teal uppercase">
+                  What you get back
+                </p>
+                <p className="mt-4 text-xl font-semibold text-balance sm:text-2xl">
+                  {outsourcePromise}
+                </p>
+                <Button
+                  asChild
+                  className="group mt-7 h-12 rounded-xl bg-white px-6 text-base font-semibold text-brand-deep hover:bg-white/90"
+                >
+                  <Link href="/why-outsource">
+                    Why it pays to outsource
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  </Link>
+                </Button>
+              </div>
+
+              <ul className="grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                {outsourceOutcomes.map((outcome) => (
+                  <li key={outcome} className="flex gap-2.5 text-sm">
+                    <Check
+                      aria-hidden
+                      className="mt-0.5 size-4 shrink-0 text-brand-teal"
+                    />
+                    <span className="text-white/90 text-pretty">{outcome}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
