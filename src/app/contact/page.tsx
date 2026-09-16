@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CalendarClock, MessageSquareText, ShieldCheck } from "lucide-react";
+import Image from "next/image";
 
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
@@ -11,25 +11,6 @@ import { site } from "@/lib/site";
 const title = "Contact Us";
 const lead =
   "Tell us about your practice and we will get back to you within one business day.";
-
-/** Reassurance points, shown beside the page title. */
-const assurances = [
-  {
-    icon: CalendarClock,
-    title: "One business day",
-    detail: "Typical time to a first reply.",
-  },
-  {
-    icon: MessageSquareText,
-    title: "Talk to a biller",
-    detail: "Not a sales script — someone who works claims.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "No obligation",
-    detail: "A written scope and pricing, yours to weigh up.",
-  },
-];
 
 export const metadata: Metadata = {
   title: `${title} — ${site.name}`,
@@ -54,30 +35,27 @@ export default function ContactPage() {
           eyebrow="Contact"
           title="Get in Touch"
           lead={lead}
+          bleed
           aside={
-            <ul className="grid gap-3">
-              {assurances.map((item, i) => (
-                <li
-                  key={item.title}
-                  className="flex items-center gap-4 rounded-2xl border border-border bg-card p-4"
-                >
-                  <span
-                    aria-hidden
-                    className={`grid size-11 shrink-0 place-items-center rounded-xl text-white ${
-                      i % 2 === 0 ? "bg-primary" : "bg-brand-teal"
-                    }`}
-                  >
-                    <item.icon className="size-5" />
-                  </span>
-                  <div className="min-w-0">
-                    <p className="font-semibold">{item.title}</p>
-                    <p className="text-sm text-muted-foreground text-pretty">
-                      {item.detail}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
+            <Image
+              src="/contact-support.avif"
+              alt=""
+              fill
+              priority
+              sizes="52vw"
+              className="object-cover object-[55%_50%]"
+            />
+          }
+          asideStacked={
+            <Image
+              src="/contact-support.avif"
+              alt="A billing support specialist wearing a headset, working at a laptop"
+              width={1400}
+              height={815}
+              priority
+              sizes="100vw"
+              className="h-auto w-full rounded-2xl"
+            />
           }
         />
         <Contact headless />
