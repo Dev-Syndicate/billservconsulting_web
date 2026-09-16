@@ -30,7 +30,7 @@ export function Hero() {
        */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[62%] xl:block"
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[56%] xl:block"
         style={{
           maskImage:
             "linear-gradient(to right, transparent 0%, black 22%, black 100%)",
@@ -38,16 +38,24 @@ export function Hero() {
             "linear-gradient(to right, transparent 0%, black 22%, black 100%)",
         }}
       >
-        {/* object-cover fills the band edge to edge with no letterboxing.
-            Anchored right-centre so the crop takes from the empty left of
-            the frame and keeps the clinician and books in view. */}
+        {/*
+         * object-cover fills the band edge to edge with no letterboxing.
+         *
+         * The -v2 source has the left 28% of the original removed. That
+         * region held a "Your Trusted RCM Partner" hand-lettered graphic
+         * which sat directly behind the headline and body copy, and
+         * object-position could not move it clear: at this aspect ratio
+         * object-cover leaves only ~115px of horizontal slack, so the
+         * whole 0%-100% range shifts the image by barely a hundred pixels.
+         * Cropping the source was the only fix that worked.
+         */}
         <Image
-          src="/hero-billing.avif"
+          src="/hero-billing-v2.avif"
           alt=""
           fill
           priority
-          sizes="62vw"
-          className="object-cover object-[82%_42%]"
+          sizes="56vw"
+          className="object-cover object-[62%_45%]"
         />
       </div>
 
@@ -138,9 +146,9 @@ export function Hero() {
             full-bleed layer above takes over and this is hidden. */}
         <div className="relative xl:hidden">
           <Image
-            src="/hero-billing.avif"
+            src="/hero-billing-v2.avif"
             alt="A clinician reviewing patient records on a tablet, beside books reading Better Billing, Healthier Practices, and Brighter Futures"
-            width={1536}
+            width={1106}
             height={1024}
             priority
             sizes="100vw"

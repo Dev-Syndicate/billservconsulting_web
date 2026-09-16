@@ -53,7 +53,7 @@ records (Wix does not allow changing nameservers, so use pointing).
 | `/`              | Landing page: hero, then a teaser per section          |
 | `/services`      | Ten services, the claim lifecycle, seven specialties    |
 | `/why-outsource` | The four reasons to outsource, plus the testimonial    |
-| `/about`         | About, leadership, clientele                           |
+| `/about`         | About, mission/vision/values, leadership, clientele, compliance & capability |
 | `/contact`       | Contact details, enquiry form, FAQ                     |
 | `/terms`         | Terms and Conditions                                   |
 | `/privacy`       | Privacy Policy                                         |
@@ -67,7 +67,8 @@ there is no duplicate-content penalty.
 Most copy lives in data files rather than in markup:
 
 - **`src/lib/site.ts`** — company details, navigation, services,
-  specialties, reasons to outsource, leadership, clients, testimonial.
+  specialties, reasons to outsource, mission/vision/values, leadership,
+  clients, compliance and capability lists, testimonial.
   Changing `nav` here updates the header, mobile menu, and footer.
 - **`src/lib/legal.ts`** — the Terms and Privacy documents, as structured
   sections. Both pull company name, email, phone, and address from
@@ -134,10 +135,15 @@ registered in `clients` in `src/lib/site.ts` along with their intrinsic
 `width`/`height`, which Next needs to reserve space and avoid layout
 shift — the artwork is not a uniform aspect ratio.
 
-Three of the four already spell the practice name inside the artwork, so
-they carry `nameInLogo: true` and render without a caption underneath;
-only the pure-symbol mark (Rashid Elahi) gets one. The name still reaches
-screen readers through the image `alt` in both cases.
+They render as a plain logo row with no captions — the logos carry their
+own names, and the practice name always reaches screen readers through
+the image `alt`. The same row appears on the homepage via
+`sections/client-logos.tsx`.
+
+**Replacing a logo:** files under `public/` are served at a stable URL, so
+overwriting one in place leaves browsers and CDNs holding the old copy.
+Ship the replacement under a new filename instead — that is what the
+`-v2` suffixes are for.
 
 ## Notes
 
@@ -148,9 +154,20 @@ screen readers through the image `alt` in both cases.
   currently says "the laws applicable at our principal place of business"
   rather than naming a jurisdiction — BillServ operates from India while
   serving US providers, so this needs a decision.
+- **Do not publish certification names or named integrations** without
+  written confirmation from BillServ. The information pack states that
+  specific certification names, issuing organizations, and certificate
+  details, and named EHR/EMR, practice-management, and clearinghouse
+  integrations, are to go live only once confirmed internally. The
+  Compliance and Technology copy on `/about` describes practices and
+  workflows for that reason.
+- **Do not state that BillServ is available 24/7** — the pack forbids it.
+  Business hours are Monday–Friday, 8:00 AM–5:00 PM Pacific Time, held in
+  `site.availability`. PT is used rather than a fixed offset because
+  California observes both PST and PDT.
 - `src/components/hero-illustration.tsx` and
   `src/components/ui/navigation-menu.tsx` are currently unused.
-- **The hero photograph is AI-generated** (`public/hero-billing.avif`).
+- **The hero photograph is AI-generated** (`public/hero-billing-v2.avif`).
   It shows a stock-style clinician, not BillServ staff or a real client
   setting. Swap it for a genuine photograph if one becomes available.
 
