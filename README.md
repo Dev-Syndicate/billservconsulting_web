@@ -101,9 +101,9 @@ text on white, use the darkened same-hue variants instead:
   text at 5.0:1
 
 The design is deliberately **flat** — no gradients. `globals.css` contains
-none at all. The only `linear-gradient` anywhere in `src/` is the hero's
-`maskImage`, which fades the photograph's left edge to transparent; it
-paints no colour.
+none at all. The only `linear-gradient` values anywhere in `src/` are the
+`maskImage` on the homepage hero and the `/contact` page header, which
+fade each photograph's left edge to transparent; they paint no colour.
 
 Teal consistently signals a confirmed or positive state: checkmarks,
 approved rows, and the clean-claim meter.
@@ -168,9 +168,10 @@ Ship the replacement under a new filename instead — that is what the
   California observes both PST and PDT.
 - `src/components/hero-illustration.tsx` and
   `src/components/ui/navigation-menu.tsx` are currently unused.
-- **The hero photograph is AI-generated** (`public/hero-billing-v2.avif`).
-  It shows a stock-style clinician, not BillServ staff or a real client
-  setting. Swap it for a genuine photograph if one becomes available.
+- **The photographs are AI-generated** (`public/hero-billing-v2.avif` and
+  `public/contact-support.avif`). They show stock-style people, not
+  BillServ staff or a real client setting. Swap them for genuine
+  photographs if any become available.
 
 `CONTENT.md` records the copy extracted from the original Wix site,
 including which parts are verbatim client wording.
