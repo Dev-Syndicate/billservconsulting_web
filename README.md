@@ -126,6 +126,19 @@ npx sharp-cli -i source.png -o public/name.avif -f avif --quality 62 resize 1536
 
 …or remove the `unoptimized` flag and let Next handle it.
 
+### Client logos
+
+`public/client-*.avif` are the practice logos shown in the Clientele
+section on `/about`, supplied by the clients themselves. They are
+registered in `clients` in `src/lib/site.ts` along with their intrinsic
+`width`/`height`, which Next needs to reserve space and avoid layout
+shift — the artwork is not a uniform aspect ratio.
+
+Three of the four already spell the practice name inside the artwork, so
+they carry `nameInLogo: true` and render without a caption underneath;
+only the pure-symbol mark (Rashid Elahi) gets one. The name still reaches
+screen readers through the image `alt` in both cases.
+
 ## Notes
 
 - **The contact form has no backend.** It builds a `mailto:` link and

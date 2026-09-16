@@ -78,8 +78,16 @@ Note: the live site lists service names only — no per-service descriptions.
 
 ## Clientele
 
+From the original site:
+
 - Rashid Elahi, M.D, Inc.
 - Van Buren Dialysis Center
+
+Added later, from logo files supplied by the client — names read off the
+artwork, so confirm the exact legal spelling before print use:
+
+- Riverside-Nephrology Physicians Inc.
+- Tricity Dialysis Center
 
 ---
 
