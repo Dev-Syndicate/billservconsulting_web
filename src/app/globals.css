@@ -82,6 +82,11 @@
    * clears 4.5:1 (5.0:1), matching the palette's Professional Blue hue. */
   --brand-cta: oklch(0.54 0.14 245);
   --brand-cta-hover: oklch(0.48 0.14 245);
+
+  /* Scrollbar: Ice Blue track with a Professional Blue thumb. */
+  --scrollbar-track: oklch(0.96 0.012 229);
+  --scrollbar-thumb: oklch(0.72 0.09 238);
+  --scrollbar-thumb-hover: oklch(0.62 0.12 240);
 }
 
 /*
@@ -141,6 +146,10 @@
   --sidebar-accent-foreground: oklch(0.97 0.01 255);
   --sidebar-border: oklch(1 0 0 / 12%);
   --sidebar-ring: oklch(0.74 0.13 238);
+
+  --scrollbar-track: oklch(0.25 0.045 257);
+  --scrollbar-thumb: oklch(0.45 0.07 250);
+  --scrollbar-thumb-hover: oklch(0.56 0.09 245);
 
   --brand-cta: oklch(0.74 0.13 238);
   --brand-cta-hover: oklch(0.8 0.11 238);
@@ -448,5 +457,40 @@
     @apply bg-background text-foreground;
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+  }
+
+  /*
+   * Slim brand-tinted scrollbar, replacing the default grey chrome.
+   * `scrollbar-color` is the standard property (Firefox, and Chromium
+   * 121+); the ::-webkit- rules below cover older WebKit and Safari,
+   * where they take precedence and allow the rounded thumb.
+   */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border: 2px solid var(--scrollbar-track);
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+
+  /* Keep the corner where the two bars meet from showing as white. */
+  ::-webkit-scrollbar-corner {
+    background: var(--scrollbar-track);
   }
 }
