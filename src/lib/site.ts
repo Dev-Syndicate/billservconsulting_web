@@ -179,10 +179,54 @@ export const leadership = [
   { name: "Susan Peters", role: "Senior Manager Operations" },
 ] as const;
 
-export const clients = [
-  "Rashid Elahi, M.D, Inc.",
-  "Van Buren Dialysis Center",
-] as const;
+/*
+ * Client logos are supplied by each practice and committed as AVIF in
+ * public/. `width`/`height` are the intrinsic pixel dimensions — needed so
+ * Next can reserve space and avoid layout shift, since these are not
+ * uniform (two square marks, two wordmarks of different ratios).
+ */
+export type Client = {
+  name: string;
+  logo: string;
+  width: number;
+  height: number;
+  /**
+   * True when the supplied artwork already spells the practice name. Those
+   * get no caption underneath — printing it twice reads as a mistake.
+   * The name is still carried into the image alt text either way.
+   */
+  nameInLogo?: boolean;
+};
+
+export const clients: Client[] = [
+  {
+    name: "Rashid Elahi, M.D, Inc.",
+    logo: "/client-rashid-elahi.avif",
+    width: 290,
+    height: 228,
+  },
+  {
+    name: "Riverside-Nephrology Physicians Inc.",
+    nameInLogo: true,
+    logo: "/client-riverside-nephrology.avif",
+    width: 581,
+    height: 232,
+  },
+  {
+    name: "Van Buren Dialysis Center",
+    nameInLogo: true,
+    logo: "/client-van-buren-dialysis.avif",
+    width: 386,
+    height: 386,
+  },
+  {
+    name: "Tricity Dialysis Center",
+    nameInLogo: true,
+    logo: "/client-tricity-dialysis.avif",
+    width: 386,
+    height: 386,
+  },
+];
 
 export const testimonial = {
   quote:
