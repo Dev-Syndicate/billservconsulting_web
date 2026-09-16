@@ -32,9 +32,17 @@ export function Expertise() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Centred flex wrap rather than a grid: seven specialties do not
+            divide evenly into three columns, so the trailing row centres
+            instead of leaving a gap at one edge. */}
+        <ul className="mt-14 flex flex-wrap justify-center gap-5">
           {expertise.map((area, i) => (
-            <Reveal key={area.name} delay={i * 70} className="h-full">
+            <Reveal
+              as="li"
+              key={area.name}
+              delay={i * 70}
+              className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]"
+            >
               <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
                 <CardContent className="flex h-full flex-col items-center px-6 text-center">
                   <span
@@ -58,8 +66,7 @@ export function Expertise() {
               </Card>
             </Reveal>
           ))}
-        </div>
-
+        </ul>
       </div>
     </section>
   );

@@ -111,22 +111,19 @@ export function Services({ headless = false }: { headless?: boolean } = {}) {
         </div>
 
         {/* Service cards: centred, with a ringed circular icon above the
-            title. Three columns leaves one card on the last row of ten, so
-            the final card spans the middle rather than sitting left-aligned
-            under an empty gap. */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            title. A centred flex wrap rather than a grid, so the tenth card
+            sits under the middle of the last full row instead of being
+            stranded at one edge. Basis values reproduce 2- and 3-column
+            layouts while allowing that final row to centre. */}
+        <ul className="mt-16 flex flex-wrap justify-center gap-6">
           {services.map((service, i) => {
             const Icon = icons[service.icon];
-            const isOrphan = i === services.length - 1;
             return (
               <Reveal
+                as="li"
                 key={service.title}
                 delay={i * 60}
-                className={cn(
-                  "h-full",
-                  // Ten cards in three columns: centre the last one.
-                  isOrphan && "sm:col-span-2 sm:mx-auto sm:max-w-md lg:col-start-2",
-                )}
+                className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
               >
                 <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
                   <CardContent className="flex h-full flex-col items-center px-6 text-center">
@@ -152,7 +149,7 @@ export function Services({ headless = false }: { headless?: boolean } = {}) {
               </Reveal>
             );
           })}
-        </div>
+        </ul>
       </div>
     </section>
   );
