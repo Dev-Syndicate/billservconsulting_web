@@ -4,7 +4,9 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHeader } from "@/components/page-header";
 import { About } from "@/components/sections/about";
+import { Values } from "@/components/sections/values";
 import { Clientele } from "@/components/sections/clientele";
+import { Assurance } from "@/components/sections/assurance";
 import { CtaBand } from "@/components/cta-band";
 import { site } from "@/lib/site";
 
@@ -37,7 +39,9 @@ export default function AboutPage() {
           lead={lead}
         />
         <About headless />
+        <Values />
         <Clientele />
+        <Assurance />
         <CtaBand />
       </main>
       <SiteFooter />

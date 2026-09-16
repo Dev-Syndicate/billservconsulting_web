@@ -60,7 +60,11 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
             {leadership.map((person, i) => (
               <Reveal key={person.name} delay={160 + i * 110}>
                 <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                  <CardContent className="flex items-center gap-4">
+                  {/* items-start, not items-center: the bio makes these
+                      cards tall, and the initials badge should sit with the
+                      name rather than float to the vertical middle.
+                      Photographs are still to be supplied by the client. */}
+                  <CardContent className="flex items-start gap-4">
                     <span
                       aria-hidden
                       className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/12 text-base font-semibold text-brand-deep"
@@ -72,8 +76,11 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
                     </span>
                     <div className="min-w-0">
                       <p className="font-medium">{person.name}</p>
-                      <p className="text-sm text-muted-foreground text-pretty">
+                      <p className="text-sm text-primary-text text-pretty">
                         {person.role}
+                      </p>
+                      <p className="mt-3 text-sm text-muted-foreground text-pretty">
+                        {person.bio}
                       </p>
                     </div>
                   </CardContent>

@@ -187,9 +187,78 @@ export const whyOutsource = [
   },
 ] as const;
 
+/*
+ * Mission, vision, and values — verbatim from the information pack, which
+ * is the client's own approved wording.
+ */
+export const mission =
+  "Our mission is to simplify healthcare revenue cycle management by delivering accurate, efficient, transparent, and dependable billing solutions that help healthcare providers maximize revenue while minimizing administrative complexity.";
+
+export const vision =
+  "Our vision is to become a trusted global leader in healthcare revenue cycle management, recognized for exceptional service, operational excellence, technological capability, transparency, and long-term client partnerships.";
+
+export const coreValues = [
+  {
+    name: "Accuracy",
+    description:
+      "Every patient record, charge, claim, payment, and account matters.",
+    icon: "Target",
+  },
+  {
+    name: "Accountability",
+    description: "We take responsibility for the work entrusted to us.",
+    icon: "ShieldCheck",
+  },
+  {
+    name: "Transparency",
+    description:
+      "Our clients deserve clear communication and visibility into their revenue cycle.",
+    icon: "Eye",
+  },
+  {
+    name: "Integrity",
+    description:
+      "We operate with professionalism, confidentiality, and respect for the trust placed in us.",
+    icon: "Scale",
+  },
+  {
+    name: "Efficiency",
+    description:
+      "We continuously look for ways to improve workflows and eliminate unnecessary delays.",
+    icon: "Gauge",
+  },
+  {
+    name: "Partnership",
+    description:
+      "We work alongside our clients as an extension of their team.",
+    icon: "Handshake",
+  },
+  {
+    name: "Continuous Improvement",
+    description:
+      "We continually develop our knowledge, processes, and capabilities.",
+    icon: "TrendingUp",
+  },
+] as const;
+
+/**
+ * Our Approach — the pack is explicit that BillServ does not work to a
+ * single template, which is a genuine differentiator worth stating.
+ */
+export const approach =
+  "At BillServ, we don't believe in a one-size-fits-all approach. Every healthcare organization has different workflows, specialties, payer mixes, patient populations, and operational requirements. We work closely with our clients to understand their business, identify opportunities for improvement, establish efficient workflows, and provide the support required to maintain a healthy revenue cycle. Our goal is to become an extension of our client's organization — not just another outsourced vendor.";
+
 export const leadership = [
-  { name: "Abutaleb Mirza", role: "President & Director of Operations" },
-  { name: "Susan Peters", role: "Senior Manager Operations" },
+  {
+    name: "Abutaleb Mirza",
+    role: "President & Director of Operations",
+    bio: "Abutaleb Mirza leads BillServ Consulting with a focus on operational excellence, healthcare revenue cycle management, client relationships, and the continued development of the company's billing operations. His leadership is centered on building efficient processes, developing strong teams, maintaining service quality, and ensuring that BillServ consistently delivers value to healthcare providers.",
+  },
+  {
+    name: "Susan Peters",
+    role: "Senior Manager, Operations",
+    bio: "Susan Peters is part of BillServ's operations leadership team, supporting day-to-day billing operations, team coordination, workflow management, and service delivery. Her role contributes to maintaining consistency, efficiency, and quality across BillServ's healthcare revenue cycle operations.",
+  },
 ] as const;
 
 /*
@@ -253,6 +322,71 @@ export const clients: Client[] = [
     height: 386,
   },
 ];
+
+/*
+ * Compliance and security posture.
+ *
+ * Deliberately describes practices rather than naming certifications: the
+ * information pack states that specific certification names, issuing
+ * organizations, and certificate details are to be published only once
+ * finalised internally. Do not add certification badges or names here
+ * without written confirmation from BillServ.
+ */
+export const compliance = {
+  lead:
+    "Healthcare billing requires the responsible handling of highly sensitive patient and financial information. BillServ is committed to maintaining professional standards for confidentiality, privacy, and responsible information handling across its operations.",
+  practices: [
+    "Confidentiality",
+    "Secure information management",
+    "Controlled access",
+    "Employee responsibility",
+    "Privacy-conscious workflows",
+    "Healthcare compliance awareness",
+    "Responsible data handling",
+  ],
+} as const;
+
+/*
+ * Operational capability.
+ *
+ * The pack is explicit that BillServ is a services company, not a software
+ * product company — so this describes technology-enabled workflows rather
+ * than implying a proprietary platform. Named EHR/EMR, practice-management,
+ * and clearinghouse integrations are to be added only after internal
+ * confirmation.
+ */
+export const capabilities = [
+  "Electronic claims transmission",
+  "EDI workflows",
+  "Insurance and payer portals",
+  "Electronic payment processing workflows",
+  "Billing and practice-management systems",
+  "Claims tracking",
+  "A/R tracking",
+  "Denial tracking",
+  "Reporting and account monitoring",
+  "Digital communication and documentation",
+] as const;
+
+/** Client communication commitments, from the pack's section 11. */
+export const communication = {
+  lead:
+    "Communication is one of the most important parts of a successful outsourcing relationship. BillServ believes healthcare providers should never be left wondering what is happening with their revenue.",
+  closing:
+    "We aim to make our clients feel that their billing department is still right there with them — even when BillServ is handling the work remotely.",
+  points: [
+    "Clear communication",
+    "Responsive support",
+    "Dedicated points of contact",
+    "Account visibility",
+    "Billing updates",
+    "A/R information",
+    "Denial information",
+    "Claim status updates",
+    "Performance discussions",
+    "Ongoing operational coordination",
+  ],
+} as const;
 
 export const testimonial = {
   quote:
