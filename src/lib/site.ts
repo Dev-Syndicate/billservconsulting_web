@@ -17,11 +17,10 @@ export const site = {
 } as const;
 
 export const nav = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Why Outsource", href: "#why" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Why Outsource", href: "/why-outsource" },
+  { label: "Contact Us", href: "/contact" },
 ] as const;
 
 export const legalNav = [

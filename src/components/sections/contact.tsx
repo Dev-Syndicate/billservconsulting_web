@@ -3,6 +3,8 @@
 import * as React from "react";
 import { Clock, Mail, MapPin, Phone, Printer } from "lucide-react";
 
+import { cn } from "cn";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,7 +15,7 @@ import { site } from "@/lib/site";
 
 const fieldClass = "h-13 rounded-xl px-4 text-base";
 
-export function Contact() {
+export function Contact({ headless = false }: { headless?: boolean } = {}) {
   const [submitted, setSubmitted] = React.useState(false);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -39,17 +41,21 @@ export function Contact() {
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
-              Contact
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-              Get in Touch
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground text-pretty">
-              Tell us about your practice and we will get back to you.
-            </p>
+            {!headless && (
+              <>
+                <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
+                  Contact
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+                  Get in Touch
+                </h2>
+                <p className="mt-4 text-lg text-muted-foreground text-pretty">
+                  Tell us about your practice and we will get back to you.
+                </p>
+              </>
+            )}
 
-            <ul className="mt-8 space-y-4 text-sm">
+            <ul className={cn("space-y-4 text-sm", headless ? "mt-0" : "mt-8")}>
               <li className="flex items-start gap-3">
                 <MapPin className="mt-0.5 size-5 shrink-0 text-primary" />
                 <span className="text-muted-foreground">

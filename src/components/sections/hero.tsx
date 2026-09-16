@@ -100,7 +100,7 @@ export function Hero() {
               size="lg"
               className="group h-13 rounded-xl bg-brand-cta hover:bg-brand-cta-hover px-7 text-base font-semibold shadow-md shadow-primary/20 transition-shadow hover:shadow-lg hover:shadow-primary/30"
             >
-              <Link href="#about">
+              <Link href="/about">
                 Learn More
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
               </Link>

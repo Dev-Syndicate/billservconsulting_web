@@ -35,28 +35,35 @@ const icons: Record<(typeof services)[number]["icon"], LucideIcon> = {
   Headset,
 };
 
-export function Services() {
+export function Services({ headless = false }: { headless?: boolean } = {}) {
   return (
     <section
       id="services"
       className="scroll-mt-16 border-b border-border bg-secondary/40"
     >
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
-        <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
-            What We Do
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-            Services Offered
-          </h2>
-          <p className="mt-4 text-lg text-muted-foreground text-pretty">
-            End-to-end revenue cycle support, from the first patient record to
-            the final settled claim.
-          </p>
-        </Reveal>
+        {!headless && (
+          <Reveal className="max-w-2xl">
+            <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
+              What We Do
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+              Services Offered
+            </h2>
+            <p className="mt-4 text-lg text-muted-foreground text-pretty">
+              End-to-end revenue cycle support, from the first patient record to
+              the final settled claim.
+            </p>
+          </Reveal>
+        )}
 
         {/* claim lifecycle */}
-        <div className="relative mx-auto mt-14 max-w-3xl">
+        <div
+          className={cn(
+            "relative mx-auto max-w-3xl",
+            headless ? "mt-2" : "mt-14",
+          )}
+        >
           {/* animated connector, sits behind the icons */}
           <div
             aria-hidden

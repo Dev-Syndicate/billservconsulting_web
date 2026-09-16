@@ -44,7 +44,7 @@ export function SiteHeader() {
           {nav.map((item) => (
             <Link
               key={item.href}
-              href={`/${item.href}`}
+              href={item.href}
               className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               {item.label}
@@ -64,7 +64,7 @@ export function SiteHeader() {
             asChild
             className="group h-11 rounded-xl bg-brand-cta hover:bg-brand-cta-hover px-6 text-[0.9375rem] font-semibold shadow-sm transition-shadow hover:shadow-md hover:shadow-primary/25"
           >
-            <Link href="/#contact">
+            <Link href="/contact">
               Get in Touch
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
@@ -90,7 +90,7 @@ export function SiteHeader() {
               {nav.map((item) => (
                 <Link
                   key={item.href}
-                  href={`/${item.href}`}
+                  href={item.href}
                   onClick={() => setOpen(false)}
                   className="rounded-lg px-3 py-3.5 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                 >
@@ -101,7 +101,7 @@ export function SiteHeader() {
                 asChild
                 className="mt-5 h-13 rounded-xl bg-brand-cta hover:bg-brand-cta-hover text-base font-semibold"
               >
-                <Link href="/#contact" onClick={() => setOpen(false)}>
+                <Link href="/contact" onClick={() => setOpen(false)}>
                   Get in Touch
                 </Link>
               </Button>

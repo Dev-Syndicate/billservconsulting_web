@@ -75,7 +75,7 @@ export function SiteFooter() {
               {nav.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={`/${item.href}`}
+                    href={item.href}
                     className="transition-colors hover:text-primary-text"
                   >
                     {item.label}
