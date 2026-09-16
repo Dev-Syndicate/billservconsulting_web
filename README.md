@@ -25,6 +25,27 @@ pnpm lint         # eslint
 npx tsc --noEmit  # type check
 ```
 
+## Deploying
+
+Two build modes:
+
+```bash
+pnpm build          # Vercel / Netlify / any Node host
+pnpm build:static   # emits out/ for upload-only hosts
+```
+
+`build:static` sets `NEXT_OUTPUT=export`, producing a plain HTML/CSS/JS
+tree in `out/` (~2.4 MB, 69 files, largest 224 KB). That suits hosts that
+take an upload rather than running Node — Wix Headless drag-and-drop, for
+example, which caps at 20 MB total and 3 MB per file.
+
+Everything here is statically prerendered either way, so no server
+functionality is lost in the export. `trailingSlash` is on in that mode so
+subpages resolve as directories on plain static hosts.
+
+If the domain stays with Wix, it can point at an external host via DNS
+records (Wix does not allow changing nameservers, so use pointing).
+
 ## Routes
 
 | Route            | Contents                                              |
