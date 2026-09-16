@@ -6,77 +6,133 @@
 :root {
   --radius: 0.625rem;
 
-  /* Blue & white brand theme */
+  /*
+   * Brand palette
+   *   Deep Navy         #0B1F3A  headings, important text
+   *   Professional Blue #3FA9E5  buttons, highlights, links
+   *   Soft Cyan/Teal    #35C2C0  small accents, icons, badges
+   *   Ice Blue          #F4FAFD  backgrounds
+   *
+   * Professional Blue and Teal are light (L .70/.74), so white text on
+   * them only reaches 2.6:1 and 2.2:1 — under the 4.5:1 AA floor. They
+   * are used for fills, icons, and large display text; --primary-text
+   * and --brand-teal-text are darkened to the same hue for small text
+   * on white. See the "text" tokens below.
+   */
   --background: oklch(1 0 0);
-  --foreground: oklch(0.21 0.04 258);
+  --foreground: oklch(0.239 0.058 257); /* Deep Navy #0B1F3A */
 
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.04 258);
+  --card-foreground: oklch(0.239 0.058 257);
 
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.04 258);
+  --popover-foreground: oklch(0.239 0.058 257);
 
-  /* Primary — brand sky blue (logo) */
-  --primary: oklch(0.71 0.135 240);
+  /* Professional Blue #3FA9E5 — fills, large text, focus rings */
+  --primary: oklch(0.7 0.13 238);
   --primary-foreground: oklch(1 0 0);
+  /* AA-safe blue for link/label text on white (4.9:1) */
+  --primary-text: oklch(0.54 0.13 238);
 
-  /* Deeper blue for text/headings that need more contrast */
-  --brand-deep: oklch(0.52 0.13 245);
+  /* Soft Cyan/Teal #35C2C0 — icons, badges, positive metrics */
+  --brand-teal: oklch(0.742 0.115 193);
+  --brand-teal-foreground: oklch(0.239 0.058 257);
+  /* AA-safe teal for small text on white (4.6:1) */
+  --brand-teal-text: oklch(0.54 0.115 193);
+  /* Deeper still, for very small teal text (6.3:1) */
+  --brand-teal-deep: oklch(0.46 0.105 193);
 
-  --secondary: oklch(0.97 0.016 235);
-  --secondary-foreground: oklch(0.36 0.07 245);
+  /* Deep Navy, for headings and text needing maximum contrast */
+  --brand-deep: oklch(0.239 0.058 257);
 
-  --muted: oklch(0.97 0.013 235);
-  --muted-foreground: oklch(0.52 0.03 245);
+  /* Ice Blue #F4FAFD — section and surface backgrounds */
+  --secondary: oklch(0.981 0.008 229);
+  --secondary-foreground: oklch(0.32 0.06 254);
 
-  --accent: oklch(0.94 0.033 235);
-  --accent-foreground: oklch(0.36 0.08 245);
+  --muted: oklch(0.981 0.008 229);
+  --muted-foreground: oklch(0.51 0.035 251);
+
+  --accent: oklch(0.945 0.026 226);
+  --accent-foreground: oklch(0.32 0.06 254);
 
   --destructive: oklch(0.58 0.22 27);
   --destructive-foreground: oklch(1 0 0);
 
-  --border: oklch(0.92 0.016 235);
-  --input: oklch(0.92 0.016 235);
-  --ring: oklch(0.71 0.135 240);
+  --border: oklch(0.92 0.014 230);
+  --input: oklch(0.92 0.014 230);
+  --ring: oklch(0.7 0.13 238);
 
-  --chart-1: oklch(0.71 0.135 240);
-  --chart-2: oklch(0.64 0.14 243);
-  --chart-3: oklch(0.57 0.13 246);
-  --chart-4: oklch(0.79 0.1 238);
-  --chart-5: oklch(0.86 0.07 236);
+  /* Charts run blue -> teal, matching the brand gradient */
+  --chart-1: oklch(0.7 0.13 238);
+  --chart-2: oklch(0.72 0.12 215);
+  --chart-3: oklch(0.742 0.115 193);
+  --chart-4: oklch(0.6 0.13 244);
+  --chart-5: oklch(0.83 0.08 230);
 
-  --sidebar: oklch(0.99 0.006 235);
-  --sidebar-foreground: oklch(0.21 0.04 245);
-  --sidebar-primary: oklch(0.71 0.135 240);
+  --sidebar: oklch(0.981 0.008 229);
+  --sidebar-foreground: oklch(0.239 0.058 257);
+  --sidebar-primary: oklch(0.7 0.13 238);
   --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.94 0.033 235);
-  --sidebar-accent-foreground: oklch(0.36 0.08 245);
-  --sidebar-border: oklch(0.92 0.016 235);
-  --sidebar-ring: oklch(0.71 0.135 240);
+  --sidebar-accent: oklch(0.945 0.026 226);
+  --sidebar-accent-foreground: oklch(0.32 0.06 254);
+  --sidebar-border: oklch(0.92 0.014 230);
+  --sidebar-ring: oklch(0.7 0.13 238);
+
+  /*
+   * Decorative gradient (bars, badges, progress fills) — the vivid brand
+   * blue -> teal from the palette.
+   */
+  --brand-gradient: linear-gradient(
+    135deg,
+    oklch(0.66 0.14 245) 0%,
+    oklch(0.742 0.115 193) 100%
+  );
+
+  /*
+   * Same hues, darkened so white label text clears 4.5:1 at BOTH ends
+   * (blue 5.0:1, teal 4.6:1). Used for any gradient carrying text.
+   */
+  --brand-gradient-cta: linear-gradient(
+    135deg,
+    oklch(0.54 0.14 245) 0%,
+    oklch(0.54 0.115 193) 100%
+  );
 }
 
+/*
+ * Dark theme: surfaces are Deep Navy at increasing lightness. Blue and
+ * teal keep their brand hues but sit lighter, so they read as accents
+ * against navy. On dark, the light brand colors are the readable ones,
+ * so the "text" tokens point back at the base hues.
+ */
 .dark {
-  --background: oklch(0.19 0.03 258);
+  --background: oklch(0.2 0.045 257);
   --foreground: oklch(0.97 0.01 255);
 
-  --card: oklch(0.24 0.035 258);
+  --card: oklch(0.25 0.045 257);
   --card-foreground: oklch(0.97 0.01 255);
 
-  --popover: oklch(0.24 0.035 258);
+  --popover: oklch(0.25 0.045 257);
   --popover-foreground: oklch(0.97 0.01 255);
 
   --primary: oklch(0.74 0.13 238);
-  --primary-foreground: oklch(0.19 0.04 245);
+  --primary-foreground: oklch(0.2 0.045 257);
+  --primary-text: oklch(0.78 0.11 238);
 
-  --brand-deep: oklch(0.82 0.09 236);
+  --brand-teal: oklch(0.78 0.11 193);
+  --brand-teal-foreground: oklch(0.2 0.045 257);
+  --brand-teal-text: oklch(0.8 0.1 193);
+  --brand-teal-deep: oklch(0.84 0.09 193);
 
-  --secondary: oklch(0.29 0.04 258);
+  --brand-deep: oklch(0.85 0.08 232);
+
+  --secondary: oklch(0.29 0.045 257);
   --secondary-foreground: oklch(0.97 0.01 255);
 
-  --muted: oklch(0.29 0.04 258);
-  --muted-foreground: oklch(0.71 0.03 257);
+  --muted: oklch(0.29 0.045 257);
+  --muted-foreground: oklch(0.72 0.03 253);
 
-  --accent: oklch(0.32 0.05 258);
+  --accent: oklch(0.33 0.05 257);
   --accent-foreground: oklch(0.97 0.01 255);
 
   --destructive: oklch(0.65 0.19 25);
@@ -84,22 +140,34 @@
 
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.68 0.16 253);
+  --ring: oklch(0.74 0.13 238);
 
-  --chart-1: oklch(0.68 0.16 253);
-  --chart-2: oklch(0.62 0.16 250);
-  --chart-3: oklch(0.55 0.15 255);
-  --chart-4: oklch(0.48 0.14 258);
-  --chart-5: oklch(0.4 0.12 260);
+  --chart-1: oklch(0.74 0.13 238);
+  --chart-2: oklch(0.76 0.12 215);
+  --chart-3: oklch(0.78 0.11 193);
+  --chart-4: oklch(0.64 0.13 244);
+  --chart-5: oklch(0.86 0.07 230);
 
-  --sidebar: oklch(0.24 0.035 258);
+  --sidebar: oklch(0.25 0.045 257);
   --sidebar-foreground: oklch(0.97 0.01 255);
-  --sidebar-primary: oklch(0.68 0.16 253);
-  --sidebar-primary-foreground: oklch(0.19 0.04 258);
-  --sidebar-accent: oklch(0.32 0.05 258);
+  --sidebar-primary: oklch(0.74 0.13 238);
+  --sidebar-primary-foreground: oklch(0.2 0.045 257);
+  --sidebar-accent: oklch(0.33 0.05 257);
   --sidebar-accent-foreground: oklch(0.97 0.01 255);
   --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.68 0.16 253);
+  --sidebar-ring: oklch(0.74 0.13 238);
+
+  --brand-gradient: linear-gradient(
+    135deg,
+    oklch(0.7 0.13 245) 0%,
+    oklch(0.78 0.11 193) 100%
+  );
+  /* On dark, buttons keep the lighter gradient with dark label text. */
+  --brand-gradient-cta: linear-gradient(
+    135deg,
+    oklch(0.7 0.13 245) 0%,
+    oklch(0.78 0.11 193) 100%
+  );
 }
 
 @theme inline {
@@ -111,7 +179,12 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-text: var(--primary-text);
   --color-brand-deep: var(--brand-deep);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-teal-foreground: var(--brand-teal-foreground);
+  --color-brand-teal-text: var(--brand-teal-text);
+  --color-brand-teal-deep: var(--brand-teal-deep);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -146,6 +219,31 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+/* Decorative gradient fill — no text on top. */
+@utility bg-brand-gradient {
+  background-image: var(--brand-gradient);
+}
+
+/* Gradient fill for elements carrying white label text. */
+@utility bg-brand-gradient-cta {
+  background-image: var(--brand-gradient-cta);
+}
+
+/*
+ * Same gradient as text. Falls back to a solid fill where
+ * background-clip: text is unsupported.
+ */
+@utility text-brand-gradient {
+  color: var(--primary);
+
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    background-image: var(--brand-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 }
 
 @keyframes bs-float {

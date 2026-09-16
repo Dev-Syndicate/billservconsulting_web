@@ -24,7 +24,7 @@ export function SiteFooter() {
                 className="h-11 w-auto"
               />
               <span className="text-base font-semibold tracking-tight">
-                BillServ <span className="text-primary">Consulting</span>
+                BillServ <span className="text-primary-text">Consulting</span>
               </span>
             </div>
             <p className="mt-4 flex items-start gap-2 text-sm text-muted-foreground">
@@ -43,7 +43,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href={`tel:${site.phone.replace(/\s/g, "")}`}
-                  className="flex items-center gap-2 transition-colors hover:text-primary"
+                  className="flex items-center gap-2 transition-colors hover:text-primary-text"
                 >
                   <Phone className="size-4 shrink-0 text-primary" />
                   {site.phone}
@@ -56,7 +56,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="flex items-center gap-2 break-all transition-colors hover:text-primary"
+                  className="flex items-center gap-2 break-all transition-colors hover:text-primary-text"
                 >
                   <Mail className="size-4 shrink-0 text-primary" />
                   {site.email}
@@ -76,7 +76,7 @@ export function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={`/${item.href}`}
-                    className="transition-colors hover:text-primary"
+                    className="transition-colors hover:text-primary-text"
                   >
                     {item.label}
                   </Link>
@@ -97,7 +97,7 @@ export function SiteFooter() {
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary-text"
                 >
                   {item.label}
                 </Link>
