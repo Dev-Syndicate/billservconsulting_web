@@ -197,6 +197,13 @@ export const leadership = [
  * public/. `width`/`height` are the intrinsic pixel dimensions — needed so
  * Next can reserve space and avoid layout shift, since these are not
  * uniform (two square marks, two wordmarks of different ratios).
+ *
+ * The `-v2` suffix on two filenames is deliberate. Files under public/ are
+ * served at a stable URL, so replacing one in place leaves browsers (and
+ * CDNs) holding the old copy indefinitely. Those two had their opaque
+ * white backgrounds removed, so they ship under a new name to guarantee
+ * every visitor gets the corrected artwork. Rename again on any future
+ * edit to the pixels.
  */
 export type Client = {
   name: string;
@@ -233,7 +240,7 @@ export const clients: Client[] = [
     name: "Van Buren Dialysis Center",
     location: "Riverside, California",
     nameInLogo: true,
-    logo: "/client-van-buren-dialysis.avif",
+    logo: "/client-van-buren-dialysis-v2.avif",
     width: 386,
     height: 386,
   },
@@ -241,7 +248,7 @@ export const clients: Client[] = [
     name: "Tri-City Dialysis Center",
     location: "Riverside, California",
     nameInLogo: true,
-    logo: "/client-tricity-dialysis.avif",
+    logo: "/client-tricity-dialysis-v2.avif",
     width: 386,
     height: 386,
   },
