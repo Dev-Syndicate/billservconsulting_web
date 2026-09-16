@@ -142,24 +142,6 @@ export const services = [
   },
 ] as const;
 
-export const processSteps = [
-  {
-    title: "Submit",
-    description:
-      "Registration, eligibility checks, coding, and charge entry — then claims go out as X12 837 files.",
-  },
-  {
-    title: "Review",
-    description:
-      "Clearinghouse and payer rejections are worked, denials analyzed by CARC/RARC, and appeals filed.",
-  },
-  {
-    title: "Paid",
-    description:
-      "Remittances posted from 835 files, balances reconciled, and remaining A/R followed up by bucket.",
-  },
-] as const;
-
 export const whyOutsource = [
   {
     title: "Current coding and payer expertise",
