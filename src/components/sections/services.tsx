@@ -1,6 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BadgeCheck,
+  Check,
   ClipboardList,
   FileCode2,
   FileWarning,
@@ -13,7 +14,6 @@ import {
 } from "lucide-react";
 import { cn } from "cn";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
 import { services } from "@/lib/site";
 
@@ -30,6 +30,17 @@ const icons: Record<(typeof services)[number]["icon"], LucideIcon> = {
   Headset,
 };
 
+/**
+ * The full service list, one wide row per service.
+ *
+ * This is the detail view, so it shows what the homepage teaser cannot:
+ * each service's full description from the information pack plus its key
+ * benefits. The teaser shows the one-line `description` only, which is
+ * what makes following the link worthwhile.
+ *
+ * Rows alternate the icon side on lg and up. That gives a long list of
+ * ten a rhythm and stops it reading as one undifferentiated column.
+ */
 export function Services({ headless = false }: { headless?: boolean } = {}) {
   return (
     <section
@@ -52,54 +63,80 @@ export function Services({ headless = false }: { headless?: boolean } = {}) {
           </Reveal>
         )}
 
-        {/* Service cards: centred, with a ringed circular icon above the
-            title. A centred flex wrap rather than a grid, so the tenth card
-            sits under the middle of the last full row instead of being
-            stranded at one edge. Basis values reproduce 2- and 3-column
-            layouts while allowing that final row to centre. */}
-        {/* No top margin in headless mode: the route's PageHeader already
-            sits above, and the section's own py provides the separation.
-            Stacking mt-16 on top of that left a visible dead band. */}
-        <ul
-          className={cn(
-            "flex flex-wrap justify-center gap-6",
-            headless ? "mt-0" : "mt-14",
-          )}
-        >
+        <ol className={cn("space-y-5", headless ? "mt-0" : "mt-14")}>
           {services.map((service, i) => {
             const Icon = icons[service.icon];
+            const teal = i % 2 === 1;
             return (
-              <Reveal
-                as="li"
-                key={service.title}
-                delay={i * 60}
-                className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
-              >
-                <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                  <CardContent className="flex h-full flex-col items-center px-6 text-center">
-                    <span
-                      aria-hidden
-                      className={cn(
-                        "grid size-18 shrink-0 place-items-center rounded-full ring-4 transition-colors duration-300",
-                        i % 2 === 0
-                          ? "bg-primary text-white ring-primary/15"
-                          : "bg-brand-teal text-white ring-brand-teal/15",
-                      )}
-                    >
-                      <Icon className="size-7" />
-                    </span>
-                    <h3 className="mt-5 font-semibold text-balance">
-                      {service.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
-                      {service.description}
-                    </p>
-                  </CardContent>
-                </Card>
+              <Reveal as="li" key={service.title} delay={(i % 3) * 70}>
+                <article
+                  id={`service-${i + 1}`}
+                  className="scroll-mt-24 rounded-2xl border border-border bg-background p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 sm:p-8"
+                >
+                  {/*
+                   * Icon column and text column. On lg the icon column
+                   * swaps sides on alternating rows via flex-row-reverse,
+                   * which keeps the DOM order stable (icon first, then
+                   * text) so reading order and focus order are unaffected.
+                   */}
+                  <div
+                    className={cn(
+                      "flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8",
+                      teal && "lg:flex-row-reverse",
+                    )}
+                  >
+                    <div className="flex shrink-0 items-center gap-4 lg:w-20 lg:flex-col lg:items-start">
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "grid size-14 shrink-0 place-items-center rounded-2xl text-white shadow-sm",
+                          teal ? "bg-brand-teal" : "bg-primary",
+                        )}
+                      >
+                        <Icon className="size-7" />
+                      </span>
+                      <span
+                        aria-hidden
+                        className="text-2xl font-bold tabular-nums text-muted-foreground/30"
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </div>
+
+                    <div className="min-w-0">
+                      <h3 className="text-lg font-semibold text-balance sm:text-xl">
+                        {service.title}
+                      </h3>
+                      <p className="mt-3 leading-relaxed text-muted-foreground text-pretty">
+                        {service.detail}
+                      </p>
+
+                      <p className="mt-5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                        Key benefits
+                      </p>
+                      <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                        {service.benefits.map((benefit) => (
+                          <li key={benefit} className="flex gap-2.5 text-sm">
+                            <Check
+                              aria-hidden
+                              className={cn(
+                                "mt-0.5 size-4 shrink-0",
+                                teal
+                                  ? "text-brand-teal-deep"
+                                  : "text-primary-text",
+                              )}
+                            />
+                            <span className="text-pretty">{benefit}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </article>
               </Reveal>
             );
           })}
-        </ul>
+        </ol>
       </div>
     </section>
   );

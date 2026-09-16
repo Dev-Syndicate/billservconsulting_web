@@ -1,10 +1,29 @@
-import { Stethoscope } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import {
+  Droplets,
+  Eye,
+  HeartPulse,
+  Microscope,
+  Scan,
+  Stethoscope,
+  TestTube,
+} from "lucide-react";
 import { cn } from "cn";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
 import { SpecialtyIllustration } from "@/components/illustrations";
 import { expertise } from "@/lib/site";
+
+const specialtyIcons: Record<(typeof expertise)[number]["icon"], LucideIcon> = {
+  Stethoscope,
+  TestTube,
+  Scan,
+  Droplets,
+  HeartPulse,
+  Eye,
+  Microscope,
+};
 
 export function Expertise() {
   return (
@@ -36,7 +55,9 @@ export function Expertise() {
             divide evenly into three columns, so the trailing row centres
             instead of leaving a gap at one edge. */}
         <ul className="mt-14 flex flex-wrap justify-center gap-5">
-          {expertise.map((area, i) => (
+          {expertise.map((area, i) => {
+            const Icon = specialtyIcons[area.icon];
+            return (
             <Reveal
               as="li"
               key={area.name}
@@ -54,7 +75,7 @@ export function Expertise() {
                         : "bg-brand-teal text-white ring-brand-teal/15",
                     )}
                   >
-                    <Stethoscope className="size-6" />
+                    <Icon className="size-6" />
                   </span>
                   <h3 className="mt-4 font-semibold text-balance">
                     {area.name}
@@ -65,7 +86,8 @@ export function Expertise() {
                 </CardContent>
               </Card>
             </Reveal>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </section>
