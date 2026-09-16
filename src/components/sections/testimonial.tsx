@@ -5,7 +5,7 @@ import { testimonial } from "@/lib/site";
 
 export function Testimonial() {
   return (
-    <section className="border-b border-border bg-[linear-gradient(135deg,var(--brand-deep)_0%,oklch(0.34_0.09_247)_100%)] text-white">
+    <section className="border-b border-border bg-brand-deep text-white">
       <div className="mx-auto w-full max-w-4xl px-4 py-16 sm:px-6 sm:py-20">
         <Reveal as="figure" className="text-center">
           <Quote aria-hidden className="mx-auto size-8 opacity-70" />

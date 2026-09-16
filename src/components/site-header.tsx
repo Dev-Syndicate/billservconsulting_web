@@ -62,7 +62,7 @@ export function SiteHeader() {
           </a>
           <Button
             asChild
-            className="group h-11 rounded-xl bg-brand-gradient-cta px-6 text-[0.9375rem] font-semibold shadow-sm transition-shadow hover:shadow-md hover:shadow-primary/25"
+            className="group h-11 rounded-xl bg-brand-cta hover:bg-brand-cta-hover px-6 text-[0.9375rem] font-semibold shadow-sm transition-shadow hover:shadow-md hover:shadow-primary/25"
           >
             <Link href="/#contact">
               Get in Touch
@@ -99,7 +99,7 @@ export function SiteHeader() {
               ))}
               <Button
                 asChild
-                className="mt-5 h-13 rounded-xl bg-brand-gradient-cta text-base font-semibold"
+                className="mt-5 h-13 rounded-xl bg-brand-cta hover:bg-brand-cta-hover text-base font-semibold"
               >
                 <Link href="/#contact" onClick={() => setOpen(false)}>
                   Get in Touch

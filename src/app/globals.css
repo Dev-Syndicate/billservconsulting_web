@@ -78,25 +78,10 @@
   --sidebar-border: oklch(0.92 0.014 230);
   --sidebar-ring: oklch(0.7 0.13 238);
 
-  /*
-   * Decorative gradient (bars, badges, progress fills) — the vivid brand
-   * blue -> teal from the palette.
-   */
-  --brand-gradient: linear-gradient(
-    135deg,
-    oklch(0.66 0.14 245) 0%,
-    oklch(0.742 0.115 193) 100%
-  );
-
-  /*
-   * Same hues, darkened so white label text clears 4.5:1 at BOTH ends
-   * (blue 5.0:1, teal 4.6:1). Used for any gradient carrying text.
-   */
-  --brand-gradient-cta: linear-gradient(
-    135deg,
-    oklch(0.54 0.14 245) 0%,
-    oklch(0.54 0.115 193) 100%
-  );
+  /* Solid brand blue for CTAs. Dark enough that white label text
+   * clears 4.5:1 (5.0:1), matching the palette's Professional Blue hue. */
+  --brand-cta: oklch(0.54 0.14 245);
+  --brand-cta-hover: oklch(0.48 0.14 245);
 }
 
 /*
@@ -157,17 +142,8 @@
   --sidebar-border: oklch(1 0 0 / 12%);
   --sidebar-ring: oklch(0.74 0.13 238);
 
-  --brand-gradient: linear-gradient(
-    135deg,
-    oklch(0.7 0.13 245) 0%,
-    oklch(0.78 0.11 193) 100%
-  );
-  /* On dark, buttons keep the lighter gradient with dark label text. */
-  --brand-gradient-cta: linear-gradient(
-    135deg,
-    oklch(0.7 0.13 245) 0%,
-    oklch(0.78 0.11 193) 100%
-  );
+  --brand-cta: oklch(0.74 0.13 238);
+  --brand-cta-hover: oklch(0.8 0.11 238);
 }
 
 @theme inline {
@@ -185,6 +161,8 @@
   --color-brand-teal-foreground: var(--brand-teal-foreground);
   --color-brand-teal-text: var(--brand-teal-text);
   --color-brand-teal-deep: var(--brand-teal-deep);
+  --color-brand-cta: var(--brand-cta);
+  --color-brand-cta-hover: var(--brand-cta-hover);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -221,29 +199,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* Decorative gradient fill — no text on top. */
-@utility bg-brand-gradient {
-  background-image: var(--brand-gradient);
-}
-
-/* Gradient fill for elements carrying white label text. */
-@utility bg-brand-gradient-cta {
-  background-image: var(--brand-gradient-cta);
-}
-
-/*
- * Same gradient as text. Falls back to a solid fill where
- * background-clip: text is unsupported.
- */
-@utility text-brand-gradient {
-  color: var(--primary);
-
-  @supports (background-clip: text) or (-webkit-background-clip: text) {
-    background-image: var(--brand-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+/* Solid brand fill for buttons and other elements carrying white text. */
+@utility bg-brand-cta {
+  background-color: var(--brand-cta);
 }
 
 @keyframes bs-float {

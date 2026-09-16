@@ -65,16 +65,6 @@ export function ClaimsDashboard({ className }: { className?: string }) {
     // Presentational only: the numbers restate the adjacent copy, so the
     // whole mock is hidden from assistive tech rather than read as data.
     <div aria-hidden className={cn("relative", className)}>
-      {/* Soft brand blooms behind the panel */}
-      <div
-        className="pointer-events-none absolute -top-6 left-4 size-40 rounded-full bg-brand-teal/25 blur-2xl"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute right-0 bottom-8 size-48 rounded-full bg-primary/15 blur-3xl"
-        aria-hidden
-      />
-
       {/*
        * From lg up this is a real two-column grid: panel on the left, a
        * rail of stat cards on the right. Laying it out rather than
@@ -105,7 +95,8 @@ export function ClaimsDashboard({ className }: { className?: string }) {
             </span>
           </div>
 
-          {/* Bar chart: blue at the left easing to teal at the right */}
+          {/* Bar chart: one flat brand blue, with the latest month in teal
+              so the current period reads as the point of interest. */}
           <div className="mt-6 flex h-28 items-end justify-between gap-2 sm:gap-3">
             {months.map((month, i) => (
               <div
@@ -115,13 +106,11 @@ export function ClaimsDashboard({ className }: { className?: string }) {
                 className="flex h-full flex-1 flex-col items-center justify-end gap-2"
               >
                 <div
-                  className="w-full rounded-t-md"
-                  style={{
-                    height: `${month.height}%`,
-                    background: `color-mix(in oklch, var(--primary), var(--brand-teal) ${
-                      (i / (months.length - 1)) * 100
-                    }%)`,
-                  }}
+                  className={cn(
+                    "w-full rounded-t-md",
+                    i === months.length - 1 ? "bg-brand-teal" : "bg-primary",
+                  )}
+                  style={{ height: `${month.height}%` }}
                 />
                 <span className="text-[0.625rem] text-muted-foreground sm:text-xs">
                   {month.label}
@@ -164,7 +153,7 @@ export function ClaimsDashboard({ className }: { className?: string }) {
             <p className="text-xs text-muted-foreground">Clean Claim Rate</p>
             <p className="text-lg font-bold">98%</p>
             <div className="mt-1.5 h-1.5 w-full overflow-hidden rounded-full bg-secondary">
-              <div className="h-full w-[98%] rounded-full bg-brand-gradient" />
+              <div className="h-full w-[98%] rounded-full bg-brand-teal" />
             </div>
           </FloatCard>
 

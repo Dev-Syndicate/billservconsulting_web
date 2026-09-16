@@ -162,7 +162,7 @@ export function Contact() {
                   <Button
                     type="submit"
                     size="lg"
-                    className="h-13 w-full rounded-xl bg-brand-gradient-cta text-base font-semibold shadow-md shadow-primary/20 transition-shadow hover:shadow-lg hover:shadow-primary/30"
+                    className="h-13 w-full rounded-xl bg-brand-cta hover:bg-brand-cta-hover text-base font-semibold shadow-md shadow-primary/20 transition-shadow hover:shadow-lg hover:shadow-primary/30"
                   >
                     Submit
                   </Button>
