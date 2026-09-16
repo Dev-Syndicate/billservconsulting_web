@@ -15,6 +15,8 @@ import {
   Wallet,
 } from "lucide-react";
 
+import { cn } from "cn";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
@@ -137,7 +139,10 @@ export function ServicesTeaser() {
                   <CardContent className="flex h-full flex-col">
                     <span
                       aria-hidden
-                      className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
+                      className={cn(
+                        "grid size-11 shrink-0 place-items-center rounded-xl text-white",
+                        i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                      )}
                     >
                       <Icon className="size-5" />
                     </span>
@@ -183,7 +188,7 @@ export function WhyTeaser() {
                 />
                 {item.title}
               </h3>
-              <p className="mt-2 pl-[1.125rem] text-sm leading-relaxed text-muted-foreground text-pretty">
+              <p className="mt-2 pl-4.5 text-sm leading-relaxed text-muted-foreground text-pretty">
                 {item.description}
               </p>
             </Reveal>

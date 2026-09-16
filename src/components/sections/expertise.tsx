@@ -1,4 +1,5 @@
 import { Stethoscope } from "lucide-react";
+import { cn } from "cn";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
@@ -31,14 +32,17 @@ export function Expertise() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {expertise.map((area, i) => (
             <Reveal key={area.name} delay={i * 70} className="h-full">
               <Card className="group h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
                 <CardContent className="flex h-full flex-col">
                   <span
                     aria-hidden
-                    className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
+                    className={cn(
+                      "grid size-11 shrink-0 place-items-center rounded-xl text-white",
+                      i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                    )}
                   >
                     <Stethoscope className="size-5" />
                   </span>

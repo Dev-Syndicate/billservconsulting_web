@@ -47,7 +47,10 @@ export function WhyOutsource({ headless = false }: { headless?: boolean } = {}) 
                   <CardContent className="flex h-full gap-4">
                     <span
                       aria-hidden
-                      className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
+                      className={cn(
+                        "grid size-11 shrink-0 place-items-center rounded-xl text-white",
+                        i % 2 === 0 ? "bg-primary" : "bg-brand-teal",
+                      )}
                     >
                       <Icon className="size-5" />
                     </span>
