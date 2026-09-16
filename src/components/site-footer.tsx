@@ -56,7 +56,7 @@ export function SiteFooter() {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="flex items-center gap-2 break-all transition-colors hover:text-primary-text"
+                  className="flex items-center gap-2 wrap-anywhere transition-colors hover:text-primary-text"
                 >
                   <Mail className="size-4 shrink-0 text-primary" />
                   {site.email}
