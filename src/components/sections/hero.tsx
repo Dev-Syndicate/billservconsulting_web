@@ -54,23 +54,14 @@ const stats = [
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border bg-secondary/60">
-      {/* Layered brand wash */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55rem_38rem_at_78%_-8%,var(--color-accent),transparent)]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -z-10 hidden size-120 rounded-full bg-brand-teal/10 blur-3xl lg:block lg:top-10 lg:right-[38%]"
-      />
+    <section className="relative overflow-hidden border-b border-border bg-secondary">
 
       <div className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-[0.88fr_1fr] lg:gap-10 xl:gap-12 lg:py-24">
         <div>
           <p className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-background px-3.5 py-1.5 text-xs font-medium text-primary-text shadow-sm sm:text-sm">
             <span
               aria-hidden
-              className="size-1.5 rounded-full bg-brand-gradient"
+              className="size-1.5 rounded-full bg-primary"
             />
             Medical Billing &amp; Revenue Cycle Management
           </p>
@@ -78,7 +69,7 @@ export function Hero() {
           <h1 className="mt-5 text-[2.25rem] leading-[1.08] font-bold tracking-tight text-balance sm:mt-6 sm:text-6xl lg:text-[4.25rem]">
             Quality Is What We{" "}
             <span className="relative inline-block">
-              <span className="text-brand-gradient">Believe In.</span>
+              <span className="text-primary-text">Believe In.</span>
               {/* Hand-drawn underline swoosh */}
               <svg
                 aria-hidden
@@ -107,7 +98,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="group h-13 rounded-xl bg-brand-gradient-cta px-7 text-base font-semibold shadow-md shadow-primary/20 transition-shadow hover:shadow-lg hover:shadow-primary/30"
+              className="group h-13 rounded-xl bg-brand-cta hover:bg-brand-cta-hover px-7 text-base font-semibold shadow-md shadow-primary/20 transition-shadow hover:shadow-lg hover:shadow-primary/30"
             >
               <Link href="#about">
                 Learn More
