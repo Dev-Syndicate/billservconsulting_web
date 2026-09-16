@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Clock, Mail, MapPin, Phone, Printer } from "lucide-react";
 
 import { Separator } from "@/components/ui/separator";
-import { nav, site } from "@/lib/site";
+import { legalNav, nav, site } from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -75,7 +75,7 @@ export function SiteFooter() {
               {nav.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={item.href}
+                    href={`/${item.href}`}
                     className="transition-colors hover:text-primary"
                   >
                     {item.label}
@@ -88,9 +88,23 @@ export function SiteFooter() {
 
         <Separator className="my-8" />
 
-        <p className="text-sm text-muted-foreground">
-          All rights reserved, Billserv Consulting.
-        </p>
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm text-muted-foreground">
+            All rights reserved, Billserv Consulting.
+          </p>
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            {legalNav.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </footer>
   );

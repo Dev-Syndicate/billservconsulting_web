@@ -22,6 +22,11 @@ export const nav = [
   { label: "Contact Us", href: "#contact" },
 ] as const;
 
+export const legalNav = [
+  { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms & Conditions", href: "/terms" },
+] as const;
+
 export const expertise = [
   {
     name: "Internal Medicine",
