@@ -97,7 +97,7 @@ export function LegalPage({ document }: { document: LegalDocument }) {
             </a>{" "}
             or{" "}
             <Link
-              href="/#contact"
+              href="/contact"
               className="font-medium text-primary-text underline-offset-4 hover:underline"
             >
               get in touch

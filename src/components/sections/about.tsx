@@ -1,27 +1,30 @@
+import { cn } from "cn";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
 import { TeamIllustration } from "@/components/illustrations";
 import { leadership } from "@/lib/site";
 
-export function About() {
+export function About({ headless = false }: { headless?: boolean } = {}) {
   return (
     <section id="about" className="scroll-mt-16 border-b border-border">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
-              About Us
-            </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-              Our Experts Are the Finest
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground text-pretty">
-              We provide services across the whole healthcare spectrum; from the
-              moment a patient arrives for treatment until the time the
-              insurance company settles the claim. We are committed to your
-              success, and our plan incorporates experienced resources to
-              guarantee that your company gets off to a great start and reaps
-              the most benefits.
+            {!headless && (
+              <>
+                <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
+                  About Us
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
+                  Our Experts Are the Finest
+                </h2>
+              </>
+            )}
+            <p className={cn("text-lg text-muted-foreground text-pretty", headless ? "mt-0" : "mt-6")}>
+              We are committed to your success, and our plan incorporates
+              experienced resources to guarantee that your company gets off to
+              a great start and reaps the most benefits.
             </p>
 
             <dl className="mt-8 grid grid-cols-3 gap-4 sm:mt-10 sm:gap-6">

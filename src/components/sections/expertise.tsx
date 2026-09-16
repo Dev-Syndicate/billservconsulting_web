@@ -1,9 +1,9 @@
-import { Building2, Stethoscope } from "lucide-react";
+import { Stethoscope } from "lucide-react";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
 import { SpecialtyIllustration } from "@/components/illustrations";
-import { clients, expertise } from "@/lib/site";
+import { expertise } from "@/lib/site";
 
 export function Expertise() {
   return (
@@ -52,29 +52,6 @@ export function Expertise() {
           ))}
         </div>
 
-        {/* Clientele */}
-        <Reveal delay={120} className="mt-14">
-          <h3 className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">
-            Clientele
-          </h3>
-          <div className="mt-5 grid gap-5 sm:grid-cols-2">
-            {clients.map((client, i) => (
-              <Reveal key={client} delay={180 + i * 110}>
-                <Card className="transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                  <CardContent className="flex items-center gap-4">
-                    <span
-                      aria-hidden
-                      className="grid size-11 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary"
-                    >
-                      <Building2 className="size-5" />
-                    </span>
-                    <p className="font-medium text-pretty">{client}</p>
-                  </CardContent>
-                </Card>
-              </Reveal>
-            ))}
-          </div>
-        </Reveal>
       </div>
     </section>
   );
