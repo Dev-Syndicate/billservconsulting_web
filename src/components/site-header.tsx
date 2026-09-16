@@ -39,7 +39,7 @@ export function SiteHeader() {
           {nav.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
+              href={`/${item.href}`}
               className="rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
             >
               {item.label}
@@ -56,7 +56,7 @@ export function SiteHeader() {
             {site.phone}
           </a>
           <Button asChild className="h-10 rounded-lg px-5">
-            <Link href="#contact">Get in Touch</Link>
+            <Link href="/#contact">Get in Touch</Link>
           </Button>
         </div>
 
@@ -79,7 +79,7 @@ export function SiteHeader() {
               {nav.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={`/${item.href}`}
                   onClick={() => setOpen(false)}
                   className="rounded-lg px-3 py-3.5 text-base font-medium transition-colors hover:bg-accent hover:text-accent-foreground"
                 >
@@ -90,7 +90,7 @@ export function SiteHeader() {
                 asChild
                 className="mt-5 h-13 rounded-xl text-base"
               >
-                <Link href="#contact" onClick={() => setOpen(false)}>
+                <Link href="/#contact" onClick={() => setOpen(false)}>
                   Get in Touch
                 </Link>
               </Button>
