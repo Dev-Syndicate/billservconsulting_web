@@ -51,7 +51,7 @@ records (Wix does not allow changing nameservers, so use pointing).
 | Route            | Contents                                              |
 | ---------------- | ----------------------------------------------------- |
 | `/`              | Landing page: hero, then a teaser per section          |
-| `/services`      | Ten services, the claim lifecycle, seven specialties    |
+| `/services`      | Ten services, seven specialties                        |
 | `/why-outsource` | The four reasons to outsource, plus the testimonial    |
 | `/about`         | About, mission/vision/values, leadership, clientele, compliance & capability |
 | `/contact`       | Contact details, enquiry form, FAQ                     |
@@ -100,12 +100,13 @@ text on white, use the darkened same-hue variants instead:
 - `--brand-cta` / `--brand-cta-hover` — solid button fill carrying white
   text at 5.0:1
 
-The design is deliberately **flat** — no gradients. The one
-`linear-gradient` left in `globals.css` is `animate-flow`, a repeating
-dash pattern for the lifecycle connector, not decorative colour.
+The design is deliberately **flat** — no gradients. `globals.css` contains
+none at all. The only `linear-gradient` anywhere in `src/` is the hero's
+`maskImage`, which fades the photograph's left edge to transparent; it
+paints no colour.
 
-Teal consistently signals a confirmed or positive state: the Paid step,
-checkmarks, approved rows, and the clean-claim meter.
+Teal consistently signals a confirmed or positive state: checkmarks,
+approved rows, and the clean-claim meter.
 
 ## Images
 

@@ -1,14 +1,11 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BadgeCheck,
-  Check,
   ClipboardList,
   FileCode2,
-  FileText,
   FileWarning,
   Headset,
   PhoneCall,
-  Search,
   Send,
   ShieldCheck,
   UserPlus,
@@ -18,9 +15,7 @@ import { cn } from "cn";
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
-import { processSteps, services } from "@/lib/site";
-
-const stepIcons: LucideIcon[] = [FileText, Search, Check];
+import { services } from "@/lib/site";
 
 const icons: Record<(typeof services)[number]["icon"], LucideIcon> = {
   UserPlus,
@@ -57,65 +52,20 @@ export function Services({ headless = false }: { headless?: boolean } = {}) {
           </Reveal>
         )}
 
-        {/* claim lifecycle */}
-        <div
-          className={cn(
-            "relative mx-auto max-w-3xl",
-            headless ? "mt-2" : "mt-14",
-          )}
-        >
-          {/* animated connector, sits behind the icons */}
-          <div
-            aria-hidden
-            className="absolute top-8 right-[16.66%] left-[16.66%] hidden h-0.5 animate-flow sm:block"
-          />
-
-          <ol className="relative grid gap-10 sm:grid-cols-3 sm:gap-6">
-            {processSteps.map((step, i) => {
-              const Icon = stepIcons[i];
-              const isLast = i === processSteps.length - 1;
-              return (
-                <Reveal
-                  as="li"
-                  key={step.title}
-                  delay={i * 140}
-                  className="flex flex-col items-center text-center"
-                >
-                  <span
-                    aria-hidden
-                    className={cn(
-                      "relative grid size-16 place-items-center rounded-full border bg-background transition-colors",
-                      // Paid is teal — the site's confirmation colour.
-                      isLast
-                        ? "border-brand-teal bg-brand-teal text-white"
-                        : "border-border text-primary",
-                    )}
-                  >
-                    {isLast && (
-                      <span className="absolute inset-0 animate-pulse-ring rounded-full bg-brand-teal/30" />
-                    )}
-                    <Icon className="relative size-6" />
-                  </span>
-
-                  <p className="mt-5 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                    Step {i + 1}
-                  </p>
-                  <p className="mt-1 font-semibold">{step.title}</p>
-                  <p className="mt-2 max-w-64 text-sm leading-relaxed text-muted-foreground text-pretty">
-                    {step.description}
-                  </p>
-                </Reveal>
-              );
-            })}
-          </ol>
-        </div>
-
         {/* Service cards: centred, with a ringed circular icon above the
             title. A centred flex wrap rather than a grid, so the tenth card
             sits under the middle of the last full row instead of being
             stranded at one edge. Basis values reproduce 2- and 3-column
             layouts while allowing that final row to centre. */}
-        <ul className="mt-16 flex flex-wrap justify-center gap-6">
+        {/* No top margin in headless mode: the route's PageHeader already
+            sits above, and the section's own py provides the separation.
+            Stacking mt-16 on top of that left a visible dead band. */}
+        <ul
+          className={cn(
+            "flex flex-wrap justify-center gap-6",
+            headless ? "mt-0" : "mt-14",
+          )}
+        >
           {services.map((service, i) => {
             const Icon = icons[service.icon];
             return (
