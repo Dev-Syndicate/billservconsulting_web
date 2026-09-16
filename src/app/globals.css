@@ -39,7 +39,7 @@
   --brand-teal-foreground: oklch(0.239 0.058 257);
   /* AA-safe teal for small text on white (4.6:1) */
   --brand-teal-text: oklch(0.54 0.115 193);
-  /* Deeper still, for very small teal text (6.3:1) */
+  /* Deeper still, for very small teal text (6.5:1) */
   --brand-teal-deep: oklch(0.46 0.105 193);
 
   /* Deep Navy, for headings and text needing maximum contrast */
