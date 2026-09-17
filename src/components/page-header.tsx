@@ -58,7 +58,7 @@ export function PageHeader({
         </div>
 
         <div className="relative mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:min-h-96 lg:px-8">
-          <Reveal className="lg:max-w-[46%]">
+          <Reveal className="lg:max-w-[48%]">
             <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
               {eyebrow}
             </p>

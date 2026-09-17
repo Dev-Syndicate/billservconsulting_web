@@ -39,20 +39,20 @@ export default function ServicesPage() {
           bleed
           aside={
             <Image
-              src="/services-cycle.avif"
+              src="/services-hero.avif"
               alt=""
               fill
               priority
               sizes="52vw"
-              className="object-cover object-[58%_30%]"
+              className="object-cover object-center"
             />
           }
           asideStacked={
             <Image
-              src="/services-cycle.avif"
-              alt="The revenue cycle as ten numbered stages, from patient registration through claims and payment posting to A/R follow-up and call centre support"
-              width={1374}
-              height={1145}
+              src="/services-hero.avif"
+              alt="A billing specialist working at a laptop, with icons for coding, compliance, claims transmission and payment posting arcing overhead"
+              width={1672}
+              height={941}
               priority
               sizes="100vw"
               className="h-auto w-full rounded-2xl"
