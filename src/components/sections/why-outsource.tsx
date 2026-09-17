@@ -58,7 +58,7 @@ export function WhyOutsource({ headless = false }: { headless?: boolean } = {}) 
               Why Outsource
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight text-balance sm:text-4xl">
-              Billing is a full-time discipline
+              Billing is a full&#8209;time discipline
             </h2>
             <p className="mt-4 text-lg text-muted-foreground text-pretty">
               Codes change annually, payer rules change constantly, and unworked
