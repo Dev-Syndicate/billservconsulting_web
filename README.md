@@ -150,11 +150,28 @@ Ship the replacement under a new filename instead — that is what the
 
 - **The contact form has no backend.** It builds a `mailto:` link and
   hands off to the visitor's email client. Wiring it to a real endpoint
-  (a form service or a route handler) is outstanding.
-- **The legal pages need a lawyer's review.** The Governing law clause
-  currently says "the laws applicable at our principal place of business"
-  rather than naming a jurisdiction — BillServ operates from India while
-  serving US providers, so this needs a decision.
+  (a form service or a route handler) is outstanding. Note that the
+  Privacy Policy now *describes* this `mailto:` behaviour accurately, so
+  adding a backend means updating "Information collection and use",
+  "Service providers", and "Security" in `src/lib/legal.ts` at the same
+  time — the header comment in that file lists the mapping.
+- **The legal pages still need a lawyer's review**, though the factual
+  inaccuracies have been fixed. The documents no longer claim cookies,
+  first-party server logs, or form submissions the Site does not make;
+  they name the operating entity (`site.legalEntity`) rather than the
+  trading name; and Terms now carries the indemnity clause that its
+  Termination section had always promised would survive.
+- **Governing law names India, with exclusive jurisdiction in Chennai**,
+  scoped to use of the Site only and expressly subordinate to any
+  services agreement. That reflects where the entity operates, but a US
+  client may want a US forum for the services themselves — which is a
+  matter for the services agreement, not this Site. Confirm with counsel.
+- **The legal text asserts two things that code must keep true:** that
+  the Site sets no cookies, and that fonts are self-hosted. Both were
+  verified against the production build (no `document.cookie` or
+  `localStorage` in any bundle; no `fonts.googleapis`/`gstatic` request,
+  with 11 `.woff2` files emitted locally by `next/font`). Adding
+  analytics or a remote font would make the published policy false.
 - **Do not publish certification names or named integrations** without
   written confirmation from BillServ. The information pack states that
   specific certification names, issuing organizations, and certificate
