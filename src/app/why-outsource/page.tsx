@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHeader } from "@/components/page-header";
 import { WhyOutsource } from "@/components/sections/why-outsource";
+import { WhyBillServ } from "@/components/sections/why-billserv";
 import { CtaBand } from "@/components/cta-band";
 import { site } from "@/lib/site";
 
@@ -59,7 +60,15 @@ export default function WhyOutsourcePage() {
           }
         />
         <WhyOutsource headless />
-        {/* The section above already closes on a navy panel with its own
+        {/*
+         * "Why outsource at all" is only half the decision; this answers
+         * the half that follows it — why BillServ specifically. The pack
+         * lists it as its own page, but a fifth nav item sitting beside
+         * "Why Outsource" would read as a near-duplicate, and the two
+         * arguments run in sequence anyway.
+         */}
+        <WhyBillServ />
+        {/* The sections above already close on a navy panel with its own
             call to action, so this one leads with the practical next step
             rather than repeating the pitch. */}
         <CtaBand

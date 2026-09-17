@@ -5,7 +5,7 @@ import { cn } from "cn";
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
 import { ClaimFlowIllustration } from "@/components/illustrations";
-import { leadership } from "@/lib/site";
+import { companyBelief, companyDescription, leadership } from "@/lib/site";
 
 export function About({ headless = false }: { headless?: boolean } = {}) {
   return (
@@ -30,10 +30,12 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
                 </h2>
               </>
             )}
+            {/* The information pack's own company description. Only the
+                first paragraph sits in this column — the second runs long
+                and would push the copy well past the illustration beside
+                it, so it follows below the grid at full width. */}
             <p className={cn("text-lg text-muted-foreground text-pretty", headless ? "mt-0" : "mt-6")}>
-              We are committed to your success, and our plan incorporates
-              experienced resources to guarantee that your company gets off to
-              a great start and reaps the most benefits.
+              {companyDescription[0]}
             </p>
 
             {/* Tiles rather than bare numerals, matching the homepage
@@ -78,6 +80,19 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
             <ClaimFlowIllustration className="mx-auto w-full max-w-md animate-float" />
           </Reveal>
         </div>
+
+        {/* The rest of the company description, at full width below both
+            columns. The closing belief is set apart on the secondary
+            surface: it is the argument the rest of the page rests on, and
+            as a fourth plain paragraph it disappeared into the prose. */}
+        <Reveal delay={90} className="mt-14">
+          <p className="max-w-4xl text-lg text-muted-foreground text-pretty">
+            {companyDescription[1]}
+          </p>
+          <div className="mt-8 rounded-2xl border border-border bg-secondary p-7 sm:p-8">
+            <p className="max-w-4xl text-lg text-pretty">{companyBelief}</p>
+          </div>
+        </Reveal>
 
         {/* Leadership spans the full width below both columns */}
         <Reveal delay={100} className="mt-16">
