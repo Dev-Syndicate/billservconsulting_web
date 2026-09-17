@@ -255,6 +255,69 @@ export const services = [
   },
 ] as const;
 
+/*
+ * Why providers choose BillServ — the information pack's section 6.
+ *
+ * Distinct from `whyOutsource` below, and the two are not interchangeable:
+ * this answers "why this company" (what BillServ brings), while that one
+ * answers "why outsource at all" (why not keep billing in-house). The pack
+ * treats them as separate pages for the same reason. Wording here is the
+ * client's own, so edit only against a revised pack.
+ */
+export const whyBillServLead =
+  "Choosing a billing company means choosing a partner that directly influences an organization's financial performance. BillServ provides the expertise, people, processes, and support required to manage the revenue cycle from beginning to end.";
+
+export const whyBillServ = [
+  {
+    title: "Comprehensive Services",
+    description:
+      "From patient registration to final reimbursement, BillServ can manage the complete revenue cycle under one roof.",
+    icon: "Layers",
+  },
+  {
+    title: "Experienced Professionals",
+    description:
+      "Specialized knowledge of healthcare billing, claims, insurance processes, denials, A/R, coding, and revenue cycle operations.",
+    icon: "Users",
+  },
+  {
+    title: "Fewer Revenue Leaks",
+    description:
+      "We work to identify billing issues, claim problems, denials, missed charges, and outstanding accounts.",
+    icon: "SearchCheck",
+  },
+  {
+    title: "Faster Revenue Cycle",
+    description:
+      "Efficient workflows, proactive follow-up, and consistent claims management help keep revenue moving.",
+    icon: "Gauge",
+  },
+  {
+    title: "Reduced Administrative Burden",
+    description:
+      "Providers and internal teams can focus more on patients and core operations.",
+    icon: "HeartHandshake",
+  },
+  {
+    title: "Dedicated Support",
+    description:
+      "Clients have access to people who understand their accounts and can provide clear answers.",
+    icon: "Headset",
+  },
+  {
+    title: "Transparent Communication",
+    description:
+      "Clients receive visibility into their billing operations.",
+    icon: "Eye",
+  },
+  {
+    title: "Scalable Solutions",
+    description:
+      "Support can be tailored to specific billing functions or comprehensive RCM.",
+    icon: "Expand",
+  },
+] as const;
+
 /**
  * Closing line from the information pack's "Why Outsource" section.
  * Their own wording, and the sharpest sentence in the document.
@@ -308,6 +371,26 @@ export const whyOutsource = [
     icon: "Clock",
   },
 ] as const;
+
+/*
+ * Company description — the information pack's section 2, verbatim.
+ *
+ * Split into paragraphs rather than held as one block: as a single run it
+ * is a 150-word wall, and the three parts answer different questions
+ * (what we are, what we cover, what we believe). The closing line is the
+ * argument the rest of the site is built on, so it reads as its own beat.
+ */
+export const companyDescription = [
+  "BillServ Consulting is a full-service healthcare revenue cycle management and medical billing company helping healthcare providers streamline their billing operations, improve revenue performance, reduce administrative burden, and focus more on delivering quality patient care.",
+  "We provide comprehensive revenue cycle solutions covering the entire billing journey — from patient registration and insurance eligibility verification through medical coding, charge entry, electronic claims transmission, payment posting, denial management, accounts receivable follow-up, credentialing, and healthcare call center support. Our team works across the healthcare spectrum, supporting providers and organizations across multiple specialties, including Internal Medicine, Laboratory, Radiology, Nephrology, Cardiology, Ophthalmology, and Hematology.",
+] as const;
+
+/**
+ * The closing claim of the company description, kept separate so it can be
+ * set apart from the prose above it.
+ */
+export const companyBelief =
+  "At BillServ, we believe healthcare providers deserve more than a billing vendor. They deserve a dependable revenue cycle partner that understands their business, takes ownership of the billing process, communicates clearly, and works continuously to keep revenue moving.";
 
 /*
  * Mission, vision, and values — verbatim from the information pack, which
