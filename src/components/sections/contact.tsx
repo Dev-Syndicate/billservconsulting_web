@@ -148,8 +148,16 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
   return (
     <section id="contact" className="scroll-mt-16">
       <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
+        {/*
+         * min-w-0 on the columns, not just the grid. A grid item defaults
+         * to min-width:auto, so it refuses to shrink below its widest
+         * unbreakable content — here the email address — which pushed the
+         * column to 356px inside a 320px phone. body has overflow-x:clip
+         * so no scrollbar appeared, but the right edge of the panel was
+         * being cut off.
+         */}
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
+          <Reveal className="min-w-0">
             {!headless && (
               <>
                 <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
@@ -205,7 +213,7 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
                          * opportunity, so the address wraps at "@" or a
                          * dot and stays readable.
                          */}
-                        <span className="mt-1 block font-medium break-words">
+                        <span className="mt-1 block font-medium wrap-break-word">
                           {method.value}
                         </span>
                         {method.note ? (
@@ -296,7 +304,7 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
             </div>
           </Reveal>
 
-          <Reveal from="right" delay={120}>
+          <Reveal from="right" delay={120} className="min-w-0">
             <div className="overflow-hidden rounded-2xl border border-border bg-background shadow-sm">
               {/* Header band, so the form reads as a titled panel rather
                   than a bare stack of inputs floating in a box. */}
