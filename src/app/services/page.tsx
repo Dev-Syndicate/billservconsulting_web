@@ -45,8 +45,8 @@ export default function ServicesPage() {
               alt=""
               fill
               priority
-              sizes="52vw"
-              className="object-cover object-center"
+              sizes="58vw"
+              className="object-cover object-top"
             />
           }
           asideStacked={

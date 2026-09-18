@@ -42,8 +42,8 @@ export default function ContactPage() {
               alt=""
               fill
               priority
-              sizes="52vw"
-              className="object-cover object-[55%_50%]"
+              sizes="58vw"
+              className="object-cover object-top"
             />
           }
           asideStacked={

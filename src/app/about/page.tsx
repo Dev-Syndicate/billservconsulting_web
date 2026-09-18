@@ -45,8 +45,8 @@ export default function AboutPage() {
               alt=""
               fill
               priority
-              sizes="52vw"
-              className="object-cover object-[62%_45%]"
+              sizes="58vw"
+              className="object-cover object-[50%_25%]"
             />
           }
           asideStacked={
