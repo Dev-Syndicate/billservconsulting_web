@@ -135,6 +135,26 @@ npx sharp-cli -i source.png -o public/name.avif -f avif --quality 62 resize 1536
 
 …or remove the `unoptimized` flag and let Next handle it.
 
+**Replacing the homepage hero.** `hero-billing-v3.avif` has the left 28%
+of its source cropped away, as `-v2` did before it. Supplied artwork for
+this slot has twice carried hand-lettering ("Your Trusted RCM Partner")
+down the left edge, which lands directly behind the headline in the
+full-bleed layer. `object-position` cannot rescue it — at this aspect
+ratio `object-cover` leaves only ~115px of horizontal slack. Crop the
+source instead:
+
+```js
+const meta = await sharp(src).metadata();
+const left = Math.round(meta.width * 0.28);
+await sharp(src)
+  .extract({ left, top: 0, width: meta.width - left, height: meta.height })
+  .avif({ quality: 62 })
+  .toFile('public/hero-billing-vN.avif');
+```
+
+The `/services` header image needs no crop: its left half is empty by
+design, which is where that page's copy sits.
+
 ### Client logos
 
 `public/client-*.avif` are the practice logos shown in the Clientele

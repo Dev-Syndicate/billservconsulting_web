@@ -41,7 +41,7 @@ export default function ServicesPage() {
           bleed
           aside={
             <Image
-              src="/services-hero.avif"
+              src="/services-hero-v2.avif"
               alt=""
               fill
               priority
@@ -51,7 +51,7 @@ export default function ServicesPage() {
           }
           asideStacked={
             <Image
-              src="/services-hero.avif"
+              src="/services-hero-v2.avif"
               alt="A billing specialist working at a laptop, with icons for coding, compliance, claims transmission and payment posting arcing overhead"
               width={1672}
               height={941}
