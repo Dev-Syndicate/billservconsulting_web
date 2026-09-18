@@ -44,15 +44,23 @@ export default function WhyOutsourcePage() {
               fill
               priority
               sizes="52vw"
-              className="object-cover object-[52%_40%]"
+              /*
+               * Biased low. This photo is taller than the band, leaving
+               * 115px of vertical slack and none horizontally, and the
+               * "Claims People Progress" mug sits near the bottom edge:
+               * at the previous 40% the window stopped at 86% of the
+               * image and cut the mug's text in half. 85% reaches 96.5%,
+               * keeping it whole with a little headroom left above.
+               */
+              className="object-cover object-[52%_85%]"
             />
           }
           asideStacked={
             <Image
               src="/why-outsource-biller.avif"
               alt="A billing specialist reviewing a claim form at her desk, beside folders labelled patient records, insurance claims, payment posting, and A/R follow-up"
-              width={1500}
-              height={1000}
+              width={1536}
+              height={1024}
               priority
               sizes="100vw"
               className="h-auto w-full rounded-2xl"

@@ -53,8 +53,8 @@ export default function AboutPage() {
             <Image
               src="/about-team.avif"
               alt="Three billing specialists reviewing claims together at a laptop"
-              width={1500}
-              height={1000}
+              width={1536}
+              height={1024}
               priority
               sizes="100vw"
               className="h-auto w-full rounded-2xl"

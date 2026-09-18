@@ -50,8 +50,8 @@ export default function ContactPage() {
             <Image
               src="/contact-support.avif"
               alt="A billing support specialist wearing a headset, working at a laptop"
-              width={1400}
-              height={815}
+              width={1644}
+              height={957}
               priority
               sizes="100vw"
               className="h-auto w-full rounded-2xl"

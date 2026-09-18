@@ -5,7 +5,13 @@ import { cn } from "cn";
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
 import { ClaimFlowIllustration } from "@/components/illustrations";
-import { companyBelief, companyDescription, leadership } from "@/lib/site";
+import {
+  companyBelief,
+  companyDescription,
+  dentalServices,
+  leadership,
+  medicalServices,
+} from "@/lib/site";
 
 export function About({ headless = false }: { headless?: boolean } = {}) {
   return (
@@ -43,7 +49,13 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
                 together. */}
             <dl className="mt-8 grid grid-cols-3 gap-3 sm:mt-10 sm:gap-4">
               {[
-                { value: "10", label: "Billing services", icon: Layers },
+                {
+                  /* Derived, not hardcoded: this read "10" and went
+                     stale when dental was added. */
+                  value: String(medicalServices.length + dentalServices.length),
+                  label: "Billing services",
+                  icon: Layers,
+                },
                 { value: "7", label: "Specialties covered", icon: Stethoscope },
                 {
                   value: "2022",
