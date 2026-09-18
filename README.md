@@ -51,14 +51,14 @@ records (Wix does not allow changing nameservers, so use pointing).
 | Route            | Contents                                              |
 | ---------------- | ----------------------------------------------------- |
 | `/`              | Landing page: hero, then a teaser per section          |
-| `/services`      | Ten services, seven specialties                        |
+| `/services`      | Medical (10) and dental (12) services, systems, seven specialties |
 | `/why-outsource` | The four reasons to outsource                          |
 | `/about`         | About, mission/vision/values, leadership, clientele, compliance & capability |
 | `/contact`       | Contact details, enquiry form, FAQ                     |
 | `/terms`         | Terms and Conditions                                   |
 | `/privacy`       | Privacy Policy                                         |
 
-The homepage teasers show a subset (six of ten services) and link
+The homepage teasers show a subset (six of the ten medical services) and link
 through, so full content lives in exactly one place and there is no
 duplicate-content penalty.
 
@@ -70,6 +70,13 @@ Most copy lives in data files rather than in markup:
   specialties, reasons to outsource, mission/vision/values, leadership,
   clients, compliance and capability lists.
   Changing `nav` here updates the header, mobile menu, and footer.
+  Services are split by line of business: `medicalServices` (10, each
+  with `detail` and `benefits`) and `dentalServices` (12, one-line
+  descriptions only), paired in `serviceCategories`. `services` remains
+  as an alias for the medical list, which is what the homepage teaser
+  and the medical detail rows mean. Homepage counts derive from both
+  arrays rather than being hardcoded — a literal `10` went stale the
+  moment dental was added.
 - **`src/lib/legal.ts`** — the Terms and Privacy documents, as structured
   sections. Both pull company name, email, phone, and address from
   `site.ts` so contact details cannot drift.
@@ -136,10 +143,13 @@ registered in `clients` in `src/lib/site.ts` along with their intrinsic
 `width`/`height`, which Next needs to reserve space and avoid layout
 shift — the artwork is not a uniform aspect ratio.
 
-They render as a plain logo row with no captions — the logos carry their
-own names, and the practice name always reaches screen readers through
-the image `alt`. The same row appears on the homepage via
-`sections/client-logos.tsx`.
+They render as a plain logo row. Most of the artwork spells the practice
+name already; those are flagged `nameInLogo: true` and get no caption,
+because printing the name twice reads as a mistake. Artwork with no
+wordmark is captioned beneath — name only on the homepage strip, name and
+location in the Clientele block on `/about`. The practice name reaches
+screen readers through the image `alt` either way. The same row appears on
+the homepage via `sections/client-logos.tsx`.
 
 **Replacing a logo:** files under `public/` are served at a stable URL, so
 overwriting one in place leaves browsers and CDNs holding the old copy.
@@ -172,13 +182,22 @@ Ship the replacement under a new filename instead — that is what the
   `localStorage` in any bundle; no `fonts.googleapis`/`gstatic` request,
   with 11 `.woff2` files emitted locally by `next/font`). Adding
   analytics or a remote font would make the published policy false.
-- **Do not publish certification names or named integrations** without
-  written confirmation from BillServ. The information pack states that
-  specific certification names, issuing organizations, and certificate
-  details, and named EHR/EMR, practice-management, and clearinghouse
-  integrations, are to go live only once confirmed internally. The
-  Compliance and Technology copy on `/about` describes practices and
-  workflows for that reason.
+- **Do not publish certification names** without written confirmation
+  from BillServ. The information pack states that specific certification
+  names, issuing organizations, and certificate details go live only once
+  confirmed internally. The Compliance copy on `/about` describes
+  practices rather than naming certifications for that reason.
+- **Named systems and clearinghouses were confirmed by the client on
+  2026-09-18** and live in `systems` in `site.ts` (HealthNautica
+  WebPractice, eClinicalWorks, Kareo, MEDITECH, AdvancedMD; Availity,
+  TriZetto, Office Ally). This lifted the pack's earlier hold on naming
+  them. Two things to preserve when editing: the copy says the team is
+  **experienced in** these systems, never that BillServ "integrates
+  with" or "partners with" them — BillServ staff work inside whatever
+  the client already runs, so an integration claim would describe a
+  technical connection that does not exist and that a prospect could
+  test. Vendor partner programmes also carry their own branding rules.
+  Do not add a name without the client confirming it.
 - **Do not state that BillServ is available 24/7** — the pack forbids it.
   Business hours are Monday–Friday, 8:00 AM–5:00 PM Pacific Time, held in
   `site.availability`. PT is used rather than a fixed offset because

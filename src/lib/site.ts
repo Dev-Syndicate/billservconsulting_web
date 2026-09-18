@@ -92,14 +92,19 @@ export const expertise = [
 ] as const;
 
 /*
- * Services.
+ * Medical RCM services.
  *
  * `description` is the one-line summary used in the homepage teaser.
  * `detail` and `benefits` come from the information pack and are shown
  * only on /services — they are what makes that page worth visiting
  * rather than a repeat of the homepage.
+ *
+ * Dental is a separate line of business with its own list; see
+ * `dentalServices` below and `serviceCategories` for the pairing. Add a
+ * medical service here, not there — the two lists have different shapes
+ * (dental entries carry no `detail`/`benefits` yet).
  */
-export const services = [
+export const medicalServices = [
   {
     title: "Patient Registration / Demographic entry",
     icon: "UserPlus",
@@ -254,6 +259,159 @@ export const services = [
     ],
   },
 ] as const;
+
+/*
+ * Dental RCM services. Supplied by BillServ on 2026-09-18.
+ *
+ * Kept as its own list rather than folded into the medical one: dental
+ * runs on CDT codes rather than CPT/ICD, has its own payer behaviour
+ * (annual maximums, pre-determination, frequency limitations), and a
+ * dental practice searching for a biller should not have to read twelve
+ * medical services to find out it is served.
+ *
+ * These entries carry no `detail`/`benefits` — the client supplied one
+ * description each. Do not invent them; ask BillServ if the dental page
+ * needs the same depth as the medical one.
+ */
+export const dentalServices = [
+  {
+    title: "Insurance Eligibility & Benefits Verification",
+    icon: "ShieldCheck",
+    description:
+      "Verify patient eligibility, coverage, benefits, deductibles, limitations, and remaining benefits before treatment.",
+  },
+  {
+    title: "Dental Claim Submission",
+    icon: "Send",
+    description:
+      "Accurate and timely electronic claim submission with thorough claim review to minimize errors and rejections.",
+  },
+  {
+    title: "CDT Coding & Claim Scrubbing",
+    icon: "FileCode2",
+    description:
+      "Review CDT codes, modifiers, documentation, and claim details to support accurate and clean claim submission.",
+  },
+  {
+    title: "Pre-Authorization & Pre-Determination",
+    icon: "ClipboardCheck",
+    description:
+      "Manage authorization and pre-determination requirements to help reduce unexpected claim issues and patient balances.",
+  },
+  {
+    title: "Claim Status & Follow-Up",
+    icon: "Search",
+    description:
+      "Proactive follow-up on outstanding claims, including payer communication and timely resolution of pending claims.",
+  },
+  {
+    title: "Payment Posting & EOB Reconciliation",
+    icon: "Wallet",
+    description:
+      "Accurate posting of insurance payments, adjustments, denials, and patient payments with EOB/ERA reconciliation.",
+  },
+  {
+    title: "Dental Denial Management & Appeals",
+    icon: "FileWarning",
+    description:
+      "Identify denial reasons, investigate root causes, correct billing issues, and manage appropriate appeals.",
+  },
+  {
+    title: "Dental A/R Follow-Up",
+    icon: "ClipboardList",
+    description:
+      "Focused follow-up on aging accounts to improve reimbursement and reduce outstanding insurance A/R.",
+  },
+  {
+    title: "Underpayment & Variance Recovery",
+    icon: "Scale",
+    description:
+      "Review contracted reimbursement against actual payments to identify underpayments and support recovery.",
+  },
+  {
+    title: "Patient Billing Support",
+    icon: "Headset",
+    description:
+      "Assist with patient statements, outstanding balances, insurance responsibility, and account resolution.",
+  },
+  {
+    title: "Secondary & Tertiary Claims Management",
+    icon: "Layers",
+    description:
+      "Coordinate secondary and tertiary billing to ensure eligible remaining balances are appropriately submitted.",
+  },
+  {
+    title: "Dental RCM Reporting & Analytics",
+    icon: "BarChart3",
+    description:
+      "Provide customized reporting on collections, aging A/R, denials, payments, and other key billing performance indicators.",
+  },
+] as const;
+
+/** Why a dental practice should choose BillServ. Client's own copy. */
+export const dentalWhy = [
+  {
+    title: "Dental-Focused Expertise",
+    description:
+      "Specialized understanding of dental billing workflows and payer processes.",
+    icon: "Sparkles",
+  },
+  {
+    title: "Improved Revenue Visibility",
+    description:
+      "Clear reporting and actionable insights into your practice's financial performance.",
+    icon: "BarChart3",
+  },
+  {
+    title: "Reduced Billing Burden",
+    description:
+      "Let your dental team focus on patient care while we manage the billing cycle.",
+    icon: "HeartPulse",
+  },
+  {
+    title: "Proactive A/R Management",
+    description:
+      "Consistent follow-up designed to keep claims moving and aging A/R under control.",
+    icon: "ClipboardList",
+  },
+] as const;
+
+/*
+ * The two lines of business, for the /services page and its navigation.
+ *
+ * Ordered medical first: it is the larger list, the established business,
+ * and what every existing client logo represents.
+ */
+export const serviceCategories = [
+  {
+    id: "medical",
+    label: "Medical",
+    eyebrow: "Medical RCM Solutions",
+    title: "End-to-end medical revenue cycle management",
+    lead: "From the moment a patient arrives for treatment until the insurance company settles the claim, BillServ can manage every step of the medical revenue cycle.",
+    services: medicalServices,
+  },
+  {
+    id: "dental",
+    label: "Dental",
+    eyebrow: "Dental RCM Solutions",
+    title: "Streamline Your Dental Revenue. Strengthen Your Practice.",
+    lead: "At BillServ Consulting, we provide specialized dental billing and revenue cycle management solutions designed to help dental practices improve collections, reduce claim delays, and maintain a healthier A/R.",
+    services: dentalServices,
+  },
+] as const;
+
+/** Closing line for the dental section. Client's own copy. */
+export const dentalClosing = {
+  headline: "Let Us Handle Your Dental Billing. You Focus on Your Patients.",
+  lead: "Partner with BillServ Consulting for reliable, end-to-end Dental RCM support.",
+} as const;
+
+/**
+ * Back-compat alias. The homepage teaser and the medical detail rows both
+ * predate the medical/dental split and still mean the medical list.
+ */
+export const services = medicalServices;
 
 /*
  * Why providers choose BillServ — the information pack's section 6.
@@ -552,13 +710,52 @@ export const compliance = {
 } as const;
 
 /*
+ * Billing and practice-management systems the team has worked in, and the
+ * clearinghouses it submits through. Confirmed by BillServ on 2026-09-18.
+ *
+ * Deliberately framed as systems the team is EXPERIENCED IN rather than
+ * systems BillServ "integrates with". BillServ is a services company, not
+ * a software product company: staff work inside whatever system the
+ * client already runs. Claiming an integration would imply a technical
+ * connection that does not exist and that a prospect could test.
+ *
+ * Do not add a name here without the client confirming it, and keep the
+ * wording about familiarity rather than partnership or certification —
+ * vendor partner programmes carry their own branding rules.
+ */
+export const systems = {
+  software: {
+    lead:
+      "Our team works inside the billing and practice-management systems our clients already use, so there is no platform to migrate to and no new software to learn.",
+    items: [
+      "HealthNautica WebPractice",
+      "eClinicalWorks (eCW)",
+      "Kareo",
+      "MEDITECH",
+      "AdvancedMD",
+    ],
+  },
+  clearinghouses: {
+    lead:
+      "Claims are submitted and tracked through established clearinghouses, with electronic remittance returned to the same workflow.",
+    items: ["Availity", "TriZetto", "Office Ally"],
+  },
+  /**
+   * Shown beneath both lists. The team's experience is not limited to the
+   * named systems, and the site should not imply a practice is turned away
+   * for running something else.
+   */
+  note:
+    "Working in a system that is not listed here? Our team adapts to the software your practice already runs — tell us what you use and we will confirm.",
+} as const;
+
+/*
  * Operational capability.
  *
  * The pack is explicit that BillServ is a services company, not a software
  * product company — so this describes technology-enabled workflows rather
- * than implying a proprietary platform. Named EHR/EMR, practice-management,
- * and clearinghouse integrations are to be added only after internal
- * confirmation.
+ * than implying a proprietary platform. Named systems and clearinghouses
+ * live in `systems` above; anything added there needs client confirmation.
  */
 export const capabilities = [
   "Electronic claims transmission",

@@ -33,7 +33,9 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/reveal";
 import { ClaimFlowIllustration } from "@/components/illustrations";
 import {
+  dentalServices,
   expertise,
+  medicalServices,
   outsourceOutcomes,
   outsourcePromise,
   services,
@@ -126,7 +128,13 @@ export function AboutTeaser() {
                 with nothing tying them to each other. */}
             <dl className="mt-10 grid grid-cols-3 gap-3 sm:gap-4">
               {[
-                { value: "10", label: "Billing services", icon: Layers },
+                {
+                  /* Derived, not hardcoded: this read "10" and silently
+                     went stale the moment dental was added. */
+                  value: String(medicalServices.length + dentalServices.length),
+                  label: "Billing services",
+                  icon: Layers,
+                },
                 { value: "7", label: "Specialties covered", icon: Stethoscope },
                 { value: "2022", label: "Serving providers since", icon: CalendarDays },
               ].map((stat, i) => (
@@ -296,8 +304,10 @@ export function ServicesTeaser() {
           })}
         </ul>
 
+        {/* Counts both categories: the teaser above lists the medical
+            services, but the link lands on a page carrying dental too. */}
         <MoreLink href="/services">
-          {`Explore all ${services.length} services in detail`}
+          {`Explore all ${medicalServices.length + dentalServices.length} medical & dental services`}
         </MoreLink>
       </div>
     </section>

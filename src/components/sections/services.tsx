@@ -15,7 +15,9 @@ import {
 import { cn } from "cn";
 
 import { Reveal } from "@/components/reveal";
-import { services } from "@/lib/site";
+import { serviceCategories, services } from "@/lib/site";
+
+const medical = serviceCategories.find((c) => c.id === "medical")!;
 
 const icons: Record<(typeof services)[number]["icon"], LucideIcon> = {
   UserPlus,
@@ -63,7 +65,28 @@ export function Services({ headless = false }: { headless?: boolean } = {}) {
           </Reveal>
         )}
 
-        <ol className={cn("space-y-5", headless ? "mt-0" : "mt-14")}>
+        {/*
+         * Category heading. Only in headless mode, where the route's
+         * PageHeader covers the page title and this section needs to
+         * announce itself as the medical half of a medical/dental pair.
+         * With its own header (the homepage-style path above) the heading
+         * would immediately repeat what that header just said.
+         */}
+        {headless && (
+          <Reveal id="medical" className="max-w-2xl scroll-mt-24">
+            <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
+              {medical.eyebrow}
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+              {medical.title}
+            </h2>
+            <p className="mt-4 text-muted-foreground text-pretty">
+              {medical.lead}
+            </p>
+          </Reveal>
+        )}
+
+        <ol className={cn("space-y-5", headless ? "mt-10" : "mt-14")}>
           {services.map((service, i) => {
             const Icon = icons[service.icon];
             const teal = i % 2 === 1;
