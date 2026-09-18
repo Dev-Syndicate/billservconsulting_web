@@ -15,10 +15,13 @@ import { site } from "@/lib/site";
  * to us. They have been corrected. If any of the following change, the
  * matching section must be revisited:
  *
- *   - a form backend is added    -> "Information collection and use",
+ *   - the form backend changes   -> "Information collection and use",
  *                                   "Service providers", "Security"
  *   - analytics are added        -> "Cookies and tracking" (and consent)
  *   - fonts move off self-host   -> "Service providers"
+ *
+ * The form now posts to Web3Forms, which is named as a processor. If that
+ * service is swapped or dropped, those three sections must change with it.
  *
  * Still outstanding: neither document has been reviewed by a lawyer.
  *
@@ -39,7 +42,7 @@ export type LegalDocument = {
 };
 
 /** Single source of truth so both documents state the same date. */
-export const legalUpdated = "September 17, 2026";
+export const legalUpdated = "September 18, 2026";
 
 export const terms: LegalDocument = {
   title: "Terms and Conditions",
@@ -190,7 +193,7 @@ export const privacy: LegalDocument = {
       heading: "Information collection and use",
       body: [
         "We collect personal information only when you voluntarily send it to us. This may include your name, email address, telephone number, practice or organisation name, and the content of any message you choose to send us (“Personal Information”).",
-        "The contact form on this Site does not transmit anything to us by itself. When you complete it and press send, the form opens a pre-filled message in your own email application; nothing reaches us until you send that message yourself, and you can review or discard it beforehand. We therefore receive your enquiry in the same way as an ordinary email.",
+        "When you submit the contact form, the details you entered are sent to Web3Forms, a form-delivery service, which forwards them to us by email. Web3Forms processes that information on our behalf solely in order to deliver it, and we do not use the service for anything else. If the form cannot reach that service, it falls back to opening a pre-filled message in your own email application, and nothing is sent until you send it yourself.",
         "We use what you send us to respond to your enquiry and, where relevant, to discuss the services you have asked about. We do not use it for marketing unrelated to your enquiry.",
       ],
     },
@@ -240,6 +243,7 @@ export const privacy: LegalDocument = {
       ],
       list: [
         "A hosting provider, which stores the Site’s files and serves them to your browser, and which processes the technical request information described under “Server logs” above.",
+        "Web3Forms, a form-delivery service, which receives what you submit through the contact form and forwards it to us by email. It acts on our instructions for that purpose only.",
         "An email provider, which carries and stores the correspondence you send us and our replies to it.",
         "Fonts used on this Site are served from our own hosting alongside the rest of the Site. Your browser makes no request to any external font service, and no information about your visit is shared with one.",
       ],
@@ -265,7 +269,7 @@ export const privacy: LegalDocument = {
     {
       heading: "Security",
       body: [
-        "The Site is served over an encrypted connection (HTTPS). Ordinary email, however, is not a secure channel: a message you send us may pass through systems outside our control and should not be treated as confidential. This is why we ask you not to send patient information or other sensitive data by email.",
+        "The Site is served over an encrypted connection (HTTPS), and contact form submissions are transmitted over an encrypted connection to the delivery service described above. Email itself, however, is not a secure channel: a message may pass through systems outside our control once it leaves us, and should not be treated as confidential. This is why we ask you not to send patient information or other sensitive data through the form or by email.",
         "We take reasonable steps to protect the information we hold, but no method of transmission over the Internet, and no method of electronic storage, is completely secure, and we cannot guarantee absolute security.",
       ],
     },
