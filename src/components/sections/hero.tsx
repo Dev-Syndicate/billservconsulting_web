@@ -41,16 +41,20 @@ export function Hero() {
         {/*
          * object-cover fills the band edge to edge with no letterboxing.
          *
-         * The -v2 source has the left 28% of the original removed. That
-         * region held a "Your Trusted RCM Partner" hand-lettered graphic
-         * which sat directly behind the headline and body copy, and
-         * object-position could not move it clear: at this aspect ratio
-         * object-cover leaves only ~115px of horizontal slack, so the
-         * whole 0%-100% range shifts the image by barely a hundred pixels.
-         * Cropping the source was the only fix that worked.
+         * The -v3 source has the left 28% of the original removed, as -v2
+         * did before it. That region held a "Your Trusted RCM Partner"
+         * hand-lettered graphic which sat directly behind the headline and
+         * body copy, and object-position could not move it clear: at this
+         * aspect ratio object-cover leaves only ~115px of horizontal
+         * slack, so the whole 0%-100% range shifts the image by barely a
+         * hundred pixels. Cropping the source was the only fix that
+         * worked.
+         *
+         * Any replacement artwork carrying lettering on its left needs the
+         * same crop — see the conversion note in the README.
          */}
         <Image
-          src="/hero-billing-v2.avif"
+          src="/hero-billing-v3.avif"
           alt=""
           fill
           priority
@@ -146,7 +150,7 @@ export function Hero() {
             full-bleed layer above takes over and this is hidden. */}
         <div className="relative xl:hidden">
           <Image
-            src="/hero-billing-v2.avif"
+            src="/hero-billing-v3.avif"
             alt="A clinician reviewing patient records on a tablet, beside books reading Better Billing, Healthier Practices, and Brighter Futures"
             width={1106}
             height={1024}
