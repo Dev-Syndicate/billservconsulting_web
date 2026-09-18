@@ -44,15 +44,9 @@ export default function WhyOutsourcePage() {
               fill
               priority
               sizes="52vw"
-              /*
-               * Biased low. This photo is taller than the band, leaving
-               * 115px of vertical slack and none horizontally, and the
-               * "Claims People Progress" mug sits near the bottom edge:
-               * at the previous 40% the window stopped at 86% of the
-               * image and cut the mug's text in half. 85% reaches 96.5%,
-               * keeping it whole with a little headroom left above.
-               */
-              className="object-cover object-[52%_85%]"
+              /* Centred: the band is now tall enough to show the whole
+                 photo, so there is no crop to bias away from. */
+              className="object-cover object-center"
             />
           }
           asideStacked={

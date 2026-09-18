@@ -57,7 +57,21 @@ export function PageHeader({
           {aside}
         </div>
 
-        <div className="relative mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:min-h-96 lg:px-8">
+        {/*
+         * 500px, not the 384px this used to be.
+         *
+         * The photo layer is inset-y-0, so the band's height decides how
+         * much of the photo survives object-cover. At 384px the tallest
+         * of these images (3:2, drawn 499px at the layer's 749px width)
+         * lost 115px, and no object-position value fixes that — it only
+         * chooses which end gets cut. Biasing it low kept the mug in the
+         * why-outsource shot but sliced the icons off the top instead.
+         *
+         * 500px clears the tallest, so every header now shows its whole
+         * photo. Any replacement taller than 3:2 will crop again; the
+         * fix is this number, not object-position.
+         */}
+        <div className="relative mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:min-h-125 lg:px-8">
           <Reveal className="lg:max-w-[48%]">
             <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
               {eyebrow}
