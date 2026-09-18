@@ -197,7 +197,15 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
                         <span className="block text-xs font-semibold tracking-wide text-muted-foreground uppercase">
                           {method.label}
                         </span>
-                        <span className="mt-1 block font-medium wrap-anywhere">
+                        {/*
+                         * break-words, not wrap-anywhere: the latter
+                         * breaks at any character, which split the email
+                         * as "…consulting.co / m" on a narrow phone. This
+                         * only breaks where the browser already sees an
+                         * opportunity, so the address wraps at "@" or a
+                         * dot and stays readable.
+                         */}
+                        <span className="mt-1 block font-medium break-words">
                           {method.value}
                         </span>
                         {method.note ? (

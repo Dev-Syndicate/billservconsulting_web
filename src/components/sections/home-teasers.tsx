@@ -97,14 +97,24 @@ function TeaserHead({
 
 function MoreLink({ href, children }: { href: string; children: string }) {
   return (
+    /*
+     * Height and padding are relaxed below sm rather than fixed. At h-12
+     * with px-6 the longest label ("Explore all 22 medical & dental
+     * services") measured 369px against a 320px container, pushing past
+     * the viewport and giving the whole page a horizontal scrollbar.
+     *
+     * h-auto + py lets the label take two lines on a narrow phone, and
+     * max-w-full keeps the button inside its column whatever the label
+     * grows to — the count in it is derived, so it can change again.
+     */
     <Button
       asChild
       variant="outline"
-      className="group mt-10 h-12 rounded-xl border-border bg-background px-6 text-base font-medium"
+      className="group mt-10 h-auto max-w-full rounded-xl border-border bg-background px-4 py-3 text-base font-medium whitespace-normal sm:h-12 sm:px-6 sm:py-0"
     >
       <Link href={href}>
-        {children}
-        <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+        <span className="text-left">{children}</span>
+        <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
       </Link>
     </Button>
   );
@@ -253,7 +263,7 @@ export function ServicesTeaser() {
                     )}
                   >
                     See how it works
-                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
                   </span>
                 </Link>
               </Reveal>
@@ -386,11 +396,11 @@ export function WhyTeaser() {
                 </p>
                 <Button
                   asChild
-                  className="group mt-7 h-12 rounded-xl bg-white px-6 text-base font-semibold text-brand-deep hover:bg-white/90"
+                  className="group mt-7 h-auto max-w-full rounded-xl bg-white px-5 py-3 text-base font-semibold whitespace-normal text-brand-deep hover:bg-white/90 sm:h-12 sm:px-6 sm:py-0"
                 >
                   <Link href="/why-outsource">
                     Why it pays to outsource
-                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
                   </Link>
                 </Button>
               </div>
@@ -479,7 +489,7 @@ export function ExpertiseTeaser() {
               </span>
               <span className="mt-2 inline-flex items-center gap-1.5 text-sm text-muted-foreground">
                 View all services
-                <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
               </span>
             </Link>
           </Reveal>
