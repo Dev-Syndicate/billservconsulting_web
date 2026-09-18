@@ -46,7 +46,7 @@ export function PageHeader({
          */}
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[52%] lg:block"
+          className="pointer-events-none absolute inset-y-0 right-0 hidden w-[58%] lg:block"
           style={{
             maskImage:
               "linear-gradient(to right, transparent 0%, black 22%, black 100%)",
@@ -58,21 +58,21 @@ export function PageHeader({
         </div>
 
         {/*
-         * 500px, not the 384px this used to be.
+         * A wide, shallow band: ~410px against a 58% photo layer.
          *
-         * The photo layer is inset-y-0, so the band's height decides how
-         * much of the photo survives object-cover. At 384px the tallest
-         * of these images (3:2, drawn 499px at the layer's 749px width)
-         * lost 115px, and no object-position value fixes that — it only
-         * chooses which end gets cut. Biasing it low kept the mug in the
-         * why-outsource shot but sliced the icons off the top instead.
+         * The photo layer is inset-y-0, so this height decides how much
+         * of the photo survives object-cover. At 58% wide the 3:2 sources
+         * draw ~557px, so ~147px is cropped — deliberately, and taken off
+         * the bottom via object-top on each page. The upper two thirds of
+         * these photos carry the subject and the floating icons; the
+         * bottom is desk.
          *
-         * 500px clears the tallest, so every header now shows its whole
-         * photo. Any replacement taller than 3:2 will crop again; the
-         * fix is this number, not object-position.
+         * Do not "fix" that crop by growing this height. It was 500px
+         * briefly, which showed every photo whole but made the band so
+         * deep the copy floated in empty space.
          */}
-        <div className="relative mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:min-h-125 lg:px-8">
-          <Reveal className="lg:max-w-[48%]">
+        <div className="relative mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:min-h-102 lg:px-8">
+          <Reveal className="lg:max-w-[44%]">
             <p className="text-sm font-semibold tracking-wide text-primary-text uppercase">
               {eyebrow}
             </p>

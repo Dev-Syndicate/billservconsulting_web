@@ -43,10 +43,8 @@ export default function WhyOutsourcePage() {
               alt=""
               fill
               priority
-              sizes="52vw"
-              /* Centred: the band is now tall enough to show the whole
-                 photo, so there is no crop to bias away from. */
-              className="object-cover object-center"
+              sizes="58vw"
+              className="object-cover object-[50%_25%]"
             />
           }
           asideStacked={
