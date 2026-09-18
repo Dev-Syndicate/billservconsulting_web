@@ -166,11 +166,11 @@ export function Dental({ headless = false }: { headless?: boolean } = {}) {
               </p>
               <Button
                 asChild
-                className="group mt-7 h-12 rounded-xl bg-white px-6 text-base font-semibold text-brand-deep hover:bg-white/90"
+                className="group mt-7 h-auto max-w-full rounded-xl bg-white px-5 py-3 text-base font-semibold whitespace-normal text-brand-deep hover:bg-white/90 sm:h-12 sm:px-6 sm:py-0"
               >
                 <Link href="/contact">
                   Talk to us about dental billing
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                  <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </Button>
             </div>
