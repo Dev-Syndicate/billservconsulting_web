@@ -29,17 +29,30 @@ export function ClientLogos({
         </Reveal>
 
         {/* Wraps to two rows on narrow screens rather than shrinking the
-            logos to the point the baked-in wordmarks stop being legible. */}
-        <ul className="mt-10 flex flex-wrap items-center justify-center gap-x-12 gap-y-8 sm:gap-x-16">
+            logos to the point the baked-in wordmarks stop being legible.
+            items-start so a captioned logo does not drag the bare ones
+            out of line with each other. */}
+        <ul className="mt-10 flex flex-wrap items-start justify-center gap-x-12 gap-y-8 sm:gap-x-16">
           {clients.map((client, i) => (
             <Reveal as="li" key={client.name} delay={i * 90}>
-              <Image
-                src={client.logo}
-                alt={`${client.name} logo`}
-                width={client.width}
-                height={client.height}
-                className="h-20 w-auto object-contain sm:h-24"
-              />
+              <figure className="flex max-w-56 flex-col items-center">
+                <Image
+                  src={client.logo}
+                  alt={`${client.name} logo`}
+                  width={client.width}
+                  height={client.height}
+                  className="h-20 w-auto object-contain sm:h-24"
+                />
+                {/* Name only, no location: the full caption belongs to the
+                    Clientele block on /about. This is the recognition
+                    strip, and artwork with no wordmark would otherwise sit
+                    here unattributed. */}
+                {client.nameInLogo ? null : (
+                  <figcaption className="mt-3 text-center text-sm font-medium text-pretty">
+                    {client.name}
+                  </figcaption>
+                )}
+              </figure>
             </Reveal>
           ))}
         </ul>
