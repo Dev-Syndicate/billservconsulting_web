@@ -158,13 +158,25 @@ Ship the replacement under a new filename instead — that is what the
 
 ## Notes
 
-- **The contact form has no backend.** It builds a `mailto:` link and
-  hands off to the visitor's email client. Wiring it to a real endpoint
-  (a form service or a route handler) is outstanding. Note that the
-  Privacy Policy now *describes* this `mailto:` behaviour accurately, so
-  adding a backend means updating "Information collection and use",
-  "Service providers", and "Security" in `src/lib/legal.ts` at the same
-  time — the header comment in that file lists the mapping.
+- **The contact form posts to Web3Forms**, which forwards submissions to
+  `site.email`. The site is a static export, so it has no server of its
+  own to send from; a relay is the only way an enquiry reaches us without
+  the visitor having a mail client configured.
+
+  Set `NEXT_PUBLIC_WEB3FORMS_KEY` (see `.env.example`). **Leave it unset
+  and the form silently falls back to `mailto:`** — the old behaviour —
+  so the build never breaks, but enquiries are then only as reliable as
+  the visitor's mail client. Check the key is present in whatever builds
+  the deployed bundle.
+
+  The key is public by design and is safe in the client bundle: it only
+  permits sending mail to the address it is registered to. Never put an
+  SMTP password or a Wix admin API key in a `NEXT_PUBLIC_` variable.
+
+  Web3Forms is named as a processor in the Privacy Policy. If it is
+  swapped or dropped, update "Information collection and use", "Service
+  providers", and "Security" in `src/lib/legal.ts` — the header comment
+  in that file carries the mapping.
 - **The legal pages still need a lawyer's review**, though the factual
   inaccuracies have been fixed. The documents no longer claim cookies,
   first-party server logs, or form submissions the Site does not make;

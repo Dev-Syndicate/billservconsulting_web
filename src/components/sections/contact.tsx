@@ -3,10 +3,12 @@
 import * as React from "react";
 import type { LucideIcon } from "lucide-react";
 import {
+  AlertCircle,
   ArrowRight,
   ArrowUpRight,
   Check,
   Clock,
+  Loader2,
   Mail,
   MapPin,
   Phone,
@@ -124,12 +126,33 @@ function Field({
   );
 }
 
-export function Contact({ headless = false }: { headless?: boolean } = {}) {
-  const [submitted, setSubmitted] = React.useState(false);
+/*
+ * Web3Forms relays the submission to site.email.
+ *
+ * The site is a static export hosted on Wix, so it has no server of its
+ * own to send mail from — a relay is the only way a submission reaches
+ * us without the visitor having a mail client configured.
+ *
+ * This key is public by design. It is not a password: the worst anyone
+ * can do with it is send mail to our own inbox, which is why it is safe
+ * in a client bundle where an SMTP credential would not be. Rotate it at
+ * web3forms.com if it ever attracts spam.
+ *
+ * Unset (the placeholder below, or a missing env var at build time) is a
+ * supported state: the form falls back to the visitor's mail client, the
+ * behaviour this had before. That keeps the site shippable while the key
+ * is being obtained rather than leaving a form that silently fails.
+ */
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
+const hasRelay = WEB3FORMS_KEY.length > 0;
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+type Status = "idle" | "sending" | "sent" | "mailto" | "error";
+
+export function Contact({ headless = false }: { headless?: boolean } = {}) {
+  const [status, setStatus] = React.useState<Status>("idle");
+
+  /** Hands off to the visitor's mail client. The no-key fallback. */
+  function openMailClient(data: FormData) {
     const subject = `Website enquiry from ${data.get("name")}`;
     const body = [
       `Name: ${data.get("name")}`,
@@ -142,7 +165,51 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+  }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    if (!hasRelay) {
+      openMailClient(data);
+      setStatus("mailto");
+      return;
+    }
+
+    // Spam trap: a real person never fills a field they cannot see, so a
+    // value here means a bot walked the form. Drop it silently and show
+    // success, since telling a bot it was caught only helps it adapt.
+    if (data.get("botcheck")) {
+      setStatus("sent");
+      return;
+    }
+
+    data.append("access_key", WEB3FORMS_KEY);
+    data.append("subject", `Website enquiry from ${data.get("name")}`);
+    data.append("from_name", site.name);
+
+    setStatus("sending");
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: data,
+      });
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setStatus("sent");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      // Offline, blocked by an extension, or the API is down. Either way
+      // the enquiry has not been sent and the visitor must be told, with
+      // a way to reach us that does not depend on this request.
+      setStatus("error");
+    }
   }
 
   return (
@@ -316,8 +383,14 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
               </div>
 
               <div className="p-6 sm:p-8">
-                {submitted ? (
-                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                {status === "sent" || status === "mailto" ? (
+                  <div
+                    /* Announced, because the form it replaces is gone and
+                       a screen-reader user would otherwise get no word of
+                       what happened. */
+                    role="status"
+                    className="flex flex-col items-center justify-center py-12 text-center"
+                  >
                     <span
                       aria-hidden
                       className="grid size-14 place-items-center rounded-full bg-brand-teal text-white"
@@ -325,29 +398,54 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
                       <Check className="size-7" />
                     </span>
                     <p className="mt-5 text-lg font-semibold">
-                      Thanks for getting in touch
+                      {status === "sent"
+                        ? "Thanks — your message is on its way"
+                        : "Thanks for getting in touch"}
                     </p>
                     <p className="mt-2 max-w-sm text-sm text-muted-foreground text-pretty">
-                      Your email client should have opened. If it did not,
-                      reach us directly at{" "}
-                      <a
-                        href={`mailto:${site.email}`}
-                        className="font-medium wrap-anywhere text-primary-text hover:underline"
-                      >
-                        {site.email}
-                      </a>
-                      .
+                      {status === "sent" ? (
+                        <>
+                          We have received your enquiry and will reply within
+                          one business day, {site.availabilityShort}.
+                        </>
+                      ) : (
+                        <>
+                          Your email client should have opened. If it did not,
+                          reach us directly at{" "}
+                          <a
+                            href={`mailto:${site.email}`}
+                            className="font-medium wrap-break-word text-primary-text hover:underline"
+                          >
+                            {site.email}
+                          </a>
+                          .
+                        </>
+                      )}
                     </p>
                     <Button
                       variant="outline"
                       className="mt-6 rounded-xl"
-                      onClick={() => setSubmitted(false)}
+                      onClick={() => setStatus("idle")}
                     >
                       Send another message
                     </Button>
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit}>
+                    {/*
+                     * Honeypot. Hidden from sight and from assistive tech,
+                     * and taken out of the tab order, so only a bot filling
+                     * every field it finds will populate it.
+                     */}
+                    <input
+                      type="checkbox"
+                      name="botcheck"
+                      className="hidden"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                    />
+
                     {/* Name and phone pair up: both are short, and pairing
                         them stops the form reading as one long column. */}
                     <div className="grid gap-5 sm:grid-cols-2">
@@ -402,11 +500,54 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
                     <Button
                       type="submit"
                       size="lg"
+                      disabled={status === "sending"}
                       className="group mt-6 h-13 w-full rounded-xl bg-brand-cta text-base font-semibold shadow-md shadow-primary/20 transition-shadow hover:bg-brand-cta-hover hover:shadow-lg hover:shadow-primary/30"
                     >
-                      Send enquiry
-                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
+                      {status === "sending" ? (
+                        <>
+                          <Loader2
+                            aria-hidden
+                            className="size-4 animate-spin"
+                          />
+                          Sending…
+                        </>
+                      ) : (
+                        <>
+                          Send enquiry
+                          <ArrowRight className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
+                        </>
+                      )}
                     </Button>
+
+                    {/*
+                     * A failed send must not be silent. role="alert" so it
+                     * is announced, and it carries the direct address:
+                     * whatever broke the request could equally break a
+                     * retry, so the visitor needs a route that does not
+                     * depend on it.
+                     */}
+                    {status === "error" && (
+                      <p
+                        role="alert"
+                        className="mt-4 flex items-start gap-2 rounded-xl border border-destructive/30 bg-destructive/5 p-3.5 text-sm text-pretty"
+                      >
+                        <AlertCircle
+                          aria-hidden
+                          className="mt-0.5 size-4 shrink-0 text-destructive"
+                        />
+                        <span>
+                          We could not send that just now. Please email us
+                          directly at{" "}
+                          <a
+                            href={`mailto:${site.email}`}
+                            className="font-medium wrap-break-word text-primary-text underline underline-offset-2"
+                          >
+                            {site.email}
+                          </a>{" "}
+                          and we will pick it up from there.
+                        </span>
+                      </p>
+                    )}
 
                     {/* Sets expectations at the point of commitment, which
                         is where hesitation actually happens. */}
