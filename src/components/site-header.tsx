@@ -34,7 +34,7 @@ export function SiteHeader() {
             className="h-11 w-auto sm:h-12"
           />
           <span className="flex flex-col leading-none">
-            <span className="text-base font-semibold tracking-tight sm:text-lg">
+            <span className="text-lg font-bold tracking-tight sm:text-xl">
               BillServ <span className="text-primary-text">Consulting</span>
             </span>
             <span className="mt-1 hidden text-[0.6875rem] text-muted-foreground sm:block">

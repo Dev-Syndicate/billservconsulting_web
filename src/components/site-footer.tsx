@@ -23,7 +23,7 @@ export function SiteFooter() {
                 height={144}
                 className="h-11 w-auto"
               />
-              <span className="text-base font-semibold tracking-tight">
+              <span className="text-lg font-bold tracking-tight">
                 BillServ <span className="text-primary-text">Consulting</span>
               </span>
             </div>
