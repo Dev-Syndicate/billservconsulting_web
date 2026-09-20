@@ -231,9 +231,9 @@ Ship the replacement under a new filename instead — that is what the
   test. Vendor partner programmes also carry their own branding rules.
   Do not add a name without the client confirming it.
 - **Do not state that BillServ is available 24/7** — the pack forbids it.
-  Business hours are Monday–Friday, 8:00 AM–5:00 PM Pacific Time, held in
-  `site.availability`. PT is used rather than a fixed offset because
-  California observes both PST and PDT.
+  Business hours are Monday–Friday, 9:00 AM–5:00 PM, held in
+  `site.availability`. The string carries no time zone, at the client's
+  direction.
 - `src/components/hero-illustration.tsx` and
   `src/components/ui/navigation-menu.tsx` are currently unused.
 - **The photographs are AI-generated** (`public/hero-billing-v2.avif` and

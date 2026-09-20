@@ -63,9 +63,9 @@ const contactMethods: ContactMethod[] = [
     value: `${site.address.street}, ${site.address.city}`,
   },
   /*
-   * Hours get their own card rather than sitting under the office address:
-   * the office is in India but the hours are quoted in Pacific Time for US
-   * clients, so pairing them would read as a contradiction.
+   * Hours get their own card rather than sitting under the office
+   * address: the office is in India while the hours are the ones quoted
+   * to US clients, so pairing them would read as a contradiction.
    */
   {
     icon: Clock,

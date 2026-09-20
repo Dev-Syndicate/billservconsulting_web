@@ -13,14 +13,13 @@ export const site = {
   fax: "+1 408 462 6009",
   email: "team@billservconsulting.com",
   /*
-   * Pacific Time, not a fixed offset: California observes PST and PDT at
-   * different points in the year, so naming the zone stays correct
-   * year-round. The information pack is explicit that the site must NOT
-   * claim 24/7 availability.
+   * Stated without a time zone at the client's direction. The
+   * information pack is explicit that the site must NOT claim 24/7
+   * availability.
    */
-  availability: "Monday–Friday, 8:00 AM–5:00 PM Pacific Time (PT)",
+  availability: "Monday–Friday, 9:00 AM–5:00 PM",
   /** Compact form, for places where the full string will not fit. */
-  availabilityShort: "Mon–Fri, 8AM–5PM PT",
+  availabilityShort: "Mon–Fri, 9AM–5PM",
   legalEntity: "Billserv Consulting (OPC) Private Limited",
   established: 2022,
   address: {

@@ -16,7 +16,11 @@ const highlights = [
     title: "Faster reimbursements",
     detail: "Improved cash flow",
   },
-  { icon: Clock, title: "Dedicated support", detail: "Mon–Fri, 8AM–5PM PT" },
+  {
+    icon: Clock,
+    title: "Dedicated support",
+    detail: site.availabilityShort,
+  },
 ];
 
 export function Hero() {
