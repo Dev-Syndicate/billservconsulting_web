@@ -193,6 +193,22 @@ Ship the replacement under a new filename instead — that is what the
   permits sending mail to the address it is registered to. Never put an
   SMTP password or a Wix admin API key in a `NEXT_PUBLIC_` variable.
 
+  **The destination is the key.** Web3Forms delivers to whichever address
+  the key was created on, and that cannot be overridden from this
+  codebase — so the production key must be one created on
+  `team@billservconsulting.com`. A key created on anyone else's address
+  will deliver every enquiry to them, with no visible sign anything is
+  wrong: the form still shows its success panel.
+
+  Delivery was verified end to end on 2026-09-21 with a test key: HTTP
+  200, `success: true`, arriving in the inbox rather than spam, with
+  UTF-8 intact. Repeat that check after swapping in the production key.
+
+  One testing note: `api.web3forms.com` sits behind Cloudflare, which
+  rejects plain `curl` and Playwright's default headless User-Agent with
+  a 403 that surfaces in the browser as a CORS error. That is not a fault
+  in the key or the code. Send a browser User-Agent when testing.
+
   Web3Forms is named as a processor in the Privacy Policy. If it is
   swapped or dropped, update "Information collection and use", "Service
   providers", and "Security" in `src/lib/legal.ts` — the header comment
