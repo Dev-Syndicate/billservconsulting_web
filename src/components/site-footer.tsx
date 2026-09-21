@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Mail, MapPin, Phone, Printer } from "lucide-react";
+import { Clock, Mail, MapPin, Phone, Printer } from "lucide-react";
 
 import { LinkedInIcon } from "@/components/brand-icons";
 import { Separator } from "@/components/ui/separator";
@@ -73,6 +73,10 @@ export function SiteFooter() {
                   <LinkedInIcon className="size-4 shrink-0 text-primary" />
                   LinkedIn
                 </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Clock className="size-4 shrink-0 text-primary" />
+                {site.availability}
               </li>
             </ul>
           </div>
