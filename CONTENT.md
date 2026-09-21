@@ -73,6 +73,9 @@ Note: the live site lists service names only — no per-service descriptions.
 
 - **Abutaleb Mirza** — President & Director of Operations
 - **Susan Peters** — Senior Manager Operations
+- **Mike Kahn** — Business Development
+- **Zara Sinclair** — HIPAA Compliance Officer
+- **Jake Parker** — Information Technology Officer
 
 ---
 
@@ -91,16 +94,41 @@ artwork, so confirm the exact legal spelling before print use:
 
 ---
 
-## Testimonial
+## Testimonials
 
-**Not currently published on the site** — the section was removed. Kept
-here as a record of the client's supplied wording.
+Published on the homepage, above the closing call to action.
 
 "Outsourcing billing to Billserv has been a game-changer. Fewer denials, faster
 reimbursements, and immediate answers from my dedicated rep. Now I can focus on
 patients, not paperwork! Highly recommend it."
 
 — Dr Mohammed Q Khan, Nephrologist, President/CEO, Riverside, CA
+
+"Billserv delivers exceptional billing support. Their fast, reliable service has
+reduced our billing issues and allows me to focus on my patients with
+confidence."
+
+— Dr. Rashid Elahi, M.D., Internal Medicine, San Jose, CA (supplied 2026-09-21;
+specialty and location taken from the clientele entry — confirm before print use)
+
+---
+
+## Credentials
+
+Published on /about at the client's direction (2026-09-21), overriding
+the information pack's note that certification names be withheld.
+
+- **PMBA** — Professional Medical Billers Association. An association
+  membership held by the company. Badge strapline: "Certifying Excellence
+  in Medical Billing."
+- **CHA** — Certified HIPAA Administrator, issued by HIPAA Academy. An
+  **individual** qualification, attributed on the site to Zara Sinclair
+  rather than claimed company-wide. Confirm the named holder with the
+  client.
+
+Artwork supplied by the client on 2026-09-21 and held in
+`public/credentials/` as AVIF. Confirm whether any membership or
+certificate numbers may be published.
 
 ---
 
@@ -127,7 +155,9 @@ Chennai- 600002, T.N, India.
 **Fax:** +1 408 462 6009
 **Email:** team@billservconsulting.com
 
-**Availability:** "We are Available 24/7"
+**Availability:** "We are Available 24/7" — republished on the new site
+at the client's direction (2026-09-21), overriding the information pack's
+ban on the claim.
 
 **Copyright:** "All rights reserved, Billserv Consulting."
 

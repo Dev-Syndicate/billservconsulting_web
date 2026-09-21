@@ -246,10 +246,10 @@ Ship the replacement under a new filename instead — that is what the
   technical connection that does not exist and that a prospect could
   test. Vendor partner programmes also carry their own branding rules.
   Do not add a name without the client confirming it.
-- **Do not state that BillServ is available 24/7** — the pack forbids it.
-  Business hours are Monday–Friday, 9:00 AM–5:00 PM, held in
-  `site.availability`. The string carries no time zone, at the client's
-  direction.
+- **The site states 24/7 availability**, held in `site.availability`.
+  The information pack had forbidden this claim, but the client
+  overrode it on 2026-09-21 to match the original Wix site. Confirm with
+  them before changing it back to business hours.
 - `src/components/hero-illustration.tsx` and
   `src/components/ui/navigation-menu.tsx` are currently unused.
 - **The photographs are AI-generated** (`public/hero-billing-v2.avif` and

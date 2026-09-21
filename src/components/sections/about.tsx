@@ -1,8 +1,17 @@
-import { CalendarDays, Layers, Stethoscope } from "lucide-react";
+import {
+  CalendarDays,
+  ClipboardCheck,
+  Compass,
+  Handshake,
+  Layers,
+  ServerCog,
+  ShieldCheck,
+  Stethoscope,
+  type LucideIcon,
+} from "lucide-react";
 
 import { cn } from "cn";
 
-import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
 import { ClaimFlowIllustration } from "@/components/illustrations";
 import {
@@ -11,6 +20,7 @@ import {
   dentalServices,
   leadership,
   medicalServices,
+  type Leader,
 } from "@/lib/site";
 
 export function About({ headless = false }: { headless?: boolean } = {}) {
@@ -106,45 +116,137 @@ export function About({ headless = false }: { headless?: boolean } = {}) {
           </div>
         </Reveal>
 
-        {/* Leadership spans the full width below both columns */}
+        {/*
+          Leadership — an even grid of five equal cards.
+
+          The bios in site.ts are held to a similar length precisely so
+          this grid sits flush; the cards are not force-matched with a
+          fixed height. Three across on desktop leaves two in the final
+          row, so that row is centred rather than left-aligned against an
+          empty third column.
+        */}
         <Reveal delay={100} className="mt-16">
           <h3 className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">
             Leadership
           </h3>
-          <div className="mt-5 grid gap-5 sm:grid-cols-2">
+
+          <ul className="mt-6 flex flex-wrap justify-center gap-5">
             {leadership.map((person, i) => (
-              <Reveal key={person.name} delay={160 + i * 110}>
-                <Card className="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5">
-                  {/* items-start, not items-center: the bio makes these
-                      cards tall, and the initials badge should sit with the
-                      name rather than float to the vertical middle.
-                      Photographs are still to be supplied by the client. */}
-                  <CardContent className="flex items-start gap-4">
-                    <span
-                      aria-hidden
-                      className="grid size-12 shrink-0 place-items-center rounded-full bg-primary/12 text-base font-semibold text-brand-deep"
-                    >
-                      {person.name
-                        .split(" ")
-                        .map((part) => part[0])
-                        .join("")}
-                    </span>
-                    <div className="min-w-0">
-                      <p className="font-medium">{person.name}</p>
-                      <p className="text-sm text-primary-text text-pretty">
-                        {person.role}
-                      </p>
-                      <p className="mt-3 text-sm text-muted-foreground text-pretty">
-                        {person.bio}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
+              <Reveal
+                as="li"
+                key={person.name}
+                delay={150 + i * 80}
+                className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]"
+              >
+                <LeaderCard person={person} />
               </Reveal>
             ))}
-          </div>
+          </ul>
         </Reveal>
       </div>
     </section>
+  );
+}
+
+/*
+ * Domain accents.
+ *
+ * Only two hues, not one per person: blue for the work itself
+ * (operations and growth) and teal for the functions that protect it
+ * (compliance and technology). Five different colours read as arbitrary
+ * decoration — this split says something true about the team.
+ */
+const domainAccent: Record<
+  Leader["domain"],
+  { tile: string; rule: string; chip: string }
+> = {
+  operations: {
+    tile: "bg-primary",
+    rule: "bg-primary",
+    chip: "bg-primary/10 text-primary-text",
+  },
+  growth: {
+    tile: "bg-primary",
+    rule: "bg-primary",
+    chip: "bg-primary/10 text-primary-text",
+  },
+  compliance: {
+    tile: "bg-brand-teal",
+    rule: "bg-brand-teal",
+    chip: "bg-brand-teal/12 text-brand-teal-deep",
+  },
+  technology: {
+    tile: "bg-brand-teal",
+    rule: "bg-brand-teal",
+    chip: "bg-brand-teal/12 text-brand-teal-deep",
+  },
+};
+
+const leaderIcons: Record<string, LucideIcon> = {
+  Compass,
+  ClipboardCheck,
+  Handshake,
+  ShieldCheck,
+  ServerCog,
+};
+
+/**
+ * One person on the leadership roster.
+ *
+ * The signature detail is the rule along the card's top edge: it sits at
+ * a short fixed width and draws across the full card on hover, in the
+ * person's domain colour. It gives the grid a reason to be interactive
+ * without moving the card contents around, and the colour is the only
+ * place the operations/assurance split is stated visually.
+ *
+ * Reading order is name, then remit, then role. The formal titles are
+ * long and similar to each other, so what someone owns is the more
+ * useful line to meet first; the title follows as the record line.
+ */
+function LeaderCard({ person }: { person: Leader }) {
+  const accent = domainAccent[person.domain];
+  const Icon = leaderIcons[person.icon];
+
+  return (
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 sm:p-7">
+      {/* The drawing rule. Motion-reduce holds it at its resting width. */}
+      <span
+        aria-hidden
+        className={cn(
+          "absolute inset-x-0 top-0 h-0.5 w-14 transition-[width] duration-500 ease-out group-hover:w-full motion-reduce:transition-none",
+          accent.rule,
+        )}
+      />
+
+      <div className="flex items-center gap-3.5">
+        <span
+          aria-hidden
+          className={cn(
+            "grid size-11 shrink-0 place-items-center rounded-xl text-white shadow-sm transition-transform duration-300 group-hover:scale-105",
+            accent.tile,
+          )}
+        >
+          <Icon className="size-5" />
+        </span>
+        <div className="min-w-0">
+          <h4 className="font-semibold tracking-tight">{person.name}</h4>
+          <p
+            className={cn(
+              "mt-1 inline-block rounded-md px-1.5 py-0.5 text-[0.6875rem] font-medium tracking-wide uppercase",
+              accent.chip,
+            )}
+          >
+            {person.role}
+          </p>
+        </div>
+      </div>
+
+      <p className="mt-5 text-[0.9375rem] font-medium text-foreground text-pretty">
+        {person.remit}
+      </p>
+      <p className="mt-2 text-sm text-muted-foreground text-pretty">
+        {person.bio}
+      </p>
+    </article>
   );
 }

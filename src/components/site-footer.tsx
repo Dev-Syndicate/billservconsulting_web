@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Mail, MapPin, Phone, Printer } from "lucide-react";
+import { Mail, MapPin, Phone, Printer } from "lucide-react";
 
+import { LinkedInIcon } from "@/components/brand-icons";
 import { Separator } from "@/components/ui/separator";
-import { legalNav, nav, site } from "@/lib/site";
+import { credentials, legalNav, nav, site } from "@/lib/site";
 
 export function SiteFooter() {
   return (
@@ -62,12 +63,16 @@ export function SiteFooter() {
                   {site.email}
                 </a>
               </li>
-              {/* items-start, not items-center: the hours string wraps to
-                  two lines in this column and the icon should sit with the
-                  first line rather than float to the vertical middle. */}
-              <li className="flex items-start gap-2">
-                <Clock className="mt-0.5 size-4 shrink-0 text-primary" />
-                <span className="text-pretty">{site.availability}</span>
+              <li>
+                <a
+                  href={site.linkedin}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-2 transition-colors hover:text-primary-text"
+                >
+                  <LinkedInIcon className="size-4 shrink-0 text-primary" />
+                  LinkedIn
+                </a>
               </li>
             </ul>
           </div>
@@ -88,6 +93,33 @@ export function SiteFooter() {
             </ul>
           </div>
         </div>
+
+        {/*
+          Credentials.
+
+          Repeated from /about because the footer is on every page, and a
+          compliance credential is exactly the thing a prospect looks for
+          without wanting to hunt for the About page. Smaller than the
+          About treatment and without the explanatory captions — this is
+          a reminder, not the full claim.
+
+          h-14 rather than smaller: the PMBA banner carries its
+          association name and strapline as baked-in fine print, which
+          stops being legible below roughly this height.
+        */}
+        <ul className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
+          {credentials.map((item) => (
+            <li key={item.name}>
+              <Image
+                src={item.logo}
+                alt={`${item.full} badge`}
+                width={item.width}
+                height={item.height}
+                className="h-14 w-auto object-contain"
+              />
+            </li>
+          ))}
+        </ul>
 
         <Separator className="my-8" />
 

@@ -13,13 +13,19 @@ export const site = {
   fax: "+1 408 462 6009",
   email: "team@billservconsulting.com",
   /*
-   * Stated without a time zone at the client's direction. The
-   * information pack is explicit that the site must NOT claim 24/7
-   * availability.
+   * Availability.
+   *
+   * The client directed on 2026-09-21 that the site state 24/7
+   * availability, matching the original Wix site's "We are Available
+   * 24/7". This deliberately overrides the information pack, which had
+   * forbidden the claim — the client was shown that conflict and
+   * confirmed the change. Do not revert it to business hours without
+   * asking them again.
    */
-  availability: "Monday–Friday, 9:00 AM–5:00 PM",
+  availability: "Available 24/7",
   /** Compact form, for places where the full string will not fit. */
-  availabilityShort: "Mon–Fri, 9AM–5PM",
+  availabilityShort: "24/7",
+  linkedin: "https://www.linkedin.com/company/billservconsulting",
   legalEntity: "Billserv Consulting (OPC) Private Limited",
   established: 2022,
   address: {
@@ -610,18 +616,72 @@ export const coreValues = [
 export const approach =
   "At BillServ, we don't believe in a one-size-fits-all approach. Every healthcare organization has different workflows, specialties, payer mixes, patient populations, and operational requirements. We work closely with our clients to understand their business, identify opportunities for improvement, establish efficient workflows, and provide the support required to maintain a healthy revenue cycle. Our goal is to become an extension of our client's organization — not just another outsourced vendor.";
 
-export const leadership = [
+/**
+ * Leadership.
+ *
+ * `domain` groups each person by the part of the revenue cycle they own
+ * and drives their accent in the About section. It is deliberately not a
+ * per-person colour — the two operations leads match, because a prospect
+ * scanning the roster should see the shape of the team rather than five
+ * unrelated swatches.
+ *
+ * `remit` is the one-line answer to "what does this person own?", and
+ * `bio` is held to roughly forty words. The About section sets these as
+ * an even grid, so wildly different bio lengths would leave the cards
+ * ragged; keep new entries to the same length as the existing ones.
+ */
+export type Leader = {
+  name: string;
+  role: string;
+  domain: "operations" | "growth" | "compliance" | "technology";
+  /** Lucide icon name, resolved in the About section. */
+  icon: string;
+  remit: string;
+  bio: string;
+};
+
+export const leadership: Leader[] = [
   {
     name: "Abutaleb Mirza",
     role: "President & Director of Operations",
-    bio: "Abutaleb Mirza leads BillServ Consulting with a focus on operational excellence, healthcare revenue cycle management, client relationships, and the continued development of the company's billing operations. His leadership is centered on building efficient processes, developing strong teams, maintaining service quality, and ensuring that BillServ consistently delivers value to healthcare providers.",
+    domain: "operations",
+    icon: "Compass",
+    remit: "Owns service quality end to end",
+    bio: "Leads BillServ with a focus on operational excellence and client relationships, building the efficient processes and strong teams that keep service quality consistent as the company grows.",
   },
   {
     name: "Susan Peters",
     role: "Senior Manager, Operations",
-    bio: "Susan Peters is part of BillServ's operations leadership team, supporting day-to-day billing operations, team coordination, workflow management, and service delivery. Her role contributes to maintaining consistency, efficiency, and quality across BillServ's healthcare revenue cycle operations.",
+    domain: "operations",
+    icon: "ClipboardCheck",
+    remit: "Keeps daily billing running to plan",
+    bio: "Coordinates day-to-day billing operations, team workflow, and service delivery, holding consistency and turnaround steady across every account BillServ handles.",
   },
-] as const;
+  {
+    name: "Mike Kahn",
+    role: "Business Development",
+    domain: "growth",
+    icon: "Handshake",
+    remit: "First point of contact for new practices",
+    bio: "Brings deep healthcare business development experience, building client relationships and partnerships so BillServ's services stay matched to what practices actually need.",
+  },
+  {
+    name: "Zara Sinclair",
+    role: "HIPAA Compliance Officer",
+    domain: "compliance",
+    icon: "ShieldCheck",
+    remit: "Guards patient data and HIPAA adherence",
+    bio: "Oversees privacy and security practice, workforce training, and risk management, keeping protected patient information and HIPAA adherence sound across the organization.",
+  },
+  {
+    name: "Jake Parker",
+    role: "Information Technology Officer",
+    domain: "technology",
+    icon: "ServerCog",
+    remit: "Runs secure, reliable billing systems",
+    bio: "Runs the infrastructure, user access, and cybersecurity behind the billing systems, keeping them available and protected so client work is never interrupted.",
+  },
+];
 
 /*
  * Client logos are supplied by each practice and committed as AVIF in
@@ -650,6 +710,37 @@ export type Client = {
    */
   nameInLogo?: boolean;
 };
+
+/*
+ * Client testimonials, in the clients' own supplied wording.
+ *
+ * `practice` ties each quote back to a name in `clients` below, so the
+ * quote is attributable to a logo the visitor has already seen on the
+ * homepage rather than to an unverifiable stranger.
+ */
+export type Testimonial = {
+  quote: string;
+  name: string;
+  title: string;
+  location: string;
+};
+
+export const testimonials: Testimonial[] = [
+  {
+    quote:
+      "Outsourcing billing to Billserv has been a game-changer. Fewer denials, faster reimbursements, and immediate answers from my dedicated rep. Now I can focus on patients, not paperwork! Highly recommend it.",
+    name: "Dr Mohammed Q Khan",
+    title: "Nephrologist, President/CEO",
+    location: "Riverside, CA",
+  },
+  {
+    quote:
+      "Billserv delivers exceptional billing support. Their fast, reliable service has reduced our billing issues and allows me to focus on my patients with confidence.",
+    name: "Dr. Rashid Elahi, M.D.",
+    title: "Internal Medicine",
+    location: "San Jose, CA",
+  },
+];
 
 export const clients: Client[] = [
   {
@@ -707,6 +798,60 @@ export const compliance = {
     "Responsible data handling",
   ],
 } as const;
+
+/*
+ * Credentials.
+ *
+ * Published at the client's direction on 2026-09-21, from badge artwork
+ * they supplied. The information pack had asked that certification names
+ * be withheld pending internal confirmation; the client was shown that
+ * note and confirmed these two anyway.
+ *
+ * Scope matters and is stated per badge. PMBA is an association
+ * membership held by the company. CHA (Certified HIPAA Administrator,
+ * issued by HIPAA Academy) is an individual qualification, so it is
+ * attributed to the person holding it rather than claimed company-wide —
+ * a personal certificate presented as an organisational one is the kind
+ * of claim a prospect's compliance officer will check.
+ *
+ * Do not add certificate or membership numbers here without written
+ * confirmation from BillServ.
+ *
+ * Artwork supplied by the client on 2026-09-21 and converted to AVIF.
+ * The `-v2` suffix follows the same rule as the client logos: files
+ * under public/ are served at a stable URL, so a replacement ships
+ * under a new name rather than leaving browsers holding the old copy.
+ * Rename again on any future edit to the pixels.
+ */
+export type Credential = {
+  name: string;
+  /** Expanded name, for the caption under the badge. */
+  full: string;
+  /** Who actually holds it — a company or a named individual. */
+  heldBy: string;
+  logo: string;
+  width: number;
+  height: number;
+};
+
+export const credentials: Credential[] = [
+  {
+    name: "PMBA",
+    full: "Professional Medical Billers Association",
+    heldBy: "BillServ Consulting",
+    logo: "/credentials/pmba-v2.avif",
+    width: 725,
+    height: 231,
+  },
+  {
+    name: "CHA",
+    full: "Certified HIPAA Administrator, HIPAA Academy",
+    heldBy: "Held by Zara Sinclair, HIPAA Compliance Officer",
+    logo: "/credentials/cha-v2.avif",
+    width: 600,
+    height: 600,
+  },
+];
 
 /*
  * Billing and practice-management systems the team has worked in, and the

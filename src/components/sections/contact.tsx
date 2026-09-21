@@ -7,7 +7,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  Clock,
   Loader2,
   Mail,
   MapPin,
@@ -18,6 +17,7 @@ import {
 
 import { cn } from "cn";
 
+import { LinkedInIcon } from "@/components/brand-icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -29,19 +29,23 @@ import { site } from "@/lib/site";
 const fieldClass = "h-13 rounded-xl pr-4 pl-11 text-base";
 
 type ContactMethod = {
-  icon: LucideIcon;
+  /* Not LucideIcon: the LinkedIn mark is drawn locally, since lucide
+     dropped its brand icons. Both take a className and nothing else. */
+  icon: React.ComponentType<{ className?: string }>;
   label: string;
   value: string;
   /** Secondary line under the value, e.g. the fax number. */
   note?: string;
   /** Present only for methods that are actionable (call, email). */
   href?: string;
+  /** Opens off-site, so the link needs target and rel. */
+  external?: boolean;
 };
 
 /*
  * Order matters: the two actionable methods lead, since a visitor who
  * wants to make contact right now should not have to read past the
- * address to find them. Office and hours follow as reference.
+ * address to find them. The office address follows as reference.
  */
 const contactMethods: ContactMethod[] = [
   {
@@ -62,15 +66,12 @@ const contactMethods: ContactMethod[] = [
     label: "Office",
     value: `${site.address.street}, ${site.address.city}`,
   },
-  /*
-   * Hours get their own card rather than sitting under the office
-   * address: the office is in India while the hours are the ones quoted
-   * to US clients, so pairing them would read as a contradiction.
-   */
   {
-    icon: Clock,
-    label: "Business hours",
-    value: site.availability,
+    icon: LinkedInIcon,
+    label: "LinkedIn",
+    value: "BillServ Consulting",
+    href: site.linkedin,
+    external: true,
   },
 ];
 
@@ -305,6 +306,8 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
                       {method.href ? (
                         <a
                           href={method.href}
+                          target={method.external ? "_blank" : undefined}
+                          rel={method.external ? "noreferrer" : undefined}
                           className="group flex gap-4 p-5 transition-colors hover:bg-secondary"
                         >
                           {row}
@@ -406,7 +409,7 @@ export function Contact({ headless = false }: { headless?: boolean } = {}) {
                       {status === "sent" ? (
                         <>
                           We have received your enquiry and will reply within
-                          one business day, {site.availabilityShort}.
+                          one business day.
                         </>
                       ) : (
                         <>
