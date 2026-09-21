@@ -3,7 +3,7 @@ export const site = {
   /* Hero headline, carried over from the original Wix site. */
   tagline: "Quality Is What We Believe In.",
   /* Logo lockup tagline. */
-  logoTagline: "Billing Today. A Healthier Tomorrow.",
+  logoTagline: "Quality Is What We Believe In",
   /* Closing line from the information pack's "Our Promise" section. */
   promise: "Your Healthcare. Our Expertise. Better Revenue Management.",
   description:
