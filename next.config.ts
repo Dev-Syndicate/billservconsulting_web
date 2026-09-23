@@ -9,20 +9,21 @@ const nextConfig: NextConfig = {
    * build directly.
    */
   /*
-   * trailingSlash is deliberately OFF.
+   * trailingSlash ON: the export emits about/index.html and links to
+   * /about/, which is what nearly every static host serves.
    *
-   * With it on, Next emits about/index.html and links to /about/. Wix
-   * then 301s /about/ to /about and does not fall back to the folder's
-   * index.html, so every subpage 404d on the deployed site while only
-   * /about/index.html resolved. Without it Next emits about.html and
-   * links to /about, which Wix serves directly.
+   * It was briefly off, which emits about.html and links to /about. That
+   * was worse on Wix, not better: Wix serves files literally, so /about
+   * 404s while /about.html works — the clean URL never resolves at all.
+   * With folders there is at least a chance the host serves the index,
+   * and this shape stays portable to any other host.
    *
-   * Do not turn it back on for a Wix upload without re-testing every
-   * route on the deployed URL. Note that Wix's edge serves a 404 to
-   * plain curl even for pages that exist, so check with a real browser.
+   * Re-test every route on the deployed URL after changing this, with a
+   * real browser: Wix's edge serves 404 to plain curl even for pages
+   * that exist. Keep scripts/build-sitemap.mjs in the same shape.
    */
   ...(process.env.NEXT_OUTPUT === "export"
-    ? { output: "export" as const, trailingSlash: false }
+    ? { output: "export" as const, trailingSlash: true }
     : {}),
   images: {
     /*

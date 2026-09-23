@@ -23,18 +23,18 @@ import { writeFileSync } from "node:fs";
 const ORIGIN = "https://www.billservconsulting.com";
 
 /*
- * No trailing slashes, matching `trailingSlash: false` in next.config.ts.
+ * Trailing slashes, matching `trailingSlash: true` in next.config.ts.
  * If that setting changes these must change with it, or the sitemap will
  * advertise URLs the host redirects away from.
  */
 const ROUTES = [
   { path: "/", priority: "1.0", changefreq: "monthly" },
-  { path: "/services", priority: "0.9", changefreq: "monthly" },
-  { path: "/contact", priority: "0.8", changefreq: "monthly" },
-  { path: "/why-outsource", priority: "0.8", changefreq: "monthly" },
-  { path: "/about", priority: "0.7", changefreq: "monthly" },
-  { path: "/privacy", priority: "0.3", changefreq: "yearly" },
-  { path: "/terms", priority: "0.3", changefreq: "yearly" },
+  { path: "/services/", priority: "0.9", changefreq: "monthly" },
+  { path: "/contact/", priority: "0.8", changefreq: "monthly" },
+  { path: "/why-outsource/", priority: "0.8", changefreq: "monthly" },
+  { path: "/about/", priority: "0.7", changefreq: "monthly" },
+  { path: "/privacy/", priority: "0.3", changefreq: "yearly" },
+  { path: "/terms/", priority: "0.3", changefreq: "yearly" },
 ];
 
 const lastmod = new Date().toISOString().slice(0, 10);

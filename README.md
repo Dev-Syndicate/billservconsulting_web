@@ -42,13 +42,14 @@ example, which caps at 20 MB total and 3 MB per file.
 Everything here is statically prerendered either way, so no server
 functionality is lost in the export.
 
-**`trailingSlash` is off**, so the export emits `about.html` rather than
-`about/index.html`. It was on originally, which is the more usual choice
-for a static host — but Wix 301s `/about/` to `/about` and then does not
-fall back to the folder's `index.html`, so every subpage 404d on the
-deployed site while only `/about/index.html` resolved. Do not turn it
-back on for a Wix upload without re-testing every route on the deployed
-URL, and keep `scripts/build-sitemap.mjs` in the same shape.
+**`trailingSlash` is on**, so the export emits `about/index.html` and
+links to `/about/`, which is what nearly every static host serves.
+
+It was briefly off, emitting `about.html` and linking to `/about`. That
+was worse on Wix, not better: **Wix serves files literally**, so `/about`
+404s while `/about.html` returns 200 — the clean URL never resolves. The
+folder shape at least gives the host an index to find, and stays portable
+elsewhere. Keep `scripts/build-sitemap.mjs` in whichever shape is set.
 
 **Testing a Wix deploy:** their edge returns 404 to plain `curl` even for
 pages that exist. Check with a real browser, or you will chase a routing
