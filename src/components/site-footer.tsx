@@ -14,7 +14,7 @@ export function SiteFooter() {
           Lets Work Together.
         </p>
 
-        <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-[1fr_1fr_auto_auto] lg:gap-x-14">
           <div>
             <div className="flex items-center gap-2.5">
               <Image
@@ -96,34 +96,42 @@ export function SiteFooter() {
               ))}
             </ul>
           </div>
+
+          {/*
+            Credentials.
+
+            Repeated from /about because the footer is on every page, and a
+            compliance credential is exactly the thing a prospect looks for
+            without wanting to hunt for the About page. Given its own
+            column on the right, with a bold heading, at the client's
+            request on 2026-09-23 — as a strip under the columns it read
+            as fine print.
+
+            Badges sit in a fixed-height box rather than matching heights,
+            for the same reason as on /about: PMBA is a 3.1:1 banner and
+            CHA a square, so equal heights would shrink the PMBA wordmark
+            and its baked-in strapline below legibility.
+          */}
+          <div>
+            <h3 className="text-base font-bold">Certified &amp; Accredited</h3>
+            <ul className="mt-4 flex flex-wrap items-stretch gap-4">
+              {credentials.map((item) => (
+                <li
+                  key={item.name}
+                  className="flex h-28 items-center xl:h-36 justify-center rounded-xl border border-border bg-background p-3 shadow-sm"
+                >
+                  <Image
+                    src={item.logo}
+                    alt={`${item.full} badge`}
+                    width={item.width}
+                    height={item.height}
+                    className="max-h-full w-auto object-contain"
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-
-        {/*
-          Credentials.
-
-          Repeated from /about because the footer is on every page, and a
-          compliance credential is exactly the thing a prospect looks for
-          without wanting to hunt for the About page. Smaller than the
-          About treatment and without the explanatory captions — this is
-          a reminder, not the full claim.
-
-          h-14 rather than smaller: the PMBA banner carries its
-          association name and strapline as baked-in fine print, which
-          stops being legible below roughly this height.
-        */}
-        <ul className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
-          {credentials.map((item) => (
-            <li key={item.name}>
-              <Image
-                src={item.logo}
-                alt={`${item.full} badge`}
-                width={item.width}
-                height={item.height}
-                className="h-14 w-auto object-contain"
-              />
-            </li>
-          ))}
-        </ul>
 
         <Separator className="my-8" />
 
