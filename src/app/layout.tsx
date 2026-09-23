@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { StructuredData } from "@/components/structured-data";
 import { site } from "@/lib/site";
 
 const geistSans = Geist({
@@ -15,6 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
+  alternates: { canonical: "/" },
   title: `${site.name} — Medical Billing & Revenue Cycle Management`,
   description: site.description,
   openGraph: {
@@ -38,7 +40,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        {/* Business and site schema. In the layout so every page carries
+            it, which is what search engines expect for organisation-level
+            markup. */}
+        <StructuredData />
+      </body>
     </html>
   );
 }

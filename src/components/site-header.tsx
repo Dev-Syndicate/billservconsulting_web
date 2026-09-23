@@ -17,6 +17,21 @@ import {
 } from "@/components/ui/sheet";
 import { nav, site } from "@/lib/site";
 
+/**
+ * Strip a trailing slash so a path can be compared to a nav href.
+ *
+ * The static export sets `trailingSlash: true`, so on the deployed site
+ * usePathname() returns "/about/" while nav carries "/about". A plain
+ * equality check therefore never matched and the current-page underline
+ * never appeared — but only in the export, which is why it looked right
+ * in dev. Keep both sides normalised rather than adding slashes to nav,
+ * so this holds in either build mode.
+ */
+function samePath(a: string, b: string) {
+  const trim = (s: string) => (s.length > 1 ? s.replace(/\/+$/, "") : s);
+  return trim(a) === trim(b);
+}
+
 export function SiteHeader() {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
@@ -47,7 +62,7 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-1 lg:flex">
           {nav.map((item) => {
-            const active = pathname === item.href;
+            const active = samePath(pathname, item.href);
             return (
               <Link
                 key={item.href}
@@ -104,7 +119,7 @@ export function SiteHeader() {
             </SheetHeader>
             <div className="flex flex-col gap-1 px-4">
               {nav.map((item) => {
-                const active = pathname === item.href;
+                const active = samePath(pathname, item.href);
                 return (
                   <Link
                     key={item.href}
