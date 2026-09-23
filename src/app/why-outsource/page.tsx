@@ -8,6 +8,7 @@ import { WhyOutsource } from "@/components/sections/why-outsource";
 import { WhyBillServ } from "@/components/sections/why-billserv";
 import { CtaBand } from "@/components/cta-band";
 import { site } from "@/lib/site";
+import { canonicalPath } from "@/components/link";
 
 const title = "Why Outsource";
 const lead =
@@ -16,7 +17,7 @@ const lead =
 export const metadata: Metadata = {
   title: `${title} — ${site.name}`,
   description: lead,
-  alternates: { canonical: "/why-outsource" },
+  alternates: { canonical: canonicalPath("/why-outsource") },
   openGraph: {
     title: `${title} — ${site.name}`,
     description: lead,

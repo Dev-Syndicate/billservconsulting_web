@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/page-header";
 import { Contact } from "@/components/sections/contact";
 import { ContactFaq } from "@/components/sections/contact-faq";
 import { site } from "@/lib/site";
+import { canonicalPath } from "@/components/link";
 
 const title = "Contact Us";
 const lead =
@@ -15,7 +16,7 @@ const lead =
 export const metadata: Metadata = {
   title: `${title} — ${site.name}`,
   description: lead,
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: canonicalPath("/contact") },
   openGraph: {
     title: `${title} — ${site.name}`,
     description: lead,

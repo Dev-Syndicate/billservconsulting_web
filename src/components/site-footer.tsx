@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/components/link";
 import { Clock, Mail, MapPin, Phone, Printer } from "lucide-react";
 
 import { LinkedInIcon } from "@/components/brand-icons";

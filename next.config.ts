@@ -9,22 +9,32 @@ const nextConfig: NextConfig = {
    * build directly.
    */
   /*
-   * trailingSlash ON: the export emits about/index.html and links to
-   * /about/, which is what nearly every static host serves.
+   * trailingSlash OFF: the export emits about.html rather than
+   * about/index.html.
    *
-   * It was briefly off, which emits about.html and links to /about. That
-   * was worse on Wix, not better: Wix serves files literally, so /about
-   * 404s while /about.html works — the clean URL never resolves at all.
-   * With folders there is at least a chance the host serves the index,
-   * and this shape stays portable to any other host.
+   * Wix does not serve directory indexes. Tested on both the
+   * drag-and-drop upload and a CLI release: /about/index.html returns
+   * 200 while /about/ returns 404, so the folder shape leaves every page
+   * reachable only at its full filename. The flat shape at least puts a
+   * real file at /about.html, which Wix does serve.
    *
-   * Re-test every route on the deployed URL after changing this, with a
-   * real browser: Wix's edge serves 404 to plain curl even for pages
-   * that exist. Keep scripts/build-sitemap.mjs in the same shape.
+   * Links are rewritten to match in src/lib/site.ts. Re-test every route
+   * on the deployed URL after changing this, with a real browser: Wix's
+   * edge serves 404 to plain curl even for pages that exist.
    */
   ...(process.env.NEXT_OUTPUT === "export"
-    ? { output: "export" as const, trailingSlash: true }
+    ? { output: "export" as const, trailingSlash: false }
     : {}),
+  /*
+   * Exposed to the browser so components can tell they are running in the
+   * static export. process.env.NEXT_OUTPUT is a server-side build var and
+   * is NOT inlined into client bundles; without this, the check in
+   * components/link.tsx would silently read undefined there and every
+   * link would lose its .html extension.
+   */
+  env: {
+    NEXT_PUBLIC_IS_EXPORT: process.env.NEXT_OUTPUT === "export" ? "1" : "",
+  },
   images: {
     /*
      * Every image in this project is a hand-optimised AVIF committed to

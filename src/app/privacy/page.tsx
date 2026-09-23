@@ -5,11 +5,12 @@ import { SiteFooter } from "@/components/site-footer";
 import { LegalPage } from "@/components/legal-page";
 import { privacy } from "@/lib/legal";
 import { site } from "@/lib/site";
+import { canonicalPath } from "@/components/link";
 
 export const metadata: Metadata = {
   title: `${privacy.title} — ${site.name}`,
   description: privacy.summary,
-  alternates: { canonical: "/privacy" },
+  alternates: { canonical: canonicalPath("/privacy") },
   openGraph: {
     title: `${privacy.title} — ${site.name}`,
     description: privacy.summary,

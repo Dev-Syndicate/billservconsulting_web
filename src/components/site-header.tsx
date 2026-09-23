@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/components/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, Phone } from "lucide-react";
 import { cn } from "cn";

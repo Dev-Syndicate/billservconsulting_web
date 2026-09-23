@@ -10,6 +10,7 @@ import { Systems } from "@/components/sections/systems";
 import { Expertise } from "@/components/sections/expertise";
 import { CtaBand } from "@/components/cta-band";
 import { serviceCategories, site } from "@/lib/site";
+import { canonicalPath } from "@/components/link";
 
 const title = "Services";
 const lead =
@@ -18,7 +19,7 @@ const lead =
 export const metadata: Metadata = {
   title: `${title} — ${site.name}`,
   description: lead,
-  alternates: { canonical: "/services" },
+  alternates: { canonical: canonicalPath("/services") },
   openGraph: {
     title: `${title} — ${site.name}`,
     description: lead,

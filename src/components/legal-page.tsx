@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/components/link";
 import { ArrowLeft, CalendarDays } from "lucide-react";
 
 import { Reveal } from "@/components/reveal";

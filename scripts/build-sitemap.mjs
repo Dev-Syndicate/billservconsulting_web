@@ -23,18 +23,21 @@ import { writeFileSync } from "node:fs";
 const ORIGIN = "https://www.billservconsulting.com";
 
 /*
- * Trailing slashes, matching `trailingSlash: true` in next.config.ts.
+ * The .html extension, matching `trailingSlash: false` plus the link
+ * rewriting in components/link.tsx. Wix serves files literally, so
+ * /about 404s and only /about.html resolves — the sitemap must list what
+ * the host will actually serve.
  * If that setting changes these must change with it, or the sitemap will
  * advertise URLs the host redirects away from.
  */
 const ROUTES = [
   { path: "/", priority: "1.0", changefreq: "monthly" },
-  { path: "/services/", priority: "0.9", changefreq: "monthly" },
-  { path: "/contact/", priority: "0.8", changefreq: "monthly" },
-  { path: "/why-outsource/", priority: "0.8", changefreq: "monthly" },
-  { path: "/about/", priority: "0.7", changefreq: "monthly" },
-  { path: "/privacy/", priority: "0.3", changefreq: "yearly" },
-  { path: "/terms/", priority: "0.3", changefreq: "yearly" },
+  { path: "/services.html", priority: "0.9", changefreq: "monthly" },
+  { path: "/contact.html", priority: "0.8", changefreq: "monthly" },
+  { path: "/why-outsource.html", priority: "0.8", changefreq: "monthly" },
+  { path: "/about.html", priority: "0.7", changefreq: "monthly" },
+  { path: "/privacy.html", priority: "0.3", changefreq: "yearly" },
+  { path: "/terms.html", priority: "0.3", changefreq: "yearly" },
 ];
 
 const lastmod = new Date().toISOString().slice(0, 10);
@@ -53,4 +56,21 @@ ${ROUTES.map(
 `;
 
 writeFileSync("public/pages-sitemap.xml", xml);
-console.log(`public/pages-sitemap.xml — ${ROUTES.length} URLs, lastmod ${lastmod}`);
+
+/*
+ * Also as .txt, because Wix does not serve .xml.
+ *
+ * Their docs list xml as a supported upload type, but a deployed
+ * /pages-sitemap.xml returns 404 while /robots.txt and /index.txt both
+ * return 200 — tested on a CLI release. Google accepts a plain-text
+ * sitemap: one absolute URL per line, UTF-8, no other markup. It carries
+ * no lastmod or priority, which are hints rather than requirements.
+ *
+ * The .xml is still written for any host that serves it properly.
+ */
+const txt = ROUTES.map(({ path }) => `${ORIGIN}${path}`).join("\n");
+writeFileSync("public/pages-sitemap.txt", `${txt}\n`);
+
+console.log(
+  `public/pages-sitemap.{xml,txt} — ${ROUTES.length} URLs, lastmod ${lastmod}`,
+);

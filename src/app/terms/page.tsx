@@ -5,11 +5,12 @@ import { SiteFooter } from "@/components/site-footer";
 import { LegalPage } from "@/components/legal-page";
 import { terms } from "@/lib/legal";
 import { site } from "@/lib/site";
+import { canonicalPath } from "@/components/link";
 
 export const metadata: Metadata = {
   title: `${terms.title} — ${site.name}`,
   description: terms.summary,
-  alternates: { canonical: "/terms" },
+  alternates: { canonical: canonicalPath("/terms") },
   openGraph: {
     title: `${terms.title} — ${site.name}`,
     description: terms.summary,

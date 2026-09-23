@@ -37,17 +37,7 @@ pnpm build:static   # emits out/ for upload-only hosts
 `build:static` sets `NEXT_OUTPUT=export`, producing a plain HTML/CSS/JS
 tree in `out/` (~3.5 MB, 84 files, largest 224 KB).
 
-### Deploying to Wix — use the CLI, not drag-and-drop
-
-**The drag-and-drop uploader cannot host this site.** Wix documents the
-limit plainly: *"HTML files nested only inside subfolders aren't
-accepted."* A multi-page export puts every page at `about/index.html`, so
-only the homepage ever resolved and every other route 404d. Neither
-`trailingSlash` setting helps — flat output gives `/about.html` working
-while `/about` 404s, because Wix serves uploaded files literally. That
-uploader is built for single-page apps.
-
-The CLI path deploys the same build properly:
+### Deploying to Wix
 
 ```bash
 pnpm wix:login      # once, opens a browser
@@ -55,53 +45,32 @@ pnpm wix:init       # once, creates wix.config.json
 pnpm deploy         # build + release, every time after
 ```
 
-Note the two commands come from different packages. Logging in uses the
-`@wix/cli` binary; linking the project uses `npm create @wix/new@latest
-init`. Plain `npx wix ...` fails with "could not determine executable to
-run", because there is no bare `wix` package to resolve — and `release`
-and `preview` only exist once the project is linked, so they are not
-available before `init`.
+`pnpm wix:preview` does the same against a throwaway preview URL. Use it
+before `deploy` — it is the only way to test a Wix deploy for real.
 
-After `init`, **set the output directory** — it defaults to `./dist` and
-this project builds to `out/`:
+Three Wix constraints shape this build. All were found by testing, and
+none are obvious from the code:
 
-```json
-"site": { "outputDirectory": "./out" }
-```
+**1. Wix does not serve directory indexes.** `/about/index.html` returns
+200 while `/about/` returns 404, on both the uploader and a CLI release.
+So `trailingSlash` is off and pages are emitted flat as `about.html`.
 
-`wix release` does not build, it uploads whatever is already in that
-folder, which is why `deploy` chains the two. `pnpm wix:preview` does the
-same against a shareable preview URL instead of production.
+**2. Wix serves files literally**, so `/about` 404s too — only
+`/about.html` resolves. `components/link.tsx` appends the extension at
+render time, gated on `NEXT_PUBLIC_IS_EXPORT`, so routes stay clean in
+source and dev is unaffected. Canonicals go through the same helper:
+pointing at `/about` when only `/about.html` exists would tell search
+engines to index a 404.
 
-Everything here is statically prerendered either way, so no server
-functionality is lost in the export.
+**3. Wix reserves `/favicon.ico`, `/sitemap.xml` and `/robots.txt`**, and
+does not serve `.xml` at all despite listing it as a supported type. So
+the favicon ships as PNGs at non-reserved names declared ahead of the
+ICO, and the sitemap is written as both `.xml` and `.txt` — Google
+accepts a plain-text sitemap, and `.txt` is what Wix actually serves.
+Submit `pages-sitemap.txt` to Search Console.
 
-**`trailingSlash` is on**, so the export emits `about/index.html` and
-links to `/about/`, which is what nearly every static host serves.
-
-It was briefly off, emitting `about.html` and linking to `/about`. That
-was worse on Wix, not better: **Wix serves files literally**, so `/about`
-404s while `/about.html` returns 200 — the clean URL never resolves. The
-folder shape at least gives the host an index to find, and stays portable
-elsewhere. Keep `scripts/build-sitemap.mjs` in whichever shape is set.
-
-**Testing a Wix deploy:** their edge returns 404 to plain `curl` even for
-pages that exist. Check with a real browser, or you will chase a routing
-bug that isn't there.
-
-**Wix reserves `/sitemap.xml`, `/robots.txt` and `/favicon.ico`** and
-serves its own file at each, whatever is uploaded. It also does not know
-these pages exist — they are uploaded files, not pages built in the Wix
-editor, so its SEO tools report "No pages have been added to your site"
-and will never generate a sitemap for them. Between the two, nothing
-useful can appear at `/sitemap.xml`.
-
-So the sitemap is written to `public/pages-sitemap.xml` by
-`scripts/build-sitemap.mjs`, which both build scripts run first. Submit
-that filename to Search Console directly; Google accepts any name. The
-favicon takes the same approach — PNGs at non-reserved names, declared
-ahead of the ICO. `src/app/robots.ts` is kept for other hosts but loses
-to Wix's own on this one.
+**Testing:** Wix's edge returns 404 to plain `curl` even for pages that
+exist. Always check with a real browser.
 
 If the domain stays with Wix, it can point at an external host via DNS
 records (Wix does not allow changing nameservers, so use pointing).
