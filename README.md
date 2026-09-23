@@ -35,9 +35,36 @@ pnpm build:static   # emits out/ for upload-only hosts
 ```
 
 `build:static` sets `NEXT_OUTPUT=export`, producing a plain HTML/CSS/JS
-tree in `out/` (~2.4 MB, 69 files, largest 224 KB). That suits hosts that
-take an upload rather than running Node — Wix Headless drag-and-drop, for
-example, which caps at 20 MB total and 3 MB per file.
+tree in `out/` (~3.5 MB, 84 files, largest 224 KB).
+
+### Deploying to Wix — use the CLI, not drag-and-drop
+
+**The drag-and-drop uploader cannot host this site.** Wix documents the
+limit plainly: *"HTML files nested only inside subfolders aren't
+accepted."* A multi-page export puts every page at `about/index.html`, so
+only the homepage ever resolved and every other route 404d. Neither
+`trailingSlash` setting helps — flat output gives `/about.html` working
+while `/about` 404s, because Wix serves uploaded files literally. That
+uploader is built for single-page apps.
+
+The CLI path deploys the same build properly:
+
+```bash
+pnpm wix:login      # once, opens a browser
+npx wix init        # once, creates wix.config.json
+pnpm deploy         # build + release, every time after
+```
+
+After `init`, **set the output directory** — it defaults to `./dist` and
+this project builds to `out/`:
+
+```json
+"site": { "outputDirectory": "./out" }
+```
+
+`wix release` does not build, it uploads whatever is already in that
+folder, which is why `deploy` chains the two. `pnpm wix:preview` does the
+same against a shareable preview URL instead of production.
 
 Everything here is statically prerendered either way, so no server
 functionality is lost in the export.

@@ -44,3 +44,7 @@ next-env.d.ts
 
 # Local review screenshots, not part of the site
 .screenshots/
+
+# Wix CLI local state. wix.config.json is NOT ignored -- it links this
+# repo to the Wix project and belongs in version control.
+.wix/
