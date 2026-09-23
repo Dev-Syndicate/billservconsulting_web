@@ -2,8 +2,6 @@ export const site = {
   name: "BillServ Consulting",
   /* Hero headline, carried over from the original Wix site. */
   tagline: "Quality Is What We Believe In.",
-  /* Logo lockup tagline. */
-  logoTagline: "Quality Is What We Believe In",
   /* Closing line from the information pack's "Our Promise" section. */
   promise: "Your Healthcare. Our Expertise. Better Revenue Management.",
   description:

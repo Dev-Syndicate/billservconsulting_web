@@ -37,8 +37,10 @@ export function SiteHeader() {
             <span className="text-lg font-bold tracking-tight sm:text-xl">
               BillServ <span className="text-primary-text">Consulting</span>
             </span>
-            <span className="mt-1 hidden text-[0.6875rem] text-muted-foreground sm:block">
-              {site.logoTagline}
+            {/* Two-tone to match the hero headline it echoes. */}
+            <span className="mt-1 hidden text-xs font-medium lg:text-[0.8125rem] text-foreground sm:block">
+              Quality Is What We{" "}
+              <span className="text-primary-text">Believe In</span>
             </span>
           </span>
         </Link>
