@@ -17,6 +17,30 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   alternates: { canonical: "/" },
+  /*
+   * Icons are declared explicitly rather than left to Next's file
+   * convention, because Wix hijacks one specific path.
+   *
+   * Wix serves its own file at /favicon.ico whatever we upload there — a
+   * single 16x16, 1150 b, against our three-size 5232 b icon — but it
+   * serves every other path byte-for-byte, /icon.png and
+   * /apple-icon.png included. So the mark is shipped as PNGs under names
+   * Wix does not reserve, and listed first: browsers honour an explicit
+   * <link rel="icon"> over the implicit /favicon.ico fallback.
+   *
+   * favicon.ico is still listed last, for the handful of old clients
+   * that only understand ICO. On Wix that entry resolves to Wix's icon,
+   * which is why it must not come first.
+   */
+  icons: {
+    icon: [
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon.ico", sizes: "48x48", type: "image/x-icon" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   title: `${site.name} — Medical Billing & Revenue Cycle Management`,
   description: site.description,
   openGraph: {
