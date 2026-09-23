@@ -108,8 +108,8 @@ patients, not paperwork! Highly recommend it."
 reduced our billing issues and allows me to focus on my patients with
 confidence."
 
-— Dr. Rashid Elahi, M.D., Internal Medicine, San Jose, CA (supplied 2026-09-21;
-specialty and location taken from the clientele entry — confirm before print use)
+— Dr. Rashid Elahi, M.D., Nephrologist, San Jose, CA (supplied 2026-09-21;
+specialty corrected to Nephrologist by the client 2026-09-23)
 
 ---
 

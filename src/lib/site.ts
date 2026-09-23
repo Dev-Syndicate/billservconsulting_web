@@ -737,7 +737,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "Billserv delivers exceptional billing support. Their fast, reliable service has reduced our billing issues and allows me to focus on my patients with confidence.",
     name: "Dr. Rashid Elahi, M.D.",
-    title: "Internal Medicine",
+    title: "Nephrologist",
     location: "San Jose, CA",
   },
 ];
