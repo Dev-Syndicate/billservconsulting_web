@@ -11,9 +11,14 @@ export const dynamic = "force-static";
 /**
  * robots.txt.
  *
- * Everything is public, so this allows all crawlers. Its real job is
- * declaring the sitemap, which is how a crawler finds it without being
- * told through Search Console.
+ * Everything is public, so this allows all crawlers, and it declares the
+ * sitemap so a crawler can find it without Search Console.
+ *
+ * Note this file does NOT win on Wix: like /sitemap.xml and
+ * /favicon.ico, /robots.txt is a reserved path there and Wix serves its
+ * own auto-generated version instead. It is kept for any other host, and
+ * because it costs nothing. On Wix the sitemap has to be submitted to
+ * Search Console by hand — see scripts/build-sitemap.mjs.
  */
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -21,6 +26,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${site.url}/sitemap.xml`,
+    sitemap: `${site.url}/pages-sitemap.xml`,
   };
 }

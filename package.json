@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build-sitemap.mjs && next build",
     "start": "next start",
     "lint": "eslint",
-    "build:static": "node -e \"process.env.NEXT_OUTPUT='export';require('child_process').execSync('next build',{stdio:'inherit',env:process.env})\""
+    "build:static": "node scripts/build-sitemap.mjs && node -e \"process.env.NEXT_OUTPUT='export';require('child_process').execSync('next build',{stdio:'inherit',env:process.env})\"",
+    "sitemap": "node scripts/build-sitemap.mjs"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

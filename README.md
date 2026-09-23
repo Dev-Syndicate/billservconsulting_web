@@ -48,11 +48,25 @@ for a static host — but Wix 301s `/about/` to `/about` and then does not
 fall back to the folder's `index.html`, so every subpage 404d on the
 deployed site while only `/about/index.html` resolved. Do not turn it
 back on for a Wix upload without re-testing every route on the deployed
-URL, and keep `src/app/sitemap.ts` in the same shape.
+URL, and keep `scripts/build-sitemap.mjs` in the same shape.
 
 **Testing a Wix deploy:** their edge returns 404 to plain `curl` even for
 pages that exist. Check with a real browser, or you will chase a routing
 bug that isn't there.
+
+**Wix reserves `/sitemap.xml`, `/robots.txt` and `/favicon.ico`** and
+serves its own file at each, whatever is uploaded. It also does not know
+these pages exist — they are uploaded files, not pages built in the Wix
+editor, so its SEO tools report "No pages have been added to your site"
+and will never generate a sitemap for them. Between the two, nothing
+useful can appear at `/sitemap.xml`.
+
+So the sitemap is written to `public/pages-sitemap.xml` by
+`scripts/build-sitemap.mjs`, which both build scripts run first. Submit
+that filename to Search Console directly; Google accepts any name. The
+favicon takes the same approach — PNGs at non-reserved names, declared
+ahead of the ICO. `src/app/robots.ts` is kept for other hosts but loses
+to Wix's own on this one.
 
 If the domain stays with Wix, it can point at an external host via DNS
 records (Wix does not allow changing nameservers, so use pointing).
