@@ -114,7 +114,10 @@ export function SiteFooter() {
           */}
           <div>
             <h3 className="text-base font-bold">Certified &amp; Accredited</h3>
-            <ul className="mt-4 flex flex-wrap items-stretch gap-4">
+            {/* Centred so that when the column is too narrow for both and
+                CHA wraps, it sits under the middle of the PMBA banner
+                rather than hanging off its left edge. */}
+            <ul className="mt-4 flex flex-wrap items-stretch justify-center gap-4">
               {credentials.map((item) => (
                 <li
                   key={item.name}
