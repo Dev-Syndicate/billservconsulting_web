@@ -73,10 +73,23 @@ export function Hero() {
        * photo real vertical room. Without it the section collapses to the
        * height of the copy alone, the photo crops tight, and the next
        * section's white background rides up close under the headline.
+       *
+       * The height scales with the viewport width rather than being fixed.
+       * The photo layer is 56vw wide, so a fixed height meant every extra
+       * pixel of screen width became extra vertical crop — at 1920px and up
+       * the books and mug were cut off along the bottom edge. 46vw holds
+       * the photo at roughly the same framing on every wide screen; the
+       * 100svh cap stops it running past the fold on short, wide displays,
+       * and 42rem keeps the old floor for xl laptops.
+       *
+       * From 2xl the copy column widens to half the container before the
+       * type steps up, and only by a little. Raising the headline to 5rem
+       * inside the 44% column broke it onto three lines and pushed the
+       * highlight chips below the fold; the column has to grow first.
        */}
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-10 pb-10 sm:px-6 sm:pt-12 sm:pb-12 lg:grid-cols-[1fr_1fr] lg:gap-12 lg:pt-14 xl:min-h-168 xl:grid-cols-1 xl:pt-16 xl:pb-16">
-        <div className="xl:max-w-[44%]">
-          <h1 className="text-[2.25rem] leading-[1.08] font-bold tracking-tight text-balance sm:text-6xl lg:text-[4.25rem]">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 px-4 pt-10 pb-10 sm:px-6 sm:pt-12 sm:pb-12 lg:grid-cols-[1fr_1fr] lg:gap-12 lg:pt-14 xl:min-h-[max(42rem,min(46vw,calc(100svh-5rem)))] xl:grid-cols-1 xl:pt-16 xl:pb-16">
+        <div className="xl:max-w-[44%] 2xl:max-w-[50%]">
+          <h1 className="text-[2.25rem] leading-[1.08] font-bold tracking-tight text-balance sm:text-6xl lg:text-[4.25rem] 2xl:text-[4.75rem]">
             Quality Is What We{" "}
             <span className="relative inline-block">
               <span className="text-primary-text">Believe In.</span>
@@ -98,7 +111,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-base text-muted-foreground text-pretty sm:mt-7 sm:text-lg">
+          <p className="mt-6 max-w-xl text-base text-muted-foreground text-pretty sm:mt-7 sm:text-lg 2xl:max-w-152 2xl:text-xl">
             We ensure that your claims are billed right every time and provide
             you with hassle-free billing services, so you can focus on what
             matters most &mdash; your patients.
@@ -128,7 +141,7 @@ export function Hero() {
             </Button>
           </div>
 
-          <ul className="mt-10 grid gap-5 sm:grid-cols-3 sm:gap-x-3 lg:grid-cols-2 xl:grid-cols-3">
+          <ul className="mt-10 grid gap-5 sm:grid-cols-3 sm:gap-x-3 lg:grid-cols-2 xl:grid-cols-3 2xl:mt-12 2xl:gap-x-5">
             {highlights.map((item) => (
               <li key={item.title} className="flex items-center gap-3">
                 <span
