@@ -8,8 +8,21 @@ const nextConfig: NextConfig = {
    * this build is ~2.4MB). Left unset for Vercel, which serves the app
    * build directly.
    */
+  /*
+   * trailingSlash is deliberately OFF.
+   *
+   * With it on, Next emits about/index.html and links to /about/. Wix
+   * then 301s /about/ to /about and does not fall back to the folder's
+   * index.html, so every subpage 404d on the deployed site while only
+   * /about/index.html resolved. Without it Next emits about.html and
+   * links to /about, which Wix serves directly.
+   *
+   * Do not turn it back on for a Wix upload without re-testing every
+   * route on the deployed URL. Note that Wix's edge serves a 404 to
+   * plain curl even for pages that exist, so check with a real browser.
+   */
   ...(process.env.NEXT_OUTPUT === "export"
-    ? { output: "export" as const, trailingSlash: true }
+    ? { output: "export" as const, trailingSlash: false }
     : {}),
   images: {
     /*

@@ -40,8 +40,19 @@ take an upload rather than running Node — Wix Headless drag-and-drop, for
 example, which caps at 20 MB total and 3 MB per file.
 
 Everything here is statically prerendered either way, so no server
-functionality is lost in the export. `trailingSlash` is on in that mode so
-subpages resolve as directories on plain static hosts.
+functionality is lost in the export.
+
+**`trailingSlash` is off**, so the export emits `about.html` rather than
+`about/index.html`. It was on originally, which is the more usual choice
+for a static host — but Wix 301s `/about/` to `/about` and then does not
+fall back to the folder's `index.html`, so every subpage 404d on the
+deployed site while only `/about/index.html` resolved. Do not turn it
+back on for a Wix upload without re-testing every route on the deployed
+URL, and keep `src/app/sitemap.ts` in the same shape.
+
+**Testing a Wix deploy:** their edge returns 404 to plain `curl` even for
+pages that exist. Check with a real browser, or you will chase a routing
+bug that isn't there.
 
 If the domain stays with Wix, it can point at an external host via DNS
 records (Wix does not allow changing nameservers, so use pointing).

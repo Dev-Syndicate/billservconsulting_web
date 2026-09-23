@@ -16,21 +16,22 @@ export const dynamic = "force-static";
  * pages above the legal ones; they are a hint to crawlers rather than a
  * guarantee, but they cost nothing to state.
  *
- * URLs carry a trailing slash to match `trailingSlash: true` in the
+ * URLs carry no trailing slash, matching `trailingSlash: false` in the
  * static export — a sitemap that lists a URL the site redirects away
- * from wastes crawl budget and can read as a duplicate.
+ * from wastes crawl budget and can read as a duplicate. If that config
+ * changes, these must change with it.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
 
   const routes: { path: string; priority: number; changeFrequency: "monthly" | "yearly" }[] = [
     { path: "/", priority: 1, changeFrequency: "monthly" },
-    { path: "/services/", priority: 0.9, changeFrequency: "monthly" },
-    { path: "/why-outsource/", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/about/", priority: 0.7, changeFrequency: "monthly" },
-    { path: "/contact/", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/privacy/", priority: 0.3, changeFrequency: "yearly" },
-    { path: "/terms/", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/services", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/why-outsource", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/about", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
   ];
 
   return routes.map(({ path, priority, changeFrequency }) => ({
