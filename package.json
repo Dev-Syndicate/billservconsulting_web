@@ -9,9 +9,10 @@
     "lint": "eslint",
     "build:static": "node scripts/build-sitemap.mjs && node -e \"process.env.NEXT_OUTPUT='export';require('child_process').execSync('next build',{stdio:'inherit',env:process.env})\"",
     "sitemap": "node scripts/build-sitemap.mjs",
-    "deploy": "pnpm build:static && npx wix release",
-    "wix:login": "npx wix login",
-    "wix:preview": "pnpm build:static && npx wix preview"
+    "deploy": "pnpm build:static && npx --yes @wix/cli@latest release",
+    "wix:login": "npx --yes @wix/cli@latest login",
+    "wix:preview": "pnpm build:static && npx --yes @wix/cli@latest preview",
+    "wix:init": "npm create @wix/new@latest init"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

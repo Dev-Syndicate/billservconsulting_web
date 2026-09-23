@@ -51,9 +51,16 @@ The CLI path deploys the same build properly:
 
 ```bash
 pnpm wix:login      # once, opens a browser
-npx wix init        # once, creates wix.config.json
+pnpm wix:init       # once, creates wix.config.json
 pnpm deploy         # build + release, every time after
 ```
+
+Note the two commands come from different packages. Logging in uses the
+`@wix/cli` binary; linking the project uses `npm create @wix/new@latest
+init`. Plain `npx wix ...` fails with "could not determine executable to
+run", because there is no bare `wix` package to resolve — and `release`
+and `preview` only exist once the project is linked, so they are not
+available before `init`.
 
 After `init`, **set the output directory** — it defaults to `./dist` and
 this project builds to `out/`:
